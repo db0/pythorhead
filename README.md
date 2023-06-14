@@ -2,6 +2,8 @@
 
 A python library for interacting with Lemmy
 
+![pythorhead logo](logo.png)
+
 # Sample Usage
 
 ```python
