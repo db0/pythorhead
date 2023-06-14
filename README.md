@@ -2,7 +2,7 @@
 
 A python library for interacting with Lemmy
 
-![pythorhead logo](logo.png)
+![pythorhead logo](https://raw.githubusercontent.com/db0/pythorhead/main/logo.png)
 
 # Sample Usage
 
