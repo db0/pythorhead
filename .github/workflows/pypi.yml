@@ -1,0 +1,63 @@
+name:  Pythörhead build and publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-n-publish:
+    name: Pythörhead build and publish
+    runs-on: ubuntu-latest
+    steps:
+    - name: "✔️ Checkout"
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: "📣 Release on push"
+      id: release
+      uses: rymndhng/release-on-push-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        bump_version_scheme: norelease
+        use_github_release_notes: true
+    - name: "✏️ Generate release changelog"
+      if: ${{ steps.release.outputs.version != '' }}
+      uses: heinrichreimer/github-changelog-generator-action@v2.3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: "💾 Commit new version"
+      if: ${{ steps.release.outputs.version != '' }}
+      run: |
+          sed -i 's/^version = ".*"/version = "${{ steps.release.outputs.version }}"/g' ./pyproject.toml
+          git config user.email github-actions@github.com
+          git config user.name github-actions
+          git commit -am 'version incremented'
+          git push
+    - name: "🐍 Set up Python 3.10"
+      if: ${{ steps.release.outputs.version != '' }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: "🛠 Install pypa/build"
+      if: ${{ steps.release.outputs.version != '' }}
+      run: >-
+        python -m
+        pip install
+        build
+        --user
+    - name: "🔧 Build a binary wheel and a source tarball"
+      if: ${{ steps.release.outputs.version != '' }}
+      run: >-
+        python -m
+        build
+        --sdist
+        --wheel
+        --outdir dist/
+        .
+    - name: "📦 Publish distribution to PyPI"
+      if: ${{ steps.release.outputs.version != '' }}
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
