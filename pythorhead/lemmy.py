@@ -3,11 +3,11 @@ from loguru import logger
 
 class Lemmy:
 
-    auth_token = None
-    api_base_url = None
+    _auth_token = None
+    _api_base_url = None
 
     def __init__(self, api_base_url):
-        self.api_base_url = api_base_url
+        self._api_base_url = api_base_url
 
 
     def log_in(self, username_or_email, password):
@@ -16,8 +16,8 @@ class Lemmy:
             "password": password
         }
         try:
-            re = requests.post(f"{self.api_base_url}/api/v3/user/login", json=payload)
-            self.auth_token = re.json()["jwt"]
+            re = requests.post(f"{self._api_base_url}/api/v3/user/login", json=payload)
+            self._auth_token = re.json()["jwt"]
         except Exception as err:
             logger.error(f"Something went wrong while logginf in as {username_or_email}: {err}")
             return False
@@ -25,7 +25,7 @@ class Lemmy:
 
     def discover_community(self, community_name):
         try:
-            req = requests.get(f"{self.api_base_url}/api/v3/community?name={community_name}")
+            req = requests.get(f"{self._api_base_url}/api/v3/community?name={community_name}")
             community_id = req.json()["community_view"]["community"]["id"]
         except Exception as err:
             logger.error(f"Error when looking up community '{community_name}': {err}")
@@ -34,7 +34,7 @@ class Lemmy:
 
     def post(self, community_id, post_name, post_url = None, post_body = None):
         new_post = {
-            "auth": self.auth_token,
+            "auth": self._auth_token,
             "community_id": community_id,
             "name": post_name,
         }
@@ -42,5 +42,5 @@ class Lemmy:
              new_post["url"] = post_url
         if post_body:
              new_post["body"] = post_body
-        re = requests.post(f"{self.api_base_url}/api/v3/post", json=new_post)
-        return re.ok
+        re = requests.post(f"{self._api_base_url}/api/v3/post", json=new_post)
+        return re
