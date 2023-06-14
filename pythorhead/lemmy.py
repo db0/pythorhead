@@ -5,6 +5,7 @@ class Lemmy:
 
     _auth_token = None
     _api_base_url = None
+    _known_communities = {}
 
     def __init__(self, api_base_url):
         self._api_base_url = api_base_url
@@ -24,9 +25,12 @@ class Lemmy:
         return True
 
     def discover_community(self, community_name):
+        if community_name in self._known_communities:
+            return self._known_communities[community_name]
         try:
             req = requests.get(f"{self._api_base_url}/api/v3/community?name={community_name}")
             community_id = req.json()["community_view"]["community"]["id"]
+            self._known_communities[community_name] = community_id
         except Exception as err:
             logger.error(f"Error when looking up community '{community_name}': {err}")
             return None
