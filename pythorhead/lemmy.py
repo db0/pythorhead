@@ -43,4 +43,6 @@ class Lemmy:
         if post_body:
              new_post["body"] = post_body
         re = requests.post(f"{self._api_base_url}/api/v3/post", json=new_post)
-        return re
+        if not re.ok:
+            logger.error(f"Error encountered while posting: {re.text}")
+        return re.ok
