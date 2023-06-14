@@ -1,1 +1,1 @@
-from . import Lemmy
+from pythorhead.lemmy import Lemmy

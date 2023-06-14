@@ -7,7 +7,7 @@ A python library for interacting with Lemmy
 ```python
 from pythorhead import Lemmy
 
-lemmy = Lemmy("https://lemmy.example.com")
+lemmy = Lemmy("https://lemmy.dbzer0.com")
 lemmy.log_in("username", "password")
 community_id = lemmy.discover_community("botart")
 lemmy.post(community_id, "Hello Lemmy World")

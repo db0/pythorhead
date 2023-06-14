@@ -1,0 +1,109 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pythorhead"
+description = "A python library for interacting with Lemmy API"
+authors = [
+    {name = "db0", email = "mail@dbzer0.com"},
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+license = { file="LICENSE" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Development Status :: 2 - Pre-Alpha",
+]
+
+dynamic=["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/db0/pythorhead"
+
+[tool.setuptools]
+license-files = ["LICENSE", "CHANGELOG*"]
+
+[tool.setuptools_scm]
+# Don't create a _version file in development mode
+# We uncomment this automatically at build time.
+#write_to = "pythorhead/_version.py"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[options.index-client]
+extra-index-urls = ["https://download.pytorch.org/whl/cu118"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "--import-mode=prepend",
+    "--ignore=nodes"
+]
+filterwarnings = [
+    "ignore:::.*",
+    "default:::pythorhead.*"
+]
+testpaths = [
+    "tests"
+]
+
+[tool.black]
+line-length = 119
+
+[tool.ruff] # XXX this isn't part of CI yet
+line-length=119
+exclude=["comfy_controlnet_preprocessors", "facerestore", "build"]
+ignore=[
+    "F401", # imported but unused
+    "E402", # Module level import not at top of file
+    "A002", # Argument `x` is shadowing a python builtin
+    "A001", # Variable `x` is shadowing a python builtin
+    "INP001", # ... is part of an implicit namespace package. Add an `__init__.py`.
+]
+select = [
+    "A",    # flake8-builtins
+    "I",    # isort
+    # "S",    # Bandit
+    "F",    # pyflakes
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+
+
+    "YTT",  # flake8-2020
+    # "BLE",    # flake8-blind-except
+    # "B",    # flake8-bugbear
+    "COM",  # flake8-commas
+    "C4",   # flake8-comprehensions
+    # "G",    # flake8-logging-format
+    "INP",  # flake8-no-pep420
+    "PIE",  # flake8-pie
+    # "T20",  # flake8-print
+    # "UP",   # pyupgrade
+    "RSE",  # flake8-raise
+    # "RET",  # flake8-return
+    # "SLF",  # flake8-self
+    # "SIM",  # flake8-simplify
+    # "ARG",  # flake8-unused-arguments
+    # "TRY",  # tryceratops
+    "RUF100"
+]
+
+[tool.ruff.per-file-ignores]
+"comfy_horde.py" = ["I001", "F401"] # I001 is isort, F401 is imported but unused
+"make_index.py" = ["E501"] # E501 is line too long
+"med.py" = ["E501", "UP035"]
+"vit.py" = ["E501", "UP035", "F821"] # F821 looks like a real bug, suppressed only for dev CI purposes
+"run_stress_test.py" = ["F841"]
+
+
+[tool.mypy]
+exclude = '''(?x)(
+    ComfyUI
+  | \.tox
+  | comfy_controlnet_preprocessors
+  | facerestore
+)''' # If you change this, you probably need to also change [tool.black] above
