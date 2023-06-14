@@ -1,4 +1,4 @@
-# pythorhead
+# Pythörhead
 
 A python library for interacting with Lemmy
 
