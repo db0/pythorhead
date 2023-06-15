@@ -12,8 +12,8 @@ class Singleton(type):
 
 
 class Authentication(metaclass=Singleton):
-    token = None
-    api_base_url = None
+    token: str | None = None
+    api_base_url: str | None = None
 
     def log_in(self, username_or_email: str, password: str) -> bool:
         payload = {
@@ -29,5 +29,5 @@ class Authentication(metaclass=Singleton):
             return False
         return True
 
-    def log_out(self):
+    def log_out(self) -> None:
         self.token = None

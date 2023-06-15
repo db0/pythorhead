@@ -1,3 +1,5 @@
+from typing import Any
+
 import requests
 from loguru import logger
 
@@ -6,7 +8,7 @@ from pythorhead.types.listing import ListingType
 from pythorhead.types.sort import SortType
 
 
-class post:
+class Post:
     def __init__(self):
         self._auth = Authentication()
 
@@ -65,9 +67,10 @@ class post:
         Returns:
             list[dict]: list of posts
         """
-        list_post = {
+        list_post : dict[str, Any] = {
             "auth": self._auth.token,
         }
+
         if community_id is not None:
             list_post["community_id"] = community_id
         if community_name is not None:

@@ -2,16 +2,18 @@ import requests
 from loguru import logger
 
 from pythorhead.auth import Authentication
-from pythorhead.post import post
+from pythorhead.post import Post
 
 
 class Lemmy:
+    _auth: Authentication
     _known_communities = {}
     post = None
 
-    def __init__(self, api_base_url) -> None:
-        Authentication().api_base_url = api_base_url
-        self.post = post()
+    def __init__(self, api_base_url: str) -> None:
+        self._auth = Authentication()
+        self._auth.api_base_url = api_base_url
+        self.post = Post()
 
     def log_in(self, username_or_email: str, password: str) -> bool:
         return Authentication().log_in(username_or_email, password)
@@ -20,7 +22,7 @@ class Lemmy:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
         try:
-            req = requests.get(f"{self._api_base_url}/api/v3/community?name={community_name}")
+            req = requests.get(f"{self._auth.api_base_url}/api/v3/community?name={community_name}")
             community_id = req.json()["community_view"]["community"]["id"]
             self._known_communities[community_name] = community_id
         except Exception as err:
