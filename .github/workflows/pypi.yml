@@ -20,7 +20,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        bump_version_scheme: patch
+        bump_version_scheme: norelease
         use_github_release_notes: true
     - name: "✏️ Generate release changelog"
       if: ${{ steps.release.outputs.version != '' }}
