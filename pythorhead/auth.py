@@ -29,8 +29,5 @@ class Authentication(metaclass=Singleton):
             return False
         return True
 
-    def _set_base_url(self, api_base_url: str):
-        self.api_base_url = api_base_url
-
     def log_out(self):
         self.token = None
