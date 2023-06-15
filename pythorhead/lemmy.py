@@ -20,7 +20,7 @@ class Lemmy:
             re = requests.post(f"{self._api_base_url}/api/v3/user/login", json=payload)
             self._auth_token = re.json()["jwt"]
         except Exception as err:
-            logger.error(f"Something went wrong while logginf in as {username_or_email}: {err}")
+            logger.error(f"Something went wrong while logging in as {username_or_email}: {err}")
             return False
         return True
 
