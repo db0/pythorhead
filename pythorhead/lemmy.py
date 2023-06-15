@@ -1,30 +1,34 @@
 import requests
 from loguru import logger
 
-class Lemmy:
+from pythorhead.post import post
 
+
+class Lemmy:
     _auth_token = None
     _api_base_url = None
     _known_communities = {}
+    post = None
 
-    def __init__(self, api_base_url):
+    def __init__(self, api_base_url) -> None:
         self._api_base_url = api_base_url
 
-
-    def log_in(self, username_or_email, password):
+    def log_in(self, username_or_email: str, password: str) -> bool:
         payload = {
             "username_or_email": username_or_email,
-            "password": password
+            "password": password,
         }
         try:
             re = requests.post(f"{self._api_base_url}/api/v3/user/login", json=payload)
             self._auth_token = re.json()["jwt"]
+            self.post = post(self._api_base_url, self._auth_token)
+
         except Exception as err:
             logger.error(f"Something went wrong while logging in as {username_or_email}: {err}")
             return False
         return True
 
-    def discover_community(self, community_name):
+    def discover_community(self, community_name: str) -> int | None:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
         try:
@@ -33,20 +37,5 @@ class Lemmy:
             self._known_communities[community_name] = community_id
         except Exception as err:
             logger.error(f"Error when looking up community '{community_name}': {err}")
-            return None
+            return
         return community_id
-
-    def post(self, community_id, post_name, post_url = None, post_body = None):
-        new_post = {
-            "auth": self._auth_token,
-            "community_id": community_id,
-            "name": post_name,
-        }
-        if post_url:
-             new_post["url"] = post_url
-        if post_body:
-             new_post["body"] = post_body
-        re = requests.post(f"{self._api_base_url}/api/v3/post", json=new_post)
-        if not re.ok:
-            logger.error(f"Error encountered while posting: {re.text}")
-        return re.ok
