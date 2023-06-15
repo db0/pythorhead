@@ -1,17 +1,14 @@
 import requests
 from loguru import logger
 
+from pythorhead.auth import Authentication
 from pythorhead.types.listing import ListingType
 from pythorhead.types.sort import SortType
 
 
 class post:
-    _auth_token = None
-    _api_base_url = None
-
-    def __init__(self, api_base_url, auth_token):
-        self._api_base_url = api_base_url
-        self._auth_token = auth_token
+    def __init__(self):
+        self._auth = Authentication()
 
     def get(
         self,
@@ -29,14 +26,14 @@ class post:
             dict: post view
         """
         get_post = {
-            "auth": self._auth_token,
+            "auth": self._auth.token,
             "id": post_id,
         }
 
         if comment_id is not None:
             get_post["comment_id"] = comment_id
 
-        re = requests.get(f"{self._api_base_url}/api/v3/post", params=get_post)
+        re = requests.get(f"{self._auth.api_base_url}/api/v3/post", params=get_post)
         if not re.ok:
             logger.error(f"Error encountered while getting posts: {re.text}")
             return {}
@@ -69,7 +66,7 @@ class post:
             list[dict]: list of posts
         """
         list_post = {
-            "auth": self._auth_token,
+            "auth": self._auth.token,
         }
         if community_id is not None:
             list_post["community_id"] = community_id
@@ -86,7 +83,7 @@ class post:
         if type_ is not None:
             list_post["type_"] = type_
 
-        re = requests.get(f"{self._api_base_url}/api/v3/post/list", params=list_post)
+        re = requests.get(f"{self._auth.api_base_url}/api/v3/post/list", params=list_post)
         if not re.ok:
             logger.error(f"Error encountered while getting posts: {re.text}")
             return []
@@ -118,7 +115,7 @@ class post:
             bool: True if successful
         """
         new_post = {
-            "auth": self._auth_token,
+            "auth": self._auth.token,
             "community_id": community_id,
             "name": name,
         }
@@ -134,7 +131,7 @@ class post:
         if language_id is not None:
             new_post["language_id"] = language_id
 
-        re = requests.post(f"{self._api_base_url}/api/v3/post", json=new_post)
+        re = requests.post(f"{self._auth.api_base_url}/api/v3/post", json=new_post)
 
         if not re.ok:
             logger.error(f"Error encountered while posting: {re.text}")
@@ -153,11 +150,11 @@ class post:
             bool: True if successful
         """
         delete_post = {
-            "auth": self._auth_token,
+            "auth": self._auth.token,
             "deleted": deleted,
             "post_id": post_id,
         }
-        re = requests.post(f"{self._api_base_url}/api/v3/post/delete", json=delete_post)
+        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/delete", json=delete_post)
         if not re.ok:
             logger.error(f"Error encountered while deleting post: {re.text}")
         return re.ok
@@ -187,7 +184,7 @@ class post:
             bool: True if successful
         """
         edit_post = {
-            "auth": self._auth_token,
+            "auth": self._auth.token,
             "post_id": post_id,
         }
         if name is not None:
@@ -201,7 +198,7 @@ class post:
         if language_id is not None:
             edit_post["language_id"] = language_id
 
-        re = requests.put(f"{self._api_base_url}/api/v3/post/edit", json=edit_post)
+        re = requests.put(f"{self._auth.api_base_url}/api/v3/post/edit", json=edit_post)
         if not re.ok:
             logger.error(f"Error encountered while editing post: {re.text}")
         return re.ok
@@ -218,11 +215,13 @@ class post:
             bool: True if successful
         """
         like_post = {
-            "auth": self._auth_token,
+            "auth": self._auth.token,
             "post_id": post_id,
             "score": score,
         }
-        re = requests.post(f"{self._api_base_url}/api/v3/post/like", json=like_post)
+        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/like", json=like_post)
         if not re.ok:
             logger.error(f"Error encountered while liking post: {re.text}")
         return re.ok
+
+    __call__ = create
