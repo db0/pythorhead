@@ -12,7 +12,7 @@ class Lemmy:
 
     def __init__(self, api_base_url: str) -> None:
         self._auth = Authentication()
-        self._auth.api_base_url = api_base_url
+        self._auth.api_base_url = f"{api_base_url}/api/v3"
         self.post = Post()
 
     def log_in(self, username_or_email: str, password: str) -> bool:
@@ -22,7 +22,7 @@ class Lemmy:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
         try:
-            req = requests.get(f"{self._auth.api_base_url}/api/v3/community?name={community_name}")
+            req = requests.get(f"{self._auth.api_base_url}/community?name={community_name}")
             community_id = req.json()["community_view"]["community"]["id"]
             self._known_communities[community_name] = community_id
         except Exception as err:

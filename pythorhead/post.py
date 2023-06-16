@@ -34,7 +34,7 @@ class Post:
         if comment_id is not None:
             get_post["comment_id"] = comment_id
 
-        re = requests.get(f"{self._auth.api_base_url}/api/v3/post", params=get_post)
+        re = requests.get(f"{self._auth.api_base_url}/post", params=get_post)
         if not re.ok:
             logger.error(f"Error encountered while getting posts: {re.text}")
             return {}
@@ -85,7 +85,7 @@ class Post:
         if type_ is not None:
             list_post["type_"] = type_.value
 
-        re = requests.get(f"{self._auth.api_base_url}/api/v3/post/list", params=list_post)
+        re = requests.get(f"{self._auth.api_base_url}/post/list", params=list_post)
         if not re.ok:
             logger.error(f"Error encountered while getting posts: {re.text}")
             return []
@@ -133,7 +133,7 @@ class Post:
         if language_id is not None:
             new_post["language_id"] = language_id
 
-        re = requests.post(f"{self._auth.api_base_url}/api/v3/post", json=new_post)
+        re = requests.post(f"{self._auth.api_base_url}/post", json=new_post)
 
         if not re.ok:
             logger.error(f"Error encountered while posting: {re.text}")
@@ -156,7 +156,7 @@ class Post:
             "post_id": post_id,
             "deleted": deleted,
         }
-        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/delete", json=delete_post)
+        re = requests.post(f"{self._auth.api_base_url}/post/delete", json=delete_post)
         if not re.ok:
             logger.error(f"Error encountered while deleting post: {re.text}")
         return re.ok
@@ -181,7 +181,7 @@ class Post:
         }
         if reason is not None:
             remove_post["reason"] = reason
-        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/remove", json=remove_post)
+        re = requests.post(f"{self._auth.api_base_url}/post/remove", json=remove_post)
         if not re.ok:
             logger.error(f"Error encountered while removing post: {re.text}")
         return re.ok
@@ -224,7 +224,7 @@ class Post:
             edit_post["nsfw"] = nsfw
         if language_id is not None:
             edit_post["language_id"] = language_id
-        re = requests.put(f"{self._auth.api_base_url}/api/v3/post", json=edit_post)
+        re = requests.put(f"{self._auth.api_base_url}/post", json=edit_post)
         if not re.ok:
             logger.error(f"Error encountered while editing post: {re.text}")
         return re.ok
@@ -245,7 +245,7 @@ class Post:
             "post_id": post_id,
             "score": score,
         }
-        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/like", json=like_post)
+        re = requests.post(f"{self._auth.api_base_url}/post/like", json=like_post)
         if not re.ok:
             logger.error(f"Error encountered while liking post: {re.text}")
         return re.ok
@@ -267,7 +267,7 @@ class Post:
             "post_id": post_id,
             "save": saved,
         }
-        re = requests.put(f"{self._auth.api_base_url}/api/v3/post/save", json=save_post)
+        re = requests.put(f"{self._auth.api_base_url}/post/save", json=save_post)
         if not re.ok:
             logger.error(f"Error encountered while saving post: {re.text}")
         return re.ok
@@ -290,7 +290,7 @@ class Post:
             "reason": reason,
         }
 
-        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/report", json=report_post)
+        re = requests.post(f"{self._auth.api_base_url}/post/report", json=report_post)
         if not re.ok:
             logger.error(f"Error encountered while reporting post: {re.text}")
         return re.ok
@@ -315,7 +315,7 @@ class Post:
             "featured": feature,
             "feature_type": feature_type.value,
         }
-        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/feature", json=feature_post)
+        re = requests.post(f"{self._auth.api_base_url}/post/feature", json=feature_post)
         if not re.ok:
             logger.error(f"Error encountered while feature post: {re.text}")
         return re.ok

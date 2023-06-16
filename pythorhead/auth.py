@@ -21,7 +21,7 @@ class Authentication(metaclass=Singleton):
             "password": password,
         }
         try:
-            re = requests.post(f"{self.api_base_url}/api/v3/user/login", json=payload)
+            re = requests.post(f"{self.api_base_url}/user/login", json=payload)
             self.token = re.json()["jwt"]
 
         except Exception as err:
