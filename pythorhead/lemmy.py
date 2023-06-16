@@ -6,9 +6,9 @@ from pythorhead.post import Post
 
 
 class Lemmy:
+    post: Post
     _auth: Authentication
     _known_communities = {}
-    post = None
 
     def __init__(self, api_base_url: str) -> None:
         self._auth = Authentication()

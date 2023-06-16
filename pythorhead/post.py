@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 import requests
 from loguru import logger
@@ -39,7 +39,7 @@ class Post:
         if not re.ok:
             logger.error(f"Error encountered while getting posts: {re.text}")
             return {}
-        return re.json()["post_view"]
+        return re.json()
 
     def list(  # noqa: A003
         self,
@@ -67,7 +67,7 @@ class Post:
         Returns:
             list[dict]: list of posts
         """
-        list_post : dict[str, Any] = {
+        list_post: dict[str, Any] = {
             "auth": self._auth.token,
         }
 
@@ -141,21 +141,21 @@ class Post:
 
         return re.ok
 
-    def delete(self, deleted: bool, post_id: int) -> bool:
+    def delete(self, post_id: int, deleted: bool) -> bool:
         """
-        Delete a post
+        Deletes / Restore a post
 
         Args:
-            deleted (bool)
             post_id (int)
+            deleted (bool)
 
         Returns:
             bool: True if successful
         """
         delete_post = {
             "auth": self._auth.token,
-            "deleted": deleted,
             "post_id": post_id,
+            "deleted": deleted,
         }
         re = requests.post(f"{self._auth.api_base_url}/api/v3/post/delete", json=delete_post)
         if not re.ok:
@@ -200,13 +200,12 @@ class Post:
             edit_post["nsfw"] = nsfw
         if language_id is not None:
             edit_post["language_id"] = language_id
-
-        re = requests.put(f"{self._auth.api_base_url}/api/v3/post/edit", json=edit_post)
+        re = requests.put(f"{self._auth.api_base_url}/api/v3/post", json=edit_post)
         if not re.ok:
             logger.error(f"Error encountered while editing post: {re.text}")
         return re.ok
 
-    def like(self, post_id: int, score: int) -> bool:
+    def like(self, post_id: int, score: Literal[-1, 0, 1]) -> bool:
         """
         Like a post
 
