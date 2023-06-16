@@ -161,6 +161,31 @@ class Post:
             logger.error(f"Error encountered while deleting post: {re.text}")
         return re.ok
 
+    def remove(self, post_id: int, removed: bool, reason: str | None = None) -> bool:
+        """
+
+        Moderator remove / restore a post.
+
+        Args:
+            post_id (int)
+            removed (bool)
+            reason (str, optional): Defaults to None.
+
+        Returns:
+            bool: True if successful
+        """
+        remove_post = {
+            "auth": self._auth.token,
+            "post_id": post_id,
+            "removed": removed,
+        }
+        if reason is not None:
+            remove_post["reason"] = reason
+        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/remove", json=remove_post)
+        if not re.ok:
+            logger.error(f"Error encountered while removing post: {re.text}")
+        return re.ok
+
     def edit(
         self,
         post_id: int,
