@@ -250,6 +250,28 @@ class Post:
             logger.error(f"Error encountered while liking post: {re.text}")
         return re.ok
 
+    def save(self, post_id: int, saved: bool) -> bool:
+        """
+
+        Save / Unsave a post
+
+        Args:
+            post_id (int)
+            saved (bool)
+
+        Returns:
+            bool: True if successful
+        """
+        save_post = {
+            "auth": self._auth.token,
+            "post_id": post_id,
+            "save": saved,
+        }
+        re = requests.put(f"{self._auth.api_base_url}/api/v3/post/save", json=save_post)
+        if not re.ok:
+            logger.error(f"Error encountered while saving post: {re.text}")
+        return re.ok
+
     def report(self, post_id: int, reason: str) -> bool:
         """
 
