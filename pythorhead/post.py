@@ -4,8 +4,7 @@ import requests
 from loguru import logger
 
 from pythorhead.auth import Authentication
-from pythorhead.types.listing import ListingType
-from pythorhead.types.sort import SortType
+from pythorhead.types import FeatureType, ListingType, SortType
 
 
 class Post:
@@ -82,9 +81,9 @@ class Post:
         if saved_only is not None:
             list_post["saved_only"] = saved_only
         if sort is not None:
-            list_post["sort"] = sort
+            list_post["sort"] = sort.value
         if type_ is not None:
-            list_post["type_"] = type_
+            list_post["type_"] = type_.value
 
         re = requests.get(f"{self._auth.api_base_url}/api/v3/post/list", params=list_post)
         if not re.ok:
@@ -247,6 +246,31 @@ class Post:
         re = requests.post(f"{self._auth.api_base_url}/api/v3/post/report", json=report_post)
         if not re.ok:
             logger.error(f"Error encountered while reporting post: {re.text}")
+        return re.ok
+
+    def feature(self, post_id: int, feature: bool, feature_type: FeatureType) -> bool:
+        """
+
+        Add / Remove Feature from a post
+
+        Args:
+            post_id (int):
+            feature (bool):
+            feature_type (FeatureType)
+
+        Returns:
+            bool: True if successful
+        """
+
+        feature_post = {
+            "auth": self._auth.token,
+            "post_id": post_id,
+            "featured": feature,
+            "feature_type": feature_type.value,
+        }
+        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/feature", json=feature_post)
+        if not re.ok:
+            logger.error(f"Error encountered while feature post: {re.text}")
         return re.ok
 
     __call__ = create

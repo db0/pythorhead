@@ -12,6 +12,3 @@ class SortType(Enum):
     TopMonth = "TopMonth"
     TopWeek = "TopWeek"
     TopYear = "TopYear"
-
-    def __str__(self):
-        return self.value

@@ -1,8 +1,6 @@
 from enum import Enum
 
 
-class ListingType(Enum):
-    All = "All"
+class FeatureType(Enum):
     Community = "Community"
     Local = "Local"
-    Subscribed = "Subscribed"
