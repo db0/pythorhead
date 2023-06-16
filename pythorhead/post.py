@@ -226,4 +226,27 @@ class Post:
             logger.error(f"Error encountered while liking post: {re.text}")
         return re.ok
 
+    def report(self, post_id: int, reason: str) -> bool:
+        """
+
+        Report a post
+
+        Args:
+            post_id (int)
+            reason (str)
+
+        Returns:
+            bool: True if successful
+        """
+        report_post = {
+            "auth": self._auth.token,
+            "post_id": post_id,
+            "reason": reason,
+        }
+
+        re = requests.post(f"{self._auth.api_base_url}/api/v3/post/report", json=report_post)
+        if not re.ok:
+            logger.error(f"Error encountered while reporting post: {re.text}")
+        return re.ok
+
     __call__ = create
