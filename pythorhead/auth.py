@@ -2,6 +2,9 @@ import requests
 from loguru import logger
 
 
+# Stack Overflow: Creating a singleton in Python
+# https://stackoverflow.com/q/6760685
+# CC BY-SA 3.0
 class Singleton(type):
     _instances = {}
 
