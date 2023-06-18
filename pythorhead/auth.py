@@ -1,3 +1,5 @@
+from typing import Optional
+
 import requests
 from loguru import logger
 
@@ -15,8 +17,8 @@ class Singleton(type):
 
 
 class Authentication(metaclass=Singleton):
-    token: str | None = None
-    api_base_url: str | None = None
+    token: Optional[str] = None
+    api_base_url: Optional[str] = None
 
     def log_in(self, username_or_email: str, password: str) -> bool:
         payload = {

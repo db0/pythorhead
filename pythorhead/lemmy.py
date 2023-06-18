@@ -1,3 +1,5 @@
+from typing import Optional
+
 import requests
 from loguru import logger
 
@@ -18,7 +20,7 @@ class Lemmy:
     def log_in(self, username_or_email: str, password: str) -> bool:
         return Authentication().log_in(username_or_email, password)
 
-    def discover_community(self, community_name: str) -> int | None:
+    def discover_community(self, community_name: str) -> Optional[int]:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
         try:
