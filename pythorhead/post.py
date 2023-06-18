@@ -1,4 +1,4 @@
-from typing import Any, Literal
+from typing import Any, Literal, Optional, List
 
 import requests
 from loguru import logger
@@ -14,7 +14,7 @@ class Post:
     def get(
         self,
         post_id: int,
-        comment_id: int | None = None,
+        comment_id: Optional[int] = None,
     ) -> dict:
         """
         Get a post.
@@ -42,14 +42,14 @@ class Post:
 
     def list(  # noqa: A003
         self,
-        community_id: int | None = None,
-        community_name: str | None = None,
-        limit: int | None = None,
-        page: int | None = None,
-        saved_only: bool | None = None,
-        sort: SortType | None = None,
-        type_: ListingType | None = None,
-    ) -> list[dict]:
+        community_id: Optional[int] = None,
+        community_name: Optional[str] = None,
+        limit: Optional[int] = None,
+        page: Optional[int] = None,
+        saved_only: Optional[bool] = None,
+        sort: Optional[SortType] = None,
+        type_: Optional[ListingType] = None,
+    ) -> List[dict]:
         """
 
         Get posts, with various filters.
@@ -95,11 +95,11 @@ class Post:
         self,
         community_id: int,
         name: str,
-        url: str | None = None,
-        body: str | None = None,
-        nsfw: bool | None = None,
-        honeypot: str | None = None,
-        language_id: int | None = None,
+        url: Optional[str] = None,
+        body: Optional[str] = None,
+        nsfw: Optional[bool] = None,
+        honeypot: Optional[str] = None,
+        language_id: Optional[int] = None,
     ) -> bool:
         """
         Create a post
@@ -161,7 +161,7 @@ class Post:
             logger.error(f"Error encountered while deleting post: {re.text}")
         return re.ok
 
-    def remove(self, post_id: int, removed: bool, reason: str | None = None) -> bool:
+    def remove(self, post_id: int, removed: bool, reason: Optional[str] = None) -> bool:
         """
 
         Moderator remove / restore a post.
@@ -189,11 +189,11 @@ class Post:
     def edit(
         self,
         post_id: int,
-        name: str | None = None,
-        url: str | None = None,
-        body: str | None = None,
-        nsfw: bool | None = None,
-        language_id: int | None = None,
+        name: Optional[str] = None,
+        url: Optional[str] = None,
+        body: Optional[str] = None,
+        nsfw: Optional[bool] = None,
+        language_id: Optional[int] = None,
     ) -> bool:
         """
 
