@@ -22,7 +22,7 @@ class Comment:
         type_: Optional[ListingType] = None,
     ) -> List[dict]:
         """
-        
+
         Get comments, with various filters.
 
         Args:
@@ -66,7 +66,6 @@ class Comment:
             return data["comments"]
         return []
 
-        
     def create(
         self,
         post_id: int,
@@ -84,7 +83,7 @@ class Comment:
             form_id (Optional[int], optional): Defaults to None.
             parent_id (Optional[int], optional): Defaults to None.
             language_id (Optional[int], optional): Defaults to None.
-        
+
         Returns:
             dict: created comment data if successful
         """
@@ -106,7 +105,8 @@ class Comment:
             json=create_comment,
         )
 
-    def edit(self,
+    def edit(
+        self,
         comment_id: int,
         content: Optional[str] = None,
         distinguished: Optional[bool] = None,
@@ -122,7 +122,7 @@ class Comment:
             distinguished (Optional[bool], optional): Defaults to None.
             form_id (Optional[str], optional): Defaults to None.
             language_id (Optional[int], optional): Defaults to None.
-        
+
         Returns:
             dict: edited comment data if successful
         """
@@ -137,11 +137,31 @@ class Comment:
             edit_comment["form_id"] = form_id
         if language_id is not None:
             edit_comment["language_id"] = language_id
-        
+
         return self._requestor.request(
             Request.PUT,
             "/comment",
-            json=edit_comment
+            json=edit_comment,
+        )
+
+    def delete(self, comment_id: int, deleted: bool) -> Optional[dict]:
+        """
+        Delete / Restore a comment.
+
+        Args:
+            comment_id (int): comment_id
+            deleted (bool): deleted
+
+        Returns:
+            dict: deleted comment data if successful
+        """
+        return self._requestor.request(
+            Request.POST,
+            "/comment/delete",
+            json={
+                "comment_id": comment_id,
+                "deleted": deleted,
+            },
         )
 
     __call__ = create
