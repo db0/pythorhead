@@ -1,8 +1,5 @@
 from typing import Optional
 
-import requests
-from loguru import logger
-
 
 # Stack Overflow: Creating a singleton in Python
 # https://stackoverflow.com/q/6760685
@@ -20,19 +17,8 @@ class Authentication(metaclass=Singleton):
     token: Optional[str] = None
     api_base_url: Optional[str] = None
 
-    def log_in(self, username_or_email: str, password: str) -> bool:
-        payload = {
-            "username_or_email": username_or_email,
-            "password": password,
-        }
-        try:
-            re = requests.post(f"{self.api_base_url}/user/login", json=payload)
-            self.token = re.json()["jwt"]
+    def set_token(self, token: str) -> None:
+        self.token = token
 
-        except Exception as err:
-            logger.error(f"Something went wrong while logging in as {username_or_email}: {err}")
-            return False
-        return True
-
-    def log_out(self) -> None:
-        self.token = None
+    def set_api_base_url(self, api_base_url: str) -> None:
+        self.api_base_url = api_base_url
