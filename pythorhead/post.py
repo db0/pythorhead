@@ -1,21 +1,18 @@
 from typing import Any, Literal, Optional, List
 
-import requests
-from loguru import logger
-
-from pythorhead.auth import Authentication
 from pythorhead.types import FeatureType, ListingType, SortType
+from pythorhead.requestor import Requestor, Request
 
 
 class Post:
     def __init__(self):
-        self._auth = Authentication()
+        self._requestor = Requestor()
 
     def get(
         self,
         post_id: int,
         comment_id: Optional[int] = None,
-    ) -> dict:
+    ) -> Optional[dict]:
         """
         Get a post.
 
@@ -27,18 +24,13 @@ class Post:
             dict: post view
         """
         get_post = {
-            "auth": self._auth.token,
             "id": post_id,
         }
 
         if comment_id is not None:
             get_post["comment_id"] = comment_id
 
-        re = requests.get(f"{self._auth.api_base_url}/post", params=get_post)
-        if not re.ok:
-            logger.error(f"Error encountered while getting posts: {re.text}")
-            return {}
-        return re.json()
+        return self._requestor.request(Request.GET, "/post", params=get_post)
 
     def list(  # noqa: A003
         self,
@@ -66,9 +58,7 @@ class Post:
         Returns:
             list[dict]: list of posts
         """
-        list_post: dict[str, Any] = {
-            "auth": self._auth.token,
-        }
+        list_post: dict = {}
 
         if community_id is not None:
             list_post["community_id"] = community_id
@@ -84,12 +74,9 @@ class Post:
             list_post["sort"] = sort.value
         if type_ is not None:
             list_post["type_"] = type_.value
-
-        re = requests.get(f"{self._auth.api_base_url}/post/list", params=list_post)
-        if not re.ok:
-            logger.error(f"Error encountered while getting posts: {re.text}")
-            return []
-        return re.json()["posts"]
+        if data := self._requestor.request(Request.GET, "/post/list", params=list_post):
+            return data["posts"]
+        return []
 
     def create(
         self,
@@ -100,7 +87,7 @@ class Post:
         nsfw: Optional[bool] = None,
         honeypot: Optional[str] = None,
         language_id: Optional[int] = None,
-    ) -> bool:
+    ) -> Optional[dict]:
         """
         Create a post
 
@@ -114,10 +101,9 @@ class Post:
             language_id (int, optional): Defaults to None.
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
         new_post = {
-            "auth": self._auth.token,
             "community_id": community_id,
             "name": name,
         }
@@ -133,14 +119,9 @@ class Post:
         if language_id is not None:
             new_post["language_id"] = language_id
 
-        re = requests.post(f"{self._auth.api_base_url}/post", json=new_post)
+        return self._requestor.request(Request.POST, "/post", json=new_post)
 
-        if not re.ok:
-            logger.error(f"Error encountered while posting: {re.text}")
-
-        return re.ok
-
-    def delete(self, post_id: int, deleted: bool) -> bool:
+    def delete(self, post_id: int, deleted: bool) -> Optional[dict]:
         """
         Deletes / Restore a post
 
@@ -149,19 +130,15 @@ class Post:
             deleted (bool)
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
         delete_post = {
-            "auth": self._auth.token,
             "post_id": post_id,
             "deleted": deleted,
         }
-        re = requests.post(f"{self._auth.api_base_url}/post/delete", json=delete_post)
-        if not re.ok:
-            logger.error(f"Error encountered while deleting post: {re.text}")
-        return re.ok
+        return self._requestor.request(Request.POST, "/post/delete", json=delete_post)
 
-    def remove(self, post_id: int, removed: bool, reason: Optional[str] = None) -> bool:
+    def remove(self, post_id: int, removed: bool, reason: Optional[str] = None) -> Optional[dict]:
         """
 
         Moderator remove / restore a post.
@@ -172,19 +149,16 @@ class Post:
             reason (str, optional): Defaults to None.
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
         remove_post = {
-            "auth": self._auth.token,
             "post_id": post_id,
             "removed": removed,
         }
         if reason is not None:
             remove_post["reason"] = reason
-        re = requests.post(f"{self._auth.api_base_url}/post/remove", json=remove_post)
-        if not re.ok:
-            logger.error(f"Error encountered while removing post: {re.text}")
-        return re.ok
+
+        return self._requestor.request(Request.POST, "/post/remove", json=remove_post)
 
     def edit(
         self,
@@ -194,7 +168,7 @@ class Post:
         body: Optional[str] = None,
         nsfw: Optional[bool] = None,
         language_id: Optional[int] = None,
-    ) -> bool:
+    ) -> Optional[dict]:
         """
 
         Edit a post
@@ -208,10 +182,9 @@ class Post:
             language_id (int, optional): Defaults to None.
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
-        edit_post = {
-            "auth": self._auth.token,
+        edit_post: dict[str, Any] = {
             "post_id": post_id,
         }
         if name is not None:
@@ -224,12 +197,10 @@ class Post:
             edit_post["nsfw"] = nsfw
         if language_id is not None:
             edit_post["language_id"] = language_id
-        re = requests.put(f"{self._auth.api_base_url}/post", json=edit_post)
-        if not re.ok:
-            logger.error(f"Error encountered while editing post: {re.text}")
-        return re.ok
 
-    def like(self, post_id: int, score: Literal[-1, 0, 1]) -> bool:
+        return self._requestor.request(Request.PUT, "/post", json=edit_post)
+
+    def like(self, post_id: int, score: Literal[-1, 0, 1]) -> Optional[dict]:
         """
         Like a post
 
@@ -238,19 +209,15 @@ class Post:
             score (int)
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
         like_post = {
-            "auth": self._auth.token,
             "post_id": post_id,
             "score": score,
         }
-        re = requests.post(f"{self._auth.api_base_url}/post/like", json=like_post)
-        if not re.ok:
-            logger.error(f"Error encountered while liking post: {re.text}")
-        return re.ok
+        return self._requestor.request(Request.POST, "/post/like", json=like_post)
 
-    def save(self, post_id: int, saved: bool) -> bool:
+    def save(self, post_id: int, saved: bool) -> Optional[dict]:
         """
 
         Save / Unsave a post
@@ -260,19 +227,15 @@ class Post:
             saved (bool)
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
         save_post = {
-            "auth": self._auth.token,
             "post_id": post_id,
             "save": saved,
         }
-        re = requests.put(f"{self._auth.api_base_url}/post/save", json=save_post)
-        if not re.ok:
-            logger.error(f"Error encountered while saving post: {re.text}")
-        return re.ok
+        return self._requestor.request(Request.PUT, "/post/save", json=save_post)
 
-    def report(self, post_id: int, reason: str) -> bool:
+    def report(self, post_id: int, reason: str) -> Optional[dict]:
         """
 
         Report a post
@@ -282,42 +245,33 @@ class Post:
             reason (str)
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post report data if successful
         """
         report_post = {
-            "auth": self._auth.token,
             "post_id": post_id,
             "reason": reason,
         }
+        return self._requestor.request(Request.POST, "/post/report", json=report_post)
 
-        re = requests.post(f"{self._auth.api_base_url}/post/report", json=report_post)
-        if not re.ok:
-            logger.error(f"Error encountered while reporting post: {re.text}")
-        return re.ok
-
-    def feature(self, post_id: int, feature: bool, feature_type: FeatureType) -> bool:
+    def feature(self, post_id: int, feature: bool, feature_type: FeatureType) -> Optional[dict]:
         """
 
         Add / Remove Feature from a post
 
         Args:
-            post_id (int):
-            feature (bool):
+            post_id (int)
+            feature (bool)
             feature_type (FeatureType)
 
         Returns:
-            bool: True if successful
+            Optional[dict]: post data if successful
         """
 
         feature_post = {
-            "auth": self._auth.token,
             "post_id": post_id,
             "featured": feature,
             "feature_type": feature_type.value,
         }
-        re = requests.post(f"{self._auth.api_base_url}/post/feature", json=feature_post)
-        if not re.ok:
-            logger.error(f"Error encountered while feature post: {re.text}")
-        return re.ok
+        return self._requestor.request(Request.POST, "/post/feature", json=feature_post)
 
     __call__ = create

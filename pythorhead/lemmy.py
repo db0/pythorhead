@@ -1,33 +1,33 @@
+import logging
+
 from typing import Optional
 
-import requests
-from loguru import logger
-
-from pythorhead.auth import Authentication
 from pythorhead.post import Post
+from pythorhead.requestor import Requestor, Request
+
+logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 class Lemmy:
     post: Post
-    _auth: Authentication
     _known_communities = {}
+    _requestor: Requestor
 
     def __init__(self, api_base_url: str) -> None:
-        self._auth = Authentication()
-        self._auth.api_base_url = f"{api_base_url}/api/v3"
+        self._requestor = Requestor()
+        self._requestor.set_api_base_url(f"{api_base_url}/api/v3")
         self.post = Post()
 
     def log_in(self, username_or_email: str, password: str) -> bool:
-        return Authentication().log_in(username_or_email, password)
+        return self._requestor.log_in(username_or_email, password)
 
     def discover_community(self, community_name: str) -> Optional[int]:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
-        try:
-            req = requests.get(f"{self._auth.api_base_url}/community?name={community_name}")
-            community_id = req.json()["community_view"]["community"]["id"]
+
+        request = self._requestor.request(Request.GET, "/community", params={"name": community_name})
+
+        if request is not None:
+            community_id = request["community_view"]["community"]["id"]
             self._known_communities[community_name] = community_id
-        except Exception as err:
-            logger.error(f"Error when looking up community '{community_name}': {err}")
-            return
-        return community_id
+            return community_id
