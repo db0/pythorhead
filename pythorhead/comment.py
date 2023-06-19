@@ -66,4 +66,44 @@ class Comment:
             return data["comments"]
         return []
 
-    
+        
+    def create(
+        self,
+        post_id: int,
+        content: str,
+        form_id: Optional[int] = None,
+        parent_id: Optional[int] = None,
+        language_id: Optional[int] = None,
+    ) -> Optional[dict]:
+        """
+        Create a comment.
+
+        Args:
+            post_id (int): post_id
+            content (str): content
+            form_id (Optional[int], optional): Defaults to None.
+            parent_id (Optional[int], optional): Defaults to None.
+            language_id (Optional[int], optional): Defaults to None.
+        
+        Returns:
+            dict: created comment data if successful
+        """
+
+        create_comment = {
+            "post_id": post_id,
+            "content": content,
+        }
+        if form_id is not None:
+            create_comment["form_id"] = form_id
+        if parent_id is not None:
+            create_comment["parent_id"] = parent_id
+        if language_id is not None:
+            create_comment["language_id"] = language_id
+
+        return self._requestor.request(
+            Request.POST,
+            "/comment",
+            json=create_comment,
+        )
+
+    __call__ = create
