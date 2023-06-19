@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class SortType(Enum):
+class PostSortType(Enum):
     Active = "Active"
     Hot = "Hot"
     MostComments = "MostComments"
@@ -12,3 +12,10 @@ class SortType(Enum):
     TopMonth = "TopMonth"
     TopWeek = "TopWeek"
     TopYear = "TopYear"
+
+
+class CommentSortType(Enum):
+    Hot = "Hot"
+    New = "New"
+    Old = "Old"
+    Top = "Top"
