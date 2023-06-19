@@ -71,7 +71,7 @@ class Comment:
         self,
         post_id: int,
         content: str,
-        form_id: Optional[int] = None,
+        form_id: Optional[str] = None,
         parent_id: Optional[int] = None,
         language_id: Optional[int] = None,
     ) -> Optional[dict]:
@@ -104,6 +104,44 @@ class Comment:
             Request.POST,
             "/comment",
             json=create_comment,
+        )
+
+    def edit(self,
+        comment_id: int,
+        content: Optional[str] = None,
+        distinguished: Optional[bool] = None,
+        form_id: Optional[str] = None,
+        language_id: Optional[int] = None,
+    ) -> Optional[dict]:
+        """
+        Edit a comment.
+
+        Args:
+            comment_id (int): comment_id
+            content (Optional[str], optional): Defaults to None.
+            distinguished (Optional[bool], optional): Defaults to None.
+            form_id (Optional[str], optional): Defaults to None.
+            language_id (Optional[int], optional): Defaults to None.
+        
+        Returns:
+            dict: edited comment data if successful
+        """
+        edit_comment: dict = {
+            "comment_id": comment_id,
+        }
+        if content is not None:
+            edit_comment["content"] = content
+        if distinguished is not None:
+            edit_comment["distinguished"] = distinguished
+        if form_id is not None:
+            edit_comment["form_id"] = form_id
+        if language_id is not None:
+            edit_comment["language_id"] = language_id
+        
+        return self._requestor.request(
+            Request.PUT,
+            "/comment",
+            json=edit_comment
         )
 
     __call__ = create
