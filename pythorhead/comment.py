@@ -58,9 +58,9 @@ class Comment:
         if saved_only is not None:
             list_comment["saved_only"] = saved_only
         if sort is not None:
-            list_comment["sort"] = sort
+            list_comment["sort"] = sort.value
         if type_ is not None:
-            list_comment["type"] = type_
+            list_comment["type"] = type_.value
 
         if data := self._requestor.request(Request.GET, "/comment/list", params=list_comment):
             return data["comments"]
@@ -182,6 +182,33 @@ class Comment:
                 "comment_id": comment_id,
                 "deleted": deleted,
             },
+        )
+
+    def remove(self, comment_id: int, removed: bool, reason: Optional[str] = None) -> Optional[dict]:
+        """
+        Moderator remove / restore a comment.
+
+        Args:
+            comment_id (int)
+            removed (bool)
+            reason (str, optional): Defaults to None.
+
+        Returns:
+            Optional[dict]: removed comment data if successful
+        """
+
+        remove_comment = {
+            "comment_id": comment_id,
+            "removed": removed,
+        }
+
+        if reason is not None:
+            remove_comment["reason"] = reason
+
+        return self._requestor.request(
+            Request.POST,
+            "/comment/remove",
+            json=remove_comment,
         )
 
     def save(self, comment_id: int, save: bool) -> Optional[dict]:
