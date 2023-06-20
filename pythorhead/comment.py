@@ -184,6 +184,27 @@ class Comment:
             },
         )
 
+    def save(self, comment_id: int, save: bool) -> Optional[dict]:
+        """
+        Add / Remove a comment from saved.
+
+        Args:
+            comment_id (int)
+            save (bool)
+
+        Returns:
+            Optional[dict]: saved comment data if successful
+
+        """
+        return self._requestor.request(
+            Request.PUT,
+            "/comment/save",
+            json={
+                "comment_id": comment_id,
+                "save": save,
+            },
+        )
+
     def report(self, comment_id: int, reason: str) -> Optional[dict]:
         """
         Report a comment.
