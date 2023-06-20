@@ -1,10 +1,10 @@
-import requests
 import logging
-
 from enum import Enum
 from typing import Optional
-from pythorhead.auth import Authentication
 
+import requests
+
+from pythorhead.auth import Authentication
 
 logger = logging.getLogger(__name__)
 

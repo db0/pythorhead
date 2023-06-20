@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from pythorhead.requestor import Request, Requestor
 from pythorhead.types import CommentSortType, ListingType
@@ -8,7 +8,7 @@ class Comment:
     def __init__(self):
         self._requestor = Requestor()
 
-    def list(
+    def list(  # noqa: A003
         self,
         community_id: Optional[int] = None,
         community_name: Optional[str] = None,
@@ -78,14 +78,14 @@ class Comment:
         Create a comment.
 
         Args:
-            post_id (int): post_id
-            content (str): content
+            post_id (int)
+            content (str)
             form_id (Optional[int], optional): Defaults to None.
             parent_id (Optional[int], optional): Defaults to None.
             language_id (Optional[int], optional): Defaults to None.
 
         Returns:
-            dict: created comment data if successful
+            Optional[dict]: created comment data if successful
         """
 
         create_comment = {
@@ -117,14 +117,14 @@ class Comment:
         Edit a comment.
 
         Args:
-            comment_id (int): comment_id
+            comment_id (int)
             content (Optional[str], optional): Defaults to None.
             distinguished (Optional[bool], optional): Defaults to None.
             form_id (Optional[str], optional): Defaults to None.
             language_id (Optional[int], optional): Defaults to None.
 
         Returns:
-            dict: edited comment data if successful
+            Optional[dict]: edited comment data if successful
         """
         edit_comment: dict = {
             "comment_id": comment_id,
@@ -144,6 +144,26 @@ class Comment:
             json=edit_comment,
         )
 
+    def like(self, comment_id: int, score: Literal[-1, 0, 1]) -> Optional[dict]:
+        """
+        Like / Dislike a comment.
+
+        Args:
+            comment_id (int)
+            score (int)
+
+        Returns:
+            Optional[dict]: like comment data if successful
+        """
+        return self._requestor.request(
+            Request.POST,
+            "/comment/like",
+            json={
+                "comment_id": comment_id,
+                "score": score,
+            },
+        )
+
     def delete(self, comment_id: int, deleted: bool) -> Optional[dict]:
         """
         Delete / Restore a comment.
@@ -153,7 +173,7 @@ class Comment:
             deleted (bool): deleted
 
         Returns:
-            dict: deleted comment data if successful
+            Optional[dict]: deleted comment data if successful
         """
         return self._requestor.request(
             Request.POST,
@@ -173,7 +193,7 @@ class Comment:
             reason (str): reason
 
         Returns:
-            dict: report comment data if successful
+            Optional[dict]: report comment data if successful
         """
         return self._requestor.request(
             Request.POST,
