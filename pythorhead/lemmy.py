@@ -1,10 +1,9 @@
 import logging
-
 from typing import Optional
 
-from pythorhead.post import Post
 from pythorhead.comment import Comment
-from pythorhead.requestor import Requestor, Request
+from pythorhead.post import Post
+from pythorhead.requestor import Request, Requestor
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
