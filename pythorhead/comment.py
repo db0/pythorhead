@@ -1,7 +1,7 @@
-from typing import Optional, List
+from typing import List, Optional
 
-from pythorhead.types import ListingType, CommentSortType
-from pythorhead.requestor import Requestor, Request
+from pythorhead.requestor import Request, Requestor
+from pythorhead.types import CommentSortType, ListingType
 
 
 class Comment:
@@ -161,6 +161,26 @@ class Comment:
             json={
                 "comment_id": comment_id,
                 "deleted": deleted,
+            },
+        )
+
+    def report(self, comment_id: int, reason: str) -> Optional[dict]:
+        """
+        Report a comment.
+
+        Args:
+            comment_id (int): comment_id
+            reason (str): reason
+
+        Returns:
+            dict: report comment data if successful
+        """
+        return self._requestor.request(
+            Request.POST,
+            "/comment/report",
+            json={
+                "comment_id": comment_id,
+                "reason": reason,
             },
         )
 
