@@ -1,15 +1,16 @@
 import logging
-
 from typing import Optional
 
+from pythorhead.comment import Comment
 from pythorhead.post import Post
-from pythorhead.requestor import Requestor, Request
+from pythorhead.requestor import Request, Requestor
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 class Lemmy:
     post: Post
+    comment: Comment
     _known_communities = {}
     _requestor: Requestor
 
@@ -17,6 +18,7 @@ class Lemmy:
         self._requestor = Requestor()
         self._requestor.set_api_base_url(f"{api_base_url}/api/v3")
         self.post = Post()
+        self.comment = Comment()
 
     def log_in(self, username_or_email: str, password: str) -> bool:
         return self._requestor.log_in(username_or_email, password)

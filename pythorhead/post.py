@@ -1,7 +1,7 @@
-from typing import Any, Literal, Optional, List
+from typing import Any, List, Literal, Optional
 
-from pythorhead.types import FeatureType, ListingType, SortType
-from pythorhead.requestor import Requestor, Request
+from pythorhead.requestor import Request, Requestor
+from pythorhead.types import FeatureType, ListingType, PostSortType
 
 
 class Post:
@@ -39,7 +39,7 @@ class Post:
         limit: Optional[int] = None,
         page: Optional[int] = None,
         saved_only: Optional[bool] = None,
-        sort: Optional[SortType] = None,
+        sort: Optional[PostSortType] = None,
         type_: Optional[ListingType] = None,
     ) -> List[dict]:
         """
@@ -202,7 +202,7 @@ class Post:
 
     def like(self, post_id: int, score: Literal[-1, 0, 1]) -> Optional[dict]:
         """
-        Like a post
+        Like / Dislike a post
 
         Args:
             post_id (int)
@@ -220,7 +220,7 @@ class Post:
     def save(self, post_id: int, saved: bool) -> Optional[dict]:
         """
 
-        Save / Unsave a post
+        Add / Remove a post to saved posts
 
         Args:
             post_id (int)
