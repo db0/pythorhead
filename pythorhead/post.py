@@ -1,12 +1,12 @@
 from typing import Any, List, Literal, Optional
 
-from pythorhead.requestor import Request, Requestor
+from pythorhead.requestor import Request
 from pythorhead.types import FeatureType, ListingType, PostSortType
 
 
 class Post:
-    def __init__(self):
-        self._requestor = Requestor()
+    def __init__(self,_requestor):
+        self._requestor = _requestor
 
     def get(
         self,
