@@ -20,11 +20,11 @@ class Lemmy:
     def __init__(self, api_base_url: str) -> None:
         self._requestor = Requestor()
         self._requestor.set_domain(api_base_url)
-        self.post = Post()
-        self.comment = Comment()
-        self.site = Site()
-        self.user = User()
-        self.private_message = PrivateMessage()
+        self.post = Post(self._requestor)
+        self.comment = Comment(self._requestor)
+        self.site = Site(self._requestor)
+        self.user = User(self._requestor)
+        self.private_message = PrivateMessage(self._requestor)
 
     @property
     def nodeinfo(self):

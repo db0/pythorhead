@@ -26,13 +26,13 @@ lemmy_username = args.lemmy_username
 if not lemmy_username:
     lemmy_username = os.getenv("LEMMY_USERNAME")
 
-lemmy_password = args.lemmy_username
+lemmy_password = args.lemmy_password
 if not lemmy_password:
     lemmy_password = os.getenv("LEMMY_PASSWORD")
 
 lemmy = Lemmy(f"https://{lemmy_domain}")
 if lemmy_username and lemmy_password:
-    lemmy.log_in(lemmy_username, lemmy_password)
+    login = lemmy.log_in(lemmy_username, lemmy_password)
 user = lemmy.user.get(username=args.username)
 if user:
     print(json.dumps(user["person_view"], indent=4))

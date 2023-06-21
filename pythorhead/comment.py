@@ -1,12 +1,12 @@
 from typing import List, Literal, Optional
 
-from pythorhead.requestor import Request, Requestor
+from pythorhead.requestor import Request
 from pythorhead.types import CommentSortType, ListingType
 
 
 class Comment:
-    def __init__(self):
-        self._requestor = Requestor()
+    def __init__(self,_requestor):
+        self._requestor = _requestor
 
     def list(  # noqa: A003
         self,

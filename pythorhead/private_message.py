@@ -1,12 +1,11 @@
 from typing import Any, List, Literal, Optional
 
-from pythorhead.requestor import Request, Requestor
-from pythorhead.types import PostSortType
+from pythorhead.requestor import Request
 
 
 class PrivateMessage:
-    def __init__(self):
-        self._requestor = Requestor()
+    def __init__(self,_requestor):
+        self._requestor = _requestor
 
     def create(
         self,

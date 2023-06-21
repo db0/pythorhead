@@ -5,8 +5,8 @@ from pythorhead.types import PostSortType
 
 
 class User:
-    def __init__(self):
-        self._requestor = Requestor()
+    def __init__(self,_requestor):
+        self._requestor = _requestor
 
     def get(
         self,
