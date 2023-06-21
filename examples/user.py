@@ -34,4 +34,7 @@ lemmy = Lemmy(f"https://{lemmy_domain}")
 if lemmy_username and lemmy_password:
     lemmy.log_in(lemmy_username, lemmy_password)
 user = lemmy.user.get(username=args.username)
-print(json.dumps(user["person_view"], indent=4))
+if user:
+    print(json.dumps(user["person_view"], indent=4))
+else:
+    print("no matching username found")
