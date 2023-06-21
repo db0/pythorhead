@@ -4,7 +4,11 @@ A python library for interacting with Lemmy
 
 ![pythorhead logo](https://raw.githubusercontent.com/db0/pythorhead/main/logo.png)
 
-# Sample Post Usage
+# Examples
+
+See working examples in [examples/](/examples)
+
+## Sample Post Usage
 
 ```python
 from pythorhead import Lemmy
@@ -15,7 +19,7 @@ community_id = lemmy.discover_community("botart")
 lemmy.post.create(community_id, "Hello Lemmy World")
 ```
 
-# Sample Comment Usage
+## Sample Comment Usage
 
 ```python
 from pythorhead import Lemmy
