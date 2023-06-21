@@ -5,6 +5,7 @@ from pythorhead.comment import Comment
 from pythorhead.post import Post
 from pythorhead.site import Site
 from pythorhead.user import User
+from pythorhead.private_message import PrivateMessage
 from pythorhead.requestor import Request, Requestor
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
@@ -23,6 +24,7 @@ class Lemmy:
         self.comment = Comment()
         self.site = Site()
         self.user = User()
+        self.private_message = PrivateMessage()
 
     def log_in(self, username_or_email: str, password: str) -> bool:
         return self._requestor.log_in(username_or_email, password)
