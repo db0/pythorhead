@@ -19,12 +19,16 @@ class Lemmy:
 
     def __init__(self, api_base_url: str) -> None:
         self._requestor = Requestor()
-        self._requestor.set_api_base_url(f"{api_base_url}/api/v3")
+        self._requestor.set_domain(api_base_url)
         self.post = Post()
         self.comment = Comment()
         self.site = Site()
         self.user = User()
         self.private_message = PrivateMessage()
+
+    @property
+    def nodeinfo(self):
+        return self._requestor.nodeinfo
 
     def log_in(self, username_or_email: str, password: str) -> bool:
         return self._requestor.log_in(username_or_email, password)
