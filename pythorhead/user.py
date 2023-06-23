@@ -5,7 +5,7 @@ from pythorhead.types import PostSortType
 
 
 class User:
-    def __init__(self,_requestor):
+    def __init__(self, _requestor):
         self._requestor = _requestor
 
     def get(
@@ -32,5 +32,5 @@ class User:
         Returns:
             dict: user view
         """
-        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != 'self'}
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.request(Request.GET, "/user", params=params)
