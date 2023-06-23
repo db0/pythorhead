@@ -47,13 +47,15 @@ class Requestor:
     def api(self, method: Request, endpoint: str, **kwargs) -> Optional[dict]:
         logger.info(f"Requesting API {method} {endpoint}")
         if self._auth.token:
-            for k in ("json", "params"):
-                if (data := kwargs.get(k)) is not None:
-                    data["auth"] = self._auth.token
-                    break
-
-        r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", **kwargs)
-
+            if (data := kwargs.get("json")) is not None:
+                data["auth"] = self._auth.token
+            if (data := kwargs.get("params")) is not None:
+                data["auth"] = self._auth.token
+        try:
+            r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", **kwargs)
+        except Exception as err:
+            logger.error(f"Error encountered while {method}: {err}")
+            return
         if not r.ok:
             logger.error(f"Error encountered while {method}: {r.text}")
             return
