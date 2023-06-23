@@ -274,4 +274,59 @@ class Post:
         }
         return self._requestor.request(Request.POST, "/post/feature", json=feature_post)
 
+    def lock(self, post_id: int, locked: bool) -> Optional[dict]:
+        """
+
+        A moderator can lock a post ( IE disable new comments )
+
+        Args:
+            post_id (int)
+            locked (bool)
+
+        Returns:
+            Optional[dict]: post data if successful
+        """
+
+        lock_post = {
+            "post_id": post_id,
+            "locked": locked,
+        }
+        return self._requestor.request(Request.POST, "/post/lock", json=lock_post)
+
+    def mark_as_read(self, post_id: int, read: bool) -> Optional[dict]:
+        """
+
+        Mark a post as read
+
+        Args:
+            post_id (int)
+            read (bool)
+
+        Returns:
+            Optional[dict]: post data if successful
+        """
+
+        mark_as_read_post = {
+            "post_id": post_id,
+            "read": read,
+        }
+        return self._requestor.request(Request.POST, "/post/mark_as_read", json=mark_as_read_post)
+
+    def site_metadata(self, url: str) -> Optional[dict]:
+        """
+
+        Fetch metadata for any given site.
+
+        Args:
+            url (str)
+
+        Returns:
+            Optional[dict]: post data if successful
+        """
+
+        site_metadata_post = {
+            "url": url,
+        }
+        return self._requestor.request(Request.GET, "/post/site_metadata", params=site_metadata_post)
+
     __call__ = create
