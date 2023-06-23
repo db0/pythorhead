@@ -252,4 +252,24 @@ class Comment:
             },
         )
 
+    def mark_as_read(self, comment_reply_id: int, read: bool) -> Optional[dict]:
+        """
+
+        Mark a comment as read
+
+        Args:
+            comment_reply_id (int)
+            read (bool)
+
+        Returns:
+            Optional[dict]: comment data if successful
+        """
+
+        mark_as_read_comment = {
+            "comment_reply_id": comment_reply_id,
+            "read": read,
+        }
+        return self._requestor.request(Request.POST, "/comment/mark_as_read", json=mark_as_read_comment)
+
+
     __call__ = create
