@@ -52,9 +52,11 @@ class Requestor:
                 data["auth"] = self._auth.token
             if (data := kwargs.get("params")) is not None:
                 data["auth"] = self._auth.token
-
-        r = REQUEST_MAP[method](f"{self._auth.api_base_url}{endpoint}", **kwargs)
-
+        try:
+            r = REQUEST_MAP[method](f"{self._auth.api_base_url}{endpoint}", **kwargs)
+        except Exception as err:
+            logger.error(f"Error encountered while {method}: {err}")
+            return
         if not r.ok:
             logger.error(f"Error encountered while {method}: {r.text}")
             return
