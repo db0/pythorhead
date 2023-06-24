@@ -52,7 +52,15 @@ class Requestor:
             if (data := kwargs.get("params")) is not None:
                 data["auth"] = self._auth.token
         try:
-            r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", **kwargs)
+            headers = {
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "none",
+                "Sec-Fetch-User": "?1",
+                "Sec-GPC": "1",
+                "User-Agent": "pythorhead/0.5",
+            }
+            r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", headers = headers, **kwargs)
         except Exception as err:
             logger.error(f"Error encountered while {method}: {err}")
             return
