@@ -2,16 +2,20 @@ from enum import Enum
 
 
 class PostSortType(Enum):
-    Active = "Active"
     Hot = "Hot"
-    MostComments = "MostComments"
     New = "New"
     Old = "Old"
+    Active = "Active"
     TopAll = "TopAll"
     TopDay = "TopDay"
-    TopMonth = "TopMonth"
     TopWeek = "TopWeek"
+    TopMonth = "TopMonth"
     TopYear = "TopYear"
+    TopHour = "TopHour"
+    TopSixHour = "TopSixHour"
+    TopTwelveHour = "TopTwelveHour"
+    NewComments = "NewComments"
+    MostComments = "MostComments"
 
 
 class CommentSortType(Enum):
