@@ -2,6 +2,7 @@ import logging
 from typing import Optional
 
 from pythorhead.comment import Comment
+from pythorhead.community import Community
 from pythorhead.image import Image
 from pythorhead.post import Post
 from pythorhead.private_message import PrivateMessage
@@ -20,6 +21,7 @@ class Lemmy:
         self._requestor = Requestor()
         self._requestor.set_domain(api_base_url)
         self.post = Post(self._requestor)
+        self.community = Community(self._requestor)
         self.comment = Comment(self._requestor)
         self.site = Site(self._requestor)
         self.user = User(self._requestor)
