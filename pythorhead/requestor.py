@@ -34,7 +34,15 @@ class Requestor:
         self.domain = domain
         self._auth.set_api_base_url(self.domain)
         try:
-            self.nodeinfo = requests.get(f"{self.domain}/nodeinfo/2.0.json", timeout=2).json()
+            headers = {
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "cross-site",
+                "Sec-Fetch-User": "?1",
+                "Sec-GPC": "1",
+                "User-Agent": "pythorhead/0.5",
+            }
+            self.nodeinfo = requests.get(f"{self.domain}/nodeinfo/2.0.json", headers = headers, timeout=2).json()
         except Exception as err:
             logger.error(f"Problem encountered retrieving Lemmy nodeinfo: {err}")
             return
