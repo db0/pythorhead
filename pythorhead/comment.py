@@ -1,11 +1,11 @@
-from typing import List, Literal, Optional
+from typing import Any, List, Literal, Optional
 
-from pythorhead.requestor import Request
+from pythorhead.requestor import Request, Requestor
 from pythorhead.types import CommentSortType, ListingType
 
 
 class Comment:
-    def __init__(self,_requestor):
+    def __init__(self, _requestor: Requestor):
         self._requestor = _requestor
 
     def list(  # noqa: A003
@@ -62,7 +62,7 @@ class Comment:
         if type_ is not None:
             list_comment["type"] = type_.value
 
-        if data := self._requestor.request(Request.GET, "/comment/list", params=list_comment):
+        if data := self._requestor.api(Request.GET, "/comment/list", params=list_comment):
             return data["comments"]
         return []
 
@@ -99,7 +99,7 @@ class Comment:
         if language_id is not None:
             create_comment["language_id"] = language_id
 
-        return self._requestor.request(
+        return self._requestor.api(
             Request.POST,
             "/comment",
             json=create_comment,
@@ -126,7 +126,7 @@ class Comment:
         Returns:
             Optional[dict]: edited comment data if successful
         """
-        edit_comment: dict = {
+        edit_comment: dict[Any, Any] = {
             "comment_id": comment_id,
         }
         if content is not None:
@@ -138,7 +138,7 @@ class Comment:
         if language_id is not None:
             edit_comment["language_id"] = language_id
 
-        return self._requestor.request(
+        return self._requestor.api(
             Request.PUT,
             "/comment",
             json=edit_comment,
@@ -155,7 +155,7 @@ class Comment:
         Returns:
             Optional[dict]: like comment data if successful
         """
-        return self._requestor.request(
+        return self._requestor.api(
             Request.POST,
             "/comment/like",
             json={
@@ -175,7 +175,7 @@ class Comment:
         Returns:
             Optional[dict]: deleted comment data if successful
         """
-        return self._requestor.request(
+        return self._requestor.api(
             Request.POST,
             "/comment/delete",
             json={
@@ -205,7 +205,7 @@ class Comment:
         if reason is not None:
             remove_comment["reason"] = reason
 
-        return self._requestor.request(
+        return self._requestor.api(
             Request.POST,
             "/comment/remove",
             json=remove_comment,
@@ -223,7 +223,7 @@ class Comment:
             Optional[dict]: saved comment data if successful
 
         """
-        return self._requestor.request(
+        return self._requestor.api(
             Request.PUT,
             "/comment/save",
             json={
@@ -243,7 +243,7 @@ class Comment:
         Returns:
             Optional[dict]: report comment data if successful
         """
-        return self._requestor.request(
+        return self._requestor.api(
             Request.POST,
             "/comment/report",
             json={
@@ -269,7 +269,6 @@ class Comment:
             "comment_reply_id": comment_reply_id,
             "read": read,
         }
-        return self._requestor.request(Request.POST, "/comment/mark_as_read", json=mark_as_read_comment)
-
+        return self._requestor.api(Request.POST, "/comment/mark_as_read", json=mark_as_read_comment)
 
     __call__ = create

@@ -1,11 +1,11 @@
 from typing import Any, List, Literal, Optional
 
-from pythorhead.requestor import Request
+from pythorhead.requestor import Request, Requestor
 from pythorhead.types import FeatureType, ListingType, PostSortType
 
 
 class Post:
-    def __init__(self,_requestor):
+    def __init__(self, _requestor: Requestor):
         self._requestor = _requestor
 
     def get(
@@ -30,7 +30,7 @@ class Post:
         if comment_id is not None:
             get_post["comment_id"] = comment_id
 
-        return self._requestor.request(Request.GET, "/post", params=get_post)
+        return self._requestor.api(Request.GET, "/post", params=get_post)
 
     def list(  # noqa: A003
         self,
@@ -74,7 +74,7 @@ class Post:
             list_post["sort"] = sort.value
         if type_ is not None:
             list_post["type_"] = type_.value
-        if data := self._requestor.request(Request.GET, "/post/list", params=list_post):
+        if data := self._requestor.api(Request.GET, "/post/list", params=list_post):
             return data["posts"]
         return []
 
@@ -119,7 +119,7 @@ class Post:
         if language_id is not None:
             new_post["language_id"] = language_id
 
-        return self._requestor.request(Request.POST, "/post", json=new_post)
+        return self._requestor.api(Request.POST, "/post", json=new_post)
 
     def delete(self, post_id: int, deleted: bool) -> Optional[dict]:
         """
@@ -136,7 +136,7 @@ class Post:
             "post_id": post_id,
             "deleted": deleted,
         }
-        return self._requestor.request(Request.POST, "/post/delete", json=delete_post)
+        return self._requestor.api(Request.POST, "/post/delete", json=delete_post)
 
     def remove(self, post_id: int, removed: bool, reason: Optional[str] = None) -> Optional[dict]:
         """
@@ -158,7 +158,7 @@ class Post:
         if reason is not None:
             remove_post["reason"] = reason
 
-        return self._requestor.request(Request.POST, "/post/remove", json=remove_post)
+        return self._requestor.api(Request.POST, "/post/remove", json=remove_post)
 
     def edit(
         self,
@@ -198,7 +198,7 @@ class Post:
         if language_id is not None:
             edit_post["language_id"] = language_id
 
-        return self._requestor.request(Request.PUT, "/post", json=edit_post)
+        return self._requestor.api(Request.PUT, "/post", json=edit_post)
 
     def like(self, post_id: int, score: Literal[-1, 0, 1]) -> Optional[dict]:
         """
@@ -215,7 +215,7 @@ class Post:
             "post_id": post_id,
             "score": score,
         }
-        return self._requestor.request(Request.POST, "/post/like", json=like_post)
+        return self._requestor.api(Request.POST, "/post/like", json=like_post)
 
     def save(self, post_id: int, saved: bool) -> Optional[dict]:
         """
@@ -233,7 +233,7 @@ class Post:
             "post_id": post_id,
             "save": saved,
         }
-        return self._requestor.request(Request.PUT, "/post/save", json=save_post)
+        return self._requestor.api(Request.PUT, "/post/save", json=save_post)
 
     def report(self, post_id: int, reason: str) -> Optional[dict]:
         """
@@ -251,7 +251,7 @@ class Post:
             "post_id": post_id,
             "reason": reason,
         }
-        return self._requestor.request(Request.POST, "/post/report", json=report_post)
+        return self._requestor.api(Request.POST, "/post/report", json=report_post)
 
     def feature(self, post_id: int, feature: bool, feature_type: FeatureType) -> Optional[dict]:
         """
@@ -272,7 +272,7 @@ class Post:
             "featured": feature,
             "feature_type": feature_type.value,
         }
-        return self._requestor.request(Request.POST, "/post/feature", json=feature_post)
+        return self._requestor.api(Request.POST, "/post/feature", json=feature_post)
 
     def lock(self, post_id: int, locked: bool) -> Optional[dict]:
         """
@@ -291,7 +291,7 @@ class Post:
             "post_id": post_id,
             "locked": locked,
         }
-        return self._requestor.request(Request.POST, "/post/lock", json=lock_post)
+        return self._requestor.api(Request.POST, "/post/lock", json=lock_post)
 
     def mark_as_read(self, post_id: int, read: bool) -> Optional[dict]:
         """
@@ -310,7 +310,7 @@ class Post:
             "post_id": post_id,
             "read": read,
         }
-        return self._requestor.request(Request.POST, "/post/mark_as_read", json=mark_as_read_post)
+        return self._requestor.api(Request.POST, "/post/mark_as_read", json=mark_as_read_post)
 
     def site_metadata(self, url: str) -> Optional[dict]:
         """
@@ -327,6 +327,6 @@ class Post:
         site_metadata_post = {
             "url": url,
         }
-        return self._requestor.request(Request.GET, "/post/site_metadata", params=site_metadata_post)
+        return self._requestor.api(Request.GET, "/post/site_metadata", params=site_metadata_post)
 
     __call__ = create

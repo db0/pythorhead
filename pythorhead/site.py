@@ -1,11 +1,11 @@
-from typing import Any, List, Literal, Optional
+from typing import Any, List, Optional
 
-from pythorhead.requestor import Request
+from pythorhead.requestor import Request, Requestor
 from pythorhead.types import ListingType
 
 
 class Site:
-    def __init__(self,_requestor):
+    def __init__(self, _requestor: Requestor):
         self._requestor = _requestor
 
     def get(
@@ -17,7 +17,7 @@ class Site:
         Returns:
             dict: site view
         """
-        return self._requestor.request(Request.GET, "/site")
+        return self._requestor.api(Request.GET, "/site")
 
     def edit(
         self,
@@ -37,7 +37,7 @@ class Site:
         legal_information: Optional[str] = None,
         application_email_admins: Optional[bool] = None,
         hide_modlog_mod_names: Optional[bool] = None,
-        discussion_languages = None,
+        discussion_languages=None,
         slur_filter_regex: Optional[str] = None,
         actor_name_max_length: Optional[int] = None,
         rate_limit_message: Optional[int] = None,
@@ -60,7 +60,7 @@ class Site:
         allowed_instances: Optional[List] = None,
         blocked_instances: Optional[List] = None,
         taglines: Optional[List] = None,
-        registration_mode = None,
+        registration_mode=None,
         reports_email_admins: Optional[bool] = None,
     ) -> Optional[dict]:
         """
@@ -112,8 +112,10 @@ class Site:
         Returns:
             Optional[dict]: post data if successful
         """
-        edit_site: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != 'self'}
+        edit_site: dict[str, Any] = {
+            key: value for key, value in locals().items() if value is not None and key != "self"
+        }
         if len(edit_site) == 0:
             raise Exception("Must provide at least one site property to change")
-        
-        return self._requestor.request(Request.PUT, "/site", json=edit_site)
+
+        return self._requestor.api(Request.PUT, "/site", json=edit_site)

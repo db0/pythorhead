@@ -2,18 +2,17 @@ import logging
 from typing import Optional
 
 from pythorhead.comment import Comment
+from pythorhead.image import Image
 from pythorhead.post import Post
-from pythorhead.site import Site
-from pythorhead.user import User
 from pythorhead.private_message import PrivateMessage
 from pythorhead.requestor import Request, Requestor
+from pythorhead.site import Site
+from pythorhead.user import User
 
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 class Lemmy:
-    post: Post
-    comment: Comment
     _known_communities = {}
     _requestor: Requestor
 
@@ -25,6 +24,7 @@ class Lemmy:
         self.site = Site(self._requestor)
         self.user = User(self._requestor)
         self.private_message = PrivateMessage(self._requestor)
+        self.image = Image(self._requestor)
 
     @property
     def nodeinfo(self):
@@ -37,7 +37,7 @@ class Lemmy:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
 
-        request = self._requestor.request(Request.GET, "/community", params={"name": community_name})
+        request = self._requestor.api(Request.GET, "/community", params={"name": community_name})
 
         if request is not None:
             community_id = request["community_view"]["community"]["id"]
