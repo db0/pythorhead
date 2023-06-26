@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class PostSortType(Enum):
+class SortType(Enum):
     Hot = "Hot"
     New = "New"
     Old = "Old"

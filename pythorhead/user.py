@@ -1,7 +1,7 @@
 from typing import Any, List, Literal, Optional
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import PostSortType
+from pythorhead.types import SortType
 
 
 class User:
@@ -12,7 +12,7 @@ class User:
         self,
         person_id: Optional[str] = None,
         username: Optional[str] = None,
-        sort: Optional[PostSortType] = None,
+        sort: Optional[SortType] = None,
         page: Optional[int] = None,
         limit: Optional[int] = None,
         community_id: Optional[int] = None,

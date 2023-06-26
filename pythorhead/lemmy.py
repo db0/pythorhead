@@ -6,7 +6,7 @@ from pythorhead.community import Community
 from pythorhead.image import Image
 from pythorhead.post import Post
 from pythorhead.private_message import PrivateMessage
-from pythorhead.requestor import Request, Requestor
+from pythorhead.requestor import Requestor
 from pythorhead.site import Site
 from pythorhead.user import User
 
@@ -39,7 +39,7 @@ class Lemmy:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
 
-        request = self._requestor.api(Request.GET, "/community", params={"name": community_name})
+        request = self.community.get(name=community_name)
 
         if request is not None:
             community_id = request["community_view"]["community"]["id"]
