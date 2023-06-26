@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.9.2](https://github.com/db0/pythorhead/tree/v0.9.2) (2023-06-26)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.1...v0.9.2)
+
+**Closed issues:**
+
+- Changelog [\#27](https://github.com/db0/pythorhead/issues/27)
+
+**Merged pull requests:**
+
+- Added get and list to community [\#31](https://github.com/db0/pythorhead/pull/31) ([NicKoehler](https://github.com/NicKoehler))
+- Added pic example [\#30](https://github.com/db0/pythorhead/pull/30) ([NicKoehler](https://github.com/NicKoehler))
+
 ## [v0.9.1](https://github.com/db0/pythorhead/tree/v0.9.1) (2023-06-25)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.0...v0.9.1)
