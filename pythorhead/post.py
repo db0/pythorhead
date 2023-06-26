@@ -1,7 +1,7 @@
 from typing import Any, List, Literal, Optional
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import FeatureType, ListingType, PostSortType
+from pythorhead.types import FeatureType, ListingType, SortType
 
 
 class Post:
@@ -39,7 +39,7 @@ class Post:
         limit: Optional[int] = None,
         page: Optional[int] = None,
         saved_only: Optional[bool] = None,
-        sort: Optional[PostSortType] = None,
+        sort: Optional[SortType] = None,
         type_: Optional[ListingType] = None,
     ) -> List[dict]:
         """
