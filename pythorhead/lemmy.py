@@ -10,8 +10,6 @@ from pythorhead.requestor import Requestor
 from pythorhead.site import Site
 from pythorhead.user import User
 
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-
 
 class Lemmy:
     _known_communities = {}
