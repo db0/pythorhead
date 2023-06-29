@@ -7,9 +7,6 @@ class Authentication:
 
     def set_token(self, token: str) -> None:
         self.token = token
-
-    def get_token(self) -> Optional[str]:
-        return self.token
     
     def set_api_base_url(self, base_url: str) -> None:
         self.api_url = f"{base_url}/api/v3"

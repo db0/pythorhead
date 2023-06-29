@@ -26,9 +26,8 @@ class Mention:
         Returns:
             dict? mentions response
         """
-
-        params = {"auth": self._requestor.get_auth_token()}
-        json: dict[str, Any] = {key: value for key, value in locals(
+        unread_only = 'true' if unread_only else 'false'
+    
+        params: dict[str, Any] = {key: value for key, value in locals(
         ).items() if value is not None and key != "self"}
-
-        return self._requestor.api(Request.GET, "/user/mention", params=params, json=json)
+        return self._requestor.api(Request.GET, "/user/mention", params=params)

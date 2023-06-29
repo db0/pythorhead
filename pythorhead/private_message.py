@@ -30,7 +30,7 @@ class PrivateMessage:
         self,
         unread_only: bool,
         page: int,
-        limit: int
+        limit: int = 20
     ) -> Optional[dict]:
         """
         List private messages
@@ -38,12 +38,12 @@ class PrivateMessage:
         Args:
             unread_only (bool).
             page (int).
-            limit (int).
+            limit (int) with a max of 50.
             
         Returns:
             dict? private message response
         """
-        json: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
-        params = {"auth": self._requestor.get_auth_token()}
-        
-        return self._requestor.api(Request.GET, "/private_message/list", params=params, json=json)
+        limit = 50 if limit > 50 else limit
+        unread_only = 'true' if unread_only else 'false'
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        return self._requestor.api(Request.GET, "/private_message/list",  params=params)
