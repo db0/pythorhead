@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from pythorhead.requestor import Request, Requestor
 from pythorhead.types import ListingType, SortType
@@ -31,7 +31,7 @@ class Community:
         Returns:
             Optional[dict]: post data if successful
         """
-        new_community: dict = {
+        new_community: dict[Any, Any] = {
             "name": name,
             "title": title,
         }
@@ -44,7 +44,7 @@ class Community:
         if [posting_restricted_to_mods] is not None:
             new_community["[posting_restricted_to_mods]"] = [posting_restricted_to_mods]
 
-        return self._requestor.api(Request.POST, "/post", json=new_community)
+        return self._requestor.api(Request.POST, "/community", json=new_community)
 
     def get(self, id: Optional[int] = None, name: Optional[str] = None) -> Optional[dict]:
         """
