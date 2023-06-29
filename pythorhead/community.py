@@ -1,5 +1,6 @@
 from typing import List, Optional, Union
 
+
 from pythorhead.requestor import Request, Requestor
 from pythorhead.types import ListingType, SortType, LanguageType
 
@@ -33,7 +34,7 @@ class Community:
         Returns:
             Optional[dict]: post data if successful
         """
-        new_community: dict = {
+        new_community: dict[Any, Any] = {
             "name": name,
             "title": title,
         }
