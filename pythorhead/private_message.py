@@ -25,3 +25,25 @@ class PrivateMessage:
         return self._requestor.api(Request.POST, "/private_message", json=params)
 
     __call__ = create
+    
+    def list(
+        self,
+        unread_only: bool,
+        page: int,
+        limit: int
+    ) -> Optional[dict]:
+        """
+        List private messages
+        
+        Args:
+            unread_only (bool).
+            page (int).
+            limit (int).
+            
+        Returns:
+            dict? private message response
+        """
+        json: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        params = {"auth": self._requestor.get_auth_token()}
+        
+        return self._requestor.api(Request.GET, "/private_message/list", params=params, json=json)

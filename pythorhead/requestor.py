@@ -97,6 +97,9 @@ class Requestor:
         if data := self.api(Request.POST, "/user/login", json=payload):
             self._auth.set_token(data["jwt"])
         return self._auth.token is not None
+    
+    def get_auth_token(self) -> Optional[str]:
+        return self._auth.get_token()
 
     def log_out(self) -> None:
         self._auth.token = None

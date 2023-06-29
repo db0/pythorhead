@@ -9,6 +9,7 @@ from pythorhead.private_message import PrivateMessage
 from pythorhead.requestor import Requestor
 from pythorhead.site import Site
 from pythorhead.user import User
+from pythorhead.mention import Mention
 
 
 class Lemmy:
@@ -25,6 +26,7 @@ class Lemmy:
         self.user = User(self._requestor)
         self.private_message = PrivateMessage(self._requestor)
         self.image = Image(self._requestor)
+        self.mention = Mention(self._requestor)
 
     @property
     def nodeinfo(self):
