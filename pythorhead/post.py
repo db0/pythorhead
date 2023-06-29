@@ -1,7 +1,7 @@
-from typing import Any, List, Literal, Optional
+from typing import Any, List, Literal, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import FeatureType, ListingType, SortType
+from pythorhead.types import FeatureType, ListingType, SortType, LanguageType
 
 
 class Post:
@@ -86,7 +86,7 @@ class Post:
         body: Optional[str] = None,
         nsfw: Optional[bool] = None,
         honeypot: Optional[str] = None,
-        language_id: Optional[int] = None,
+        language_id: Union[int, LanguageType, None] = None,
     ) -> Optional[dict]:
         """
         Create a post
@@ -98,7 +98,7 @@ class Post:
             body (str, optional): Defaults to None.
             nsfw (bool, optional): Defaults to None.
             honeypot (str, optional): Defaults to None.
-            language_id (int, optional): Defaults to None.
+            language_id (Union[int, LanguageType], optional): Defaults to None.
 
         Returns:
             Optional[dict]: post data if successful
@@ -117,7 +117,10 @@ class Post:
         if honeypot is not None:
             new_post["honeypot"] = honeypot
         if language_id is not None:
-            new_post["language_id"] = language_id
+            if isinstance(language_id, LanguageType):
+                new_post["language_id"] = language_id.value
+            else:
+                new_post["language_id"] = language_id
 
         return self._requestor.api(Request.POST, "/post", json=new_post)
 
@@ -167,7 +170,7 @@ class Post:
         url: Optional[str] = None,
         body: Optional[str] = None,
         nsfw: Optional[bool] = None,
-        language_id: Optional[int] = None,
+        language_id: Union[int, LanguageType, None] = None,
     ) -> Optional[dict]:
         """
 
@@ -179,7 +182,7 @@ class Post:
             url (str, optional): Defaults to None.
             body (str, optional): Defaults to None.
             nsfw (bool, optional): Defaults to None.
-            language_id (int, optional): Defaults to None.
+            language_id (Union[int, LanguageType], optional): Defaults to None.
 
         Returns:
             Optional[dict]: post data if successful
@@ -196,7 +199,10 @@ class Post:
         if nsfw is not None:
             edit_post["nsfw"] = nsfw
         if language_id is not None:
-            edit_post["language_id"] = language_id
+            if isinstance(language_id, LanguageType):
+                edit_post["language_id"] = language_id.value
+            else:
+                edit_post["language_id"] = language_id
 
         return self._requestor.api(Request.PUT, "/post", json=edit_post)
 

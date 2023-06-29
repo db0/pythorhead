@@ -1,7 +1,7 @@
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import ListingType
+from pythorhead.types import ListingType, LanguageType
 
 
 class Site:
@@ -37,7 +37,7 @@ class Site:
         legal_information: Optional[str] = None,
         application_email_admins: Optional[bool] = None,
         hide_modlog_mod_names: Optional[bool] = None,
-        discussion_languages=None,
+        discussion_languages: Optional[List[Union[int, LanguageType]]] = None,
         slur_filter_regex: Optional[str] = None,
         actor_name_max_length: Optional[int] = None,
         rate_limit_message: Optional[int] = None,
@@ -84,7 +84,7 @@ class Site:
             legal_information (str, optional): Defaults to None.
             application_email_admins (bool, optional): Defaults to None.
             hide_modlog_mod_names (bool, optional): Defaults to None.
-            discussion_languages (LanguageType, optional): Defaults to None.
+            discussion_languages: (List[Union[int, LanguageType]], optional): Defaults to None
             slur_filter_regex (str, optional): Defaults to None.
             actor_name_max_length (int, optional): Defaults to None.
             rate_limit_message (int, optional): Defaults to None.
@@ -112,6 +112,7 @@ class Site:
         Returns:
             Optional[dict]: post data if successful
         """
+        discussion_languages = [l.value for l in discussion_languages if isinstance(l, LanguageType)]
         edit_site: dict[str, Any] = {
             key: value for key, value in locals().items() if value is not None and key != "self"
         }

@@ -1,7 +1,7 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import ListingType, SortType
+from pythorhead.types import ListingType, SortType, LanguageType
 
 
 class Community:
@@ -16,6 +16,7 @@ class Community:
         icon: Optional[str] = None,
         nsfw: Optional[bool] = None,
         posting_restricted_to_mods: Optional[bool] = None,
+        discussion_languages: Optional[List[Union[int, LanguageType]]] = None,
     ) -> Optional[dict]:
         """
         Create a community
@@ -27,6 +28,7 @@ class Community:
             icon (str, optional): Defaults to None
             nsfw (bool, optional): Defaults to None
             posting_restricted_to_mods (bool, optional): Defaults to None
+            discussion_languages: (List[Union[int, LanguageType]], optional): Defaults to None
 
         Returns:
             Optional[dict]: post data if successful
@@ -43,8 +45,11 @@ class Community:
             new_community["nsfw"] = nsfw
         if [posting_restricted_to_mods] is not None:
             new_community["[posting_restricted_to_mods]"] = [posting_restricted_to_mods]
+        if discussion_languages is not None:
+            new_community["discussion_languages"] = [l.value for l in discussion_languages
+                                                     if isinstance(l, LanguageType)]
 
-        return self._requestor.api(Request.POST, "/post", json=new_community)
+        return self._requestor.api(Request.POST, "/community", json=new_community)
 
     def get(self, id: Optional[int] = None, name: Optional[str] = None) -> Optional[dict]:
         """

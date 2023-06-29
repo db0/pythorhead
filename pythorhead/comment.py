@@ -1,7 +1,7 @@
-from typing import Any, List, Literal, Optional
+from typing import Any, List, Literal, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import CommentSortType, ListingType
+from pythorhead.types import CommentSortType, ListingType, LanguageType
 
 
 class Comment:
@@ -72,7 +72,7 @@ class Comment:
         content: str,
         form_id: Optional[str] = None,
         parent_id: Optional[int] = None,
-        language_id: Optional[int] = None,
+        language_id: Union[int, LanguageType, None] = None,
     ) -> Optional[dict]:
         """
         Create a comment.
@@ -82,7 +82,7 @@ class Comment:
             content (str)
             form_id (Optional[int], optional): Defaults to None.
             parent_id (Optional[int], optional): Defaults to None.
-            language_id (Optional[int], optional): Defaults to None.
+            language_id (Union[int, LanguageType], optional): Defaults to None.
 
         Returns:
             Optional[dict]: created comment data if successful
@@ -97,7 +97,10 @@ class Comment:
         if parent_id is not None:
             create_comment["parent_id"] = parent_id
         if language_id is not None:
-            create_comment["language_id"] = language_id
+            if isinstance(language_id, LanguageType):
+                create_comment["language_id"] = language_id.value
+            else:
+                create_comment["language_id"] = language_id
 
         return self._requestor.api(
             Request.POST,
@@ -111,7 +114,7 @@ class Comment:
         content: Optional[str] = None,
         distinguished: Optional[bool] = None,
         form_id: Optional[str] = None,
-        language_id: Optional[int] = None,
+        language_id: Union[int, LanguageType, None] = None,
     ) -> Optional[dict]:
         """
         Edit a comment.
@@ -121,7 +124,7 @@ class Comment:
             content (Optional[str], optional): Defaults to None.
             distinguished (Optional[bool], optional): Defaults to None.
             form_id (Optional[str], optional): Defaults to None.
-            language_id (Optional[int], optional): Defaults to None.
+            language_id (Union[int, LanguageType], optional): Defaults to None.
 
         Returns:
             Optional[dict]: edited comment data if successful
@@ -136,7 +139,10 @@ class Comment:
         if form_id is not None:
             edit_comment["form_id"] = form_id
         if language_id is not None:
-            edit_comment["language_id"] = language_id
+            if isinstance(language_id, LanguageType):
+                edit_comment["language_id"] = language_id.value
+            else:
+                edit_comment["language_id"] = language_id
 
         return self._requestor.api(
             Request.PUT,
