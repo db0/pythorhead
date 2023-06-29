@@ -1,5 +1,22 @@
 # Changelog
 
+## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.3...HEAD)
+
+**Fixed bugs:**
+
+- Create community broken [\#35](https://github.com/db0/pythorhead/issues/35)
+
+## [v0.9.3](https://github.com/db0/pythorhead/tree/v0.9.3) (2023-06-29)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.2...v0.9.3)
+
+**Merged pull requests:**
+
+- fix create community [\#36](https://github.com/db0/pythorhead/pull/36) ([NicKoehler](https://github.com/NicKoehler))
+- Remove logging.basicConfig statement [\#32](https://github.com/db0/pythorhead/pull/32) ([hjalp](https://github.com/hjalp))
+
 ## [v0.9.2](https://github.com/db0/pythorhead/tree/v0.9.2) (2023-06-26)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.1...v0.9.2)
