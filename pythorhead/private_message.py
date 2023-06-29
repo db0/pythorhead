@@ -38,7 +38,7 @@ class PrivateMessage:
         Args:
             unread_only (bool).
             page (int).
-            limit (int) with a max of 50.
+            limit (int) with a max of 50, defaults to 20.
             
         Returns:
             dict? private message response
