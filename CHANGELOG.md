@@ -1,12 +1,16 @@
 # Changelog
 
-## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+## [v0.10.0](https://github.com/db0/pythorhead/tree/v0.10.0) (2023-06-30)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.3...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.3...v0.10.0)
 
 **Fixed bugs:**
 
 - Create community broken [\#35](https://github.com/db0/pythorhead/issues/35)
+
+**Merged pull requests:**
+
+- ✨ Add list functions for Mentions and Private Messages [\#34](https://github.com/db0/pythorhead/pull/34) ([i-be-snek](https://github.com/i-be-snek))
 
 ## [v0.9.3](https://github.com/db0/pythorhead/tree/v0.9.3) (2023-06-29)
 
