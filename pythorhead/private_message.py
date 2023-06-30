@@ -25,3 +25,25 @@ class PrivateMessage:
         return self._requestor.api(Request.POST, "/private_message", json=params)
 
     __call__ = create
+    
+    def list(
+        self,
+        unread_only: bool,
+        page: int,
+        limit: int = 20
+    ) -> Optional[dict]:
+        """
+        List private messages
+        
+        Args:
+            unread_only (bool).
+            page (int).
+            limit (int) with a max of 50, defaults to 20.
+            
+        Returns:
+            dict? private message response
+        """
+        limit = 50 if limit > 50 else limit
+        unread_only = 'true' if unread_only else 'false'
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        return self._requestor.api(Request.GET, "/private_message/list",  params=params)
