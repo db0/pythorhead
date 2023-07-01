@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.10.1](https://github.com/db0/pythorhead/tree/v0.10.1) (2023-07-01)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.10.0...v0.10.1)
+
+**Merged pull requests:**
+
+- CI: Added announcement in !pythorhead@lemmy.dbzer0.com [\#40](https://github.com/db0/pythorhead/pull/40) ([db0](https://github.com/db0))
+
 ## [v0.10.0](https://github.com/db0/pythorhead/tree/v0.10.0) (2023-06-30)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.9.3...v0.10.0)
