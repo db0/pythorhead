@@ -17,6 +17,7 @@ jobs:
     - name: "🤖 Announce on lemmy.dbzer0.com"
       run: |
           python -m pip install pythorhead
-          ls -la ../../
+          ls -la
           pwd
-          python ../../.github/publish_on_lemmy.py v0.xx.xx
+          env
+          python .github/publish_on_lemmy.py v0.xx.xx
