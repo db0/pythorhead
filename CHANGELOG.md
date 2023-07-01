@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.10.2](https://github.com/db0/pythorhead/tree/v0.10.2) (2023-07-01)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.10.1...v0.10.2)
+
+**Merged pull requests:**
+
+- Enum for languages [\#37](https://github.com/db0/pythorhead/pull/37) ([pnewstein](https://github.com/pnewstein))
+
 ## [v0.10.1](https://github.com/db0/pythorhead/tree/v0.10.1) (2023-07-01)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.10.0...v0.10.1)
