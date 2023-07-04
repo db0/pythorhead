@@ -1,8 +1,7 @@
-from typing import List, Optional, Union
-
+from typing import Any, List, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import ListingType, SortType, LanguageType
+from pythorhead.types import LanguageType, ListingType, SortType
 
 
 class Community:
@@ -47,8 +46,9 @@ class Community:
         if [posting_restricted_to_mods] is not None:
             new_community["[posting_restricted_to_mods]"] = [posting_restricted_to_mods]
         if discussion_languages is not None:
-            new_community["discussion_languages"] = [l.value for l in discussion_languages
-                                                     if isinstance(l, LanguageType)]
+            new_community["discussion_languages"] = [
+                language.value for language in discussion_languages if isinstance(language, LanguageType)
+            ]
 
         return self._requestor.api(Request.POST, "/community", json=new_community)
 

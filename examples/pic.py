@@ -74,7 +74,7 @@ if not lemmy_password:
 if not lemmy_password:
     raise Exception("You need to provide a lemmy password via env var or arg")
 
-lemmy = Lemmy(f"http://{lemmy_domain}")
+lemmy = Lemmy(f"https://{lemmy_domain}")
 if not lemmy.log_in(lemmy_username, lemmy_password):
     print("Failed to log in")
     exit(1)
