@@ -1,7 +1,7 @@
 from typing import Any, List, Literal, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import CommentSortType, ListingType, LanguageType
+from pythorhead.types import CommentSortType, LanguageType, ListingType
 
 
 class Comment:
@@ -129,7 +129,7 @@ class Comment:
         Returns:
             Optional[dict]: edited comment data if successful
         """
-        edit_comment: dict[Any, Any] = {
+        edit_comment: dict[str, Any] = {
             "comment_id": comment_id,
         }
         if content is not None:
@@ -276,5 +276,26 @@ class Comment:
             "read": read,
         }
         return self._requestor.api(Request.POST, "/comment/mark_as_read", json=mark_as_read_comment)
+
+    def purge(self, id: int, reason: Optional[str] = None) -> Optional[dict]:
+        """
+        Admin purge / delete a comment from the database
+
+        Args:
+            id (int)
+            reason (Optional[str]): Defaults to None.
+
+        Returns:
+            Optional[dict]: purge result if successful
+        """
+
+        purge_comment: dict[str, Any] = {
+            "comment_id": id,
+        }
+
+        if reason is not None:
+            purge_comment["reason"] = reason
+
+        return self._requestor.api(Request.POST, "/admin/purge/comment", json=purge_comment)
 
     __call__ = create
