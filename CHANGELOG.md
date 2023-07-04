@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.0...HEAD)
+
+**Implemented enhancements:**
+
+- \[Enhancement\] Method to purge a community [\#42](https://github.com/db0/pythorhead/issues/42)
+
+## [v0.12.0](https://github.com/db0/pythorhead/tree/v0.12.0) (2023-07-04)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.11.0...v0.12.0)
+
+**Merged pull requests:**
+
+- Purge for Communities, Comments, Posts and Users [\#44](https://github.com/db0/pythorhead/pull/44) ([NicKoehler](https://github.com/NicKoehler))
+
 ## [v0.11.0](https://github.com/db0/pythorhead/tree/v0.11.0) (2023-07-04)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.10.2...v0.11.0)
