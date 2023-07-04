@@ -130,7 +130,7 @@ class Community:
 
     def purge(self, id: int, reason: Optional[str] = None) -> Optional[dict]:
         """
-        Admin purge community
+        Admin  purge / delete a community from the database
 
         Args:
             id (int)
