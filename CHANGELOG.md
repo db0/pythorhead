@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.11.0](https://github.com/db0/pythorhead/tree/v0.11.0) (2023-07-04)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.10.2...v0.11.0)
+
+**Closed issues:**
+
+- Can't get "Feature Type" to work [\#41](https://github.com/db0/pythorhead/issues/41)
+
+**Merged pull requests:**
+
+- added function for subscribing and unsubscribing [\#43](https://github.com/db0/pythorhead/pull/43) ([LemiSt24](https://github.com/LemiSt24))
+
 ## [v0.10.2](https://github.com/db0/pythorhead/tree/v0.10.2) (2023-07-01)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.10.1...v0.10.2)
