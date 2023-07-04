@@ -1,8 +1,7 @@
-from typing import List, Optional, Union
-
+from typing import Any, List, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import ListingType, SortType, LanguageType
+from pythorhead.types import LanguageType, ListingType, SortType
 
 
 class Community:
@@ -34,7 +33,7 @@ class Community:
         Returns:
             Optional[dict]: post data if successful
         """
-        new_community: dict[Any, Any] = {
+        new_community: dict[str, Any] = {
             "name": name,
             "title": title,
         }
@@ -47,8 +46,9 @@ class Community:
         if [posting_restricted_to_mods] is not None:
             new_community["[posting_restricted_to_mods]"] = [posting_restricted_to_mods]
         if discussion_languages is not None:
-            new_community["discussion_languages"] = [l.value for l in discussion_languages
-                                                     if isinstance(l, LanguageType)]
+            new_community["discussion_languages"] = [
+                language.value for language in discussion_languages if isinstance(language, LanguageType)
+            ]
 
         return self._requestor.api(Request.POST, "/community", json=new_community)
 
@@ -127,3 +127,24 @@ class Community:
         if data := self._requestor.api(Request.POST, "/community/follow", json=follow_community):
             return data["community_view"]
         return None
+
+    def purge(self, id: int, reason: Optional[str] = None) -> Optional[dict]:
+        """
+        Admin  purge / delete a community from the database
+
+        Args:
+            id (int)
+            reason (Optional[str]): Defaults to None
+
+        Returns:
+            Optional[dict]: purge result if successful
+        """
+
+        purge_community: dict[str, Any] = {
+            "community_id": id,
+        }
+
+        if reason is not None:
+            purge_community["reason"] = reason
+
+        return self._requestor.api(Request.POST, "/admin/purge/community", json=purge_community)

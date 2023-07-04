@@ -34,3 +34,22 @@ class User:
         """
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.api(Request.GET, "/user", params=params)
+
+    def purge(self, id: int, reason: Optional[str] = None) -> Optional[dict]:
+        """
+        Admin purge / delete a person from the database
+
+        Args:
+            id (int)
+            reason (Optional[str]): Defaults to None
+
+        Returns:
+            Optional[dict]: purge result if successful
+        """
+
+        user_purge: dict[str, Any] = {"person_id": id}
+
+        if reason is not None:
+            user_purge["reason"] = reason
+
+        return self._requestor.api(Request.POST, "/admin/purge/person", json=user_purge)
