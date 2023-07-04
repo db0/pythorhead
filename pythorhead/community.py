@@ -33,7 +33,7 @@ class Community:
         Returns:
             Optional[dict]: post data if successful
         """
-        new_community: dict[Any, Any] = {
+        new_community: dict[str, Any] = {
             "name": name,
             "title": title,
         }
@@ -127,3 +127,24 @@ class Community:
         if data := self._requestor.api(Request.POST, "/community/follow", json=follow_community):
             return data["community_view"]
         return None
+
+    def purge(self, id: int, reason: Optional[str] = None) -> Optional[dict]:
+        """
+        Admin purge community
+
+        Args:
+            id (int)
+            reason (Optional[str]): Defaults to None
+
+        Returns:
+            Optional[dict]: purge result if successful
+        """
+
+        purge_community: dict[str, Any] = {
+            "community_id": id,
+        }
+
+        if reason is not None:
+            purge_community["reason"] = reason
+
+        return self._requestor.api(Request.POST, "/admin/purge/community", json=purge_community)
