@@ -283,7 +283,7 @@ class Comment:
 
         Args:
             id (int)
-            reason (Optional[str]): Defaults to None.
+            reason (Optional[str]): Defaults to None
 
         Returns:
             Optional[dict]: purge result if successful

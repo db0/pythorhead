@@ -1,7 +1,7 @@
 from typing import Any, List, Literal, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import FeatureType, ListingType, SortType, LanguageType
+from pythorhead.types import FeatureType, LanguageType, ListingType, SortType
 
 
 class Post:
@@ -334,5 +334,24 @@ class Post:
             "url": url,
         }
         return self._requestor.api(Request.GET, "/post/site_metadata", params=site_metadata_post)
+
+    def purge(self, id: int, reason: Optional[str]) -> Optional[dict]:
+        """
+        Admin purge / delete a post from the database
+
+        Args:
+            id (int)
+            reason (Optional[str]): Defaults to None
+
+        Returns:
+            Optional[dict]: purge result if successful
+        """
+        purge_post: dict[str, Any] = {
+            "post_id": id,
+        }
+        if reason is not None:
+            purge_post["reason"] = reason
+
+        return self._requestor.api(Request.POST, "/admin/purge/post", json=purge_post)
 
     __call__ = create
