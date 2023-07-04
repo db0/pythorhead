@@ -106,3 +106,24 @@ class Community:
         if data := self._requestor.api(Request.GET, "/community/list", params=list_community):
             return data["communities"]
         return []
+
+    def follow(self, id: int, follow: Optional[bool] = True):
+        """
+
+        Subscribe to the community with supplied id.
+        Args:
+            id (int)
+            follow (Optional[bool], optional): Defaults to True
+
+        Returns:
+            Optional[dict]: community info if successful
+
+        """
+
+        follow_community: dict = {}
+        follow_community["community_id"] = id
+        follow_community["follow"] = follow
+
+        if data := self._requestor.api(Request.POST, "/community/follow", json=follow_community):
+            return data["community_view"]
+        return None
