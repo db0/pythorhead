@@ -2,11 +2,23 @@
 
 ## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.0...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.1...HEAD)
+
+**Closed issues:**
+
+- Marking a PM as read [\#45](https://github.com/db0/pythorhead/issues/45)
+
+## [v0.12.1](https://github.com/db0/pythorhead/tree/v0.12.1) (2023-07-04)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.0...v0.12.1)
 
 **Implemented enhancements:**
 
 - \[Enhancement\] Method to purge a community [\#42](https://github.com/db0/pythorhead/issues/42)
+
+**Merged pull requests:**
+
+- feat: marks PM as read [\#47](https://github.com/db0/pythorhead/pull/47) ([db0](https://github.com/db0))
 
 ## [v0.12.0](https://github.com/db0/pythorhead/tree/v0.12.0) (2023-07-04)
 
