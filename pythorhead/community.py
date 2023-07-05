@@ -148,3 +148,24 @@ class Community:
             purge_community["reason"] = reason
 
         return self._requestor.api(Request.POST, "/admin/purge/community", json=purge_community)
+        
+    def add_mod_to_community(self, added: bool, community_id: int, person_id: int) -> Optional[dict]:
+        """
+
+        Add a mod to community
+
+        Args:
+            added (bool)
+            community_id (int)
+            person_id (bool)
+
+        Returns:
+            Optional[dict]: 
+        """
+
+        addmodtocommunity = {
+            "added": added,
+            "community_id": community_id,
+            "person_id": person_id
+        }
+        return self._requestor.api(Request.POST, "/community/mod", json=addmodtocommunity)
