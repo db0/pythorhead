@@ -1,12 +1,16 @@
 # Changelog
 
-## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+## [v0.12.2](https://github.com/db0/pythorhead/tree/v0.12.2) (2023-07-05)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.1...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.1...v0.12.2)
 
 **Closed issues:**
 
 - Marking a PM as read [\#45](https://github.com/db0/pythorhead/issues/45)
+
+**Merged pull requests:**
+
+- Add "Add mod to community" [\#48](https://github.com/db0/pythorhead/pull/48) ([Demigodrick](https://github.com/Demigodrick))
 
 ## [v0.12.1](https://github.com/db0/pythorhead/tree/v0.12.1) (2023-07-04)
 
