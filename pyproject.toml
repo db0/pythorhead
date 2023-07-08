@@ -18,15 +18,15 @@ classifiers = [
     "Operating System :: OS Independent",
     "Development Status :: 2 - Pre-Alpha",
 ]
+dependencies = [
+    "requests >= 2.31.0, < 3.0.0"
+]
 
 [project.urls]
 "Homepage" = "https://github.com/db0/pythorhead"
 
 [tool.setuptools]
 license-files = ["LICENSE", "CHANGELOG*"]
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
 
 [options.index-client]
 extra-index-urls = ["https://download.pytorch.org/whl/cu118"]

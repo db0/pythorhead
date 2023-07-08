@@ -65,7 +65,6 @@ jobs:
     - name: "🤖 Announce on lemmy.dbzer0.com"
       if: ${{ steps.release.outputs.version != '' }}
       run: |
-          python -m pip install -r requirements.txt
           python -m pip install -e . 
           python .github/publish_on_lemmy.py ${{ steps.release.outputs.version }}
       env:
