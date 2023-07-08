@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.12.3](https://github.com/db0/pythorhead/tree/v0.12.3) (2023-07-08)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.2...v0.12.3)
+
+**Merged pull requests:**
+
+- fix: avoid crashing when language not set [\#51](https://github.com/db0/pythorhead/pull/51) ([db0](https://github.com/db0))
+- Declare dependencies in project metadata [\#50](https://github.com/db0/pythorhead/pull/50) ([fixmycode](https://github.com/fixmycode))
+
 ## [v0.12.2](https://github.com/db0/pythorhead/tree/v0.12.2) (2023-07-05)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.1...v0.12.2)
