@@ -112,7 +112,8 @@ class Site:
         Returns:
             Optional[dict]: post data if successful
         """
-        discussion_languages = [l.value for l in discussion_languages if isinstance(l, LanguageType)]
+        if discussion_languages:
+            discussion_languages = [l.value for l in discussion_languages if isinstance(l, LanguageType)]
         edit_site: dict[str, Any] = {
             key: value for key, value in locals().items() if value is not None and key != "self"
         }
