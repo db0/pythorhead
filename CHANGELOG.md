@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.13.0](https://github.com/db0/pythorhead/tree/v0.13.0) (2023-07-14)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.3...v0.13.0)
+
+**Closed issues:**
+
+- Dependencies from requirements.txt not being installed [\#49](https://github.com/db0/pythorhead/issues/49)
+
+**Merged pull requests:**
+
+- Implemented search [\#53](https://github.com/db0/pythorhead/pull/53) ([NicKoehler](https://github.com/NicKoehler))
+
 ## [v0.12.3](https://github.com/db0/pythorhead/tree/v0.12.3) (2023-07-08)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.2...v0.12.3)
