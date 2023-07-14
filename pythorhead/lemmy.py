@@ -11,6 +11,7 @@ from pythorhead.requestor import Request, Requestor
 from pythorhead.site import Site
 from pythorhead.types import FeatureType, ListingType, SortType
 from pythorhead.user import User
+from pythorhead.admin import Admin
 
 
 class Lemmy:
@@ -28,6 +29,7 @@ class Lemmy:
         self.private_message = PrivateMessage(self._requestor)
         self.image = Image(self._requestor)
         self.mention = Mention(self._requestor)
+        self.admin = Admin(self._requestor)
 
     @property
     def nodeinfo(self):
