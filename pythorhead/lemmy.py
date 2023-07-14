@@ -1,15 +1,16 @@
 import logging
-from typing import Optional
+from typing import Any, Optional
 
 from pythorhead.comment import Comment
 from pythorhead.community import Community
 from pythorhead.image import Image
+from pythorhead.mention import Mention
 from pythorhead.post import Post
 from pythorhead.private_message import PrivateMessage
-from pythorhead.requestor import Requestor
+from pythorhead.requestor import Request, Requestor
 from pythorhead.site import Site
+from pythorhead.types import FeatureType, ListingType, SortType
 from pythorhead.user import User
-from pythorhead.mention import Mention
 
 
 class Lemmy:
@@ -45,3 +46,37 @@ class Lemmy:
             community_id = request["community_view"]["community"]["id"]
             self._known_communities[community_name] = community_id
             return community_id
+
+    def search(
+        self,
+        q: str,
+        community_id: Optional[int] = None,
+        community_name: Optional[str] = None,
+        creator_id: Optional[int] = None,
+        page: Optional[int] = None,
+        limit: Optional[int] = None,
+        listing_type: Optional[ListingType] = None,
+        sort: Optional[SortType] = None,
+        type_: Optional[FeatureType] = None,
+    ) -> Optional[dict]:
+        """
+
+        Search on lemmy
+
+        Args:
+            q (str)
+            community_id (Optional[int]): Defaults to None.
+            community_name (Optional[str]): Defaults to None.
+            creator_id (Optional[int]): Defaults to None.
+            page (Optional[int]): Defaults to None.
+            limit (Optional[int]): Defaults to None.
+            listing_type (Optional[ListingType]): Defaults to None.
+            sort (Optional[SortType]): Defaults to None.
+            type_ (Optional[FeatureType]): Defaults to None.
+
+        Returns:
+            Optional[dict]: search result
+        """
+
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        return self._requestor.api(Request.GET, "/search", params=params)
