@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.14.0](https://github.com/db0/pythorhead/tree/v0.14.0) (2023-07-15)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.13.0...v0.14.0)
+
+**Implemented enhancements:**
+
+- URL Search [\#52](https://github.com/db0/pythorhead/issues/52)
+
+**Merged pull requests:**
+
+- Add admin class & list applications admin function [\#54](https://github.com/db0/pythorhead/pull/54) ([Demigodrick](https://github.com/Demigodrick))
+
 ## [v0.13.0](https://github.com/db0/pythorhead/tree/v0.13.0) (2023-07-14)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.12.3...v0.13.0)
