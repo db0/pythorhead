@@ -9,7 +9,7 @@ class Admin:
         self,
         limit: Optional[int] = None,
         page: Optional[int] = None,
-        unread_only: Optional[bool] = None,
+        unread_only: Optional[str] = None,
     ) -> Optional[dict]:
         """
         Pull applications from site. Note user must be admin.
@@ -17,7 +17,7 @@ class Admin:
         Args:
             limit (Optional[int], optional): Defaults to None.
             page (Optional[int], optional): Defaults to None.
-            undread_only (Optional[bool], optional): Defaults to false
+            undread_only (Optional[str], optional): Must be "true" or "false". Defaults to false
         Returns:
             dict: list applications
         """
