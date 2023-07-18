@@ -335,6 +335,61 @@ class Post:
         }
         return self._requestor.api(Request.GET, "/post/site_metadata", params=site_metadata_post)
 
+    def report_list(
+            self,
+            community_id: Optional[int] = None,
+            limit: Optional[int] = None,
+            page: Optional[int] = None,
+            unresolved_only: Optional[bool] = None,
+    ) -> List[dict]:
+        """
+        Returns a list of reported posts
+
+        https://github.com/LemmyNet/lemmy/blob/main/crates/api/src/post_report/list.rs#L14
+
+        Args:
+            community_id: Optional[int], defaults to None
+            unresolved_only: Optional[bool], defaults to None
+            limit: Optional[int], defaults to None
+            page: Optional[int], defaults to None
+        
+        Returns:
+          List[dict]
+        """
+
+        list_reports = {}
+        if community_id is not None:
+            list_reports["community_id"] = community_id
+        if unresolved_only is not None:
+            list_reports['unresolved_only'] = unresolved_only
+        if limit is not None:
+            list_reports["limit"] = limit
+        if page is not None:
+            list_reports["page"] = page
+
+        if data := self._requestor.api(Request.GET, "/post/report/list", params=list_reports):
+            return data["post_reports"]
+        return []
+
+    def resolve_report(self, report_id: int) -> Optional[dict]:
+        """
+        Resolve a post report
+
+        https://github.com/LemmyNet/lemmy/blob/main/crates/api_common/src/post.rs#L202
+        
+        Args:
+            report_id: int
+        Returns:
+            Optional[dict]
+        """
+        return self._requestor.api(
+            Request.PUT,
+            "/post/report/resolve",
+            json={
+                "report_id": report_id,
+                "resolved": True
+            })
+
     def purge(self, id: int, reason: Optional[str]) -> Optional[dict]:
         """
         Admin purge / delete a post from the database

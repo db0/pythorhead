@@ -217,6 +217,59 @@ class Comment:
             json=remove_comment,
         )
 
+    def report_list(
+            self,
+            community_id: Optional[int] = None,
+            limit: Optional[int] = None,
+            page: Optional[int] = None,
+            unresolved_only: Optional[bool] = None,
+    ) -> List[dict]:
+        """
+        Returns a list of reported posts
+
+        Args:
+            community_id (int, optional): Defaults to None
+            limit (int, optional): Defaults to None
+            page (int, optional): Defaults to None
+            unresolved_only (bool, optional): Defaults to None
+        
+        Return:
+            List[dict]
+        """
+
+        list_reports = {}
+        if community_id is not None:
+            list_reports["community_id"] = community_id
+        if limit is not None:
+            list_reports["limit"] = limit
+        if page is not None:
+            list_reports["page"] = page
+        if unresolved_only is not None:
+            list_reports['unresolved_only'] = unresolved_only
+
+        if data := self._requestor.api(Request.GET, "/comment/report/list", params=list_reports):
+            return data["comment_reports"]
+        return []
+
+    def resolve_report(self, report_id: int) -> Optional[dict]:
+        """
+        Resolve a report
+        
+        Args:
+            report_id (int)
+        
+        Returns:
+            Optional[dict]
+            
+        """
+        return self._requestor.api( 
+            Request.PUT,
+            "/comment/report/resolve",
+            json={
+                "report_id": report_id,
+                "resolved": True
+            })
+
     def save(self, comment_id: int, save: bool) -> Optional[dict]:
         """
         Add / Remove a comment from saved.
