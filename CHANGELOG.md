@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.15.0](https://github.com/db0/pythorhead/tree/v0.15.0) (2023-07-18)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.14.0...v0.15.0)
+
+**Closed issues:**
+
+- Get user posts [\#55](https://github.com/db0/pythorhead/issues/55)
+
+**Merged pull requests:**
+
+- Imp new methods in comment.py and post.py [\#57](https://github.com/db0/pythorhead/pull/57) ([coder0422](https://github.com/coder0422))
+
 ## [v0.14.0](https://github.com/db0/pythorhead/tree/v0.14.0) (2023-07-15)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.13.0...v0.14.0)
