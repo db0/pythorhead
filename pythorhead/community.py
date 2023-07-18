@@ -94,8 +94,9 @@ class Community:
         """
 
         params: list[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
-        return self._requestor.api(Request.GET, "/community/list", params=params)
-
+        if data := self._requestor.api(Request.GET, "/community/list", params=params):
+            return data["communities"]
+        return []
 
     def follow(self, id: int, follow: Optional[bool] = True):
         """
