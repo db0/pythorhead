@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.1...HEAD)
+
+**Closed issues:**
+
+- Issue with community.list [\#56](https://github.com/db0/pythorhead/issues/56)
+
+## [v0.15.1](https://github.com/db0/pythorhead/tree/v0.15.1) (2023-07-19)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.0...v0.15.1)
+
+**Merged pull requests:**
+
+- Fix community.list [\#58](https://github.com/db0/pythorhead/pull/58) ([Demigodrick](https://github.com/Demigodrick))
+
 ## [v0.15.0](https://github.com/db0/pythorhead/tree/v0.15.0) (2023-07-18)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.14.0...v0.15.0)
