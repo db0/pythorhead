@@ -60,7 +60,7 @@ class Comment:
         if sort is not None:
             list_comment["sort"] = sort.value
         if type_ is not None:
-            list_comment["type"] = type_.value
+            list_comment["type_"] = type_.value
 
         if data := self._requestor.api(Request.GET, "/comment/list", params=list_comment):
             return data["comments"]
