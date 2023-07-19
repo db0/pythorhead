@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class ListingType(Enum):
+class ListingType(str, Enum):
     All = "All"
     Community = "Community"
     Local = "Local"

@@ -87,23 +87,14 @@ class Community:
             limit (Optional[int], optional): Defaults to None.
             page (Optional[int], optional): Defaults to None.
             sort (Optional[SortType], optional): Defaults to None.
-            type_ (Optional[ListingType], optional): Defaults to None.
+            type_ (Optional[ListingType], optional): Defaults to None. 
 
         Returns:
             List[dict]: list of communities
         """
-        list_community: dict = {}
 
-        if limit is not None:
-            list_community["limit"] = limit
-        if page is not None:
-            list_community["page"] = page
-        if sort is not None:
-            list_community["sort"] = sort.value
-        if type_ is not None:
-            list_community["type"] = type_.value
-
-        if data := self._requestor.api(Request.GET, "/community/list", params=list_community):
+        params: list[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        if data := self._requestor.api(Request.GET, "/community/list", params=params):
             return data["communities"]
         return []
 

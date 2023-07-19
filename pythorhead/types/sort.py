@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class SortType(Enum):
+class SortType(str, Enum):
     Hot = "Hot"
     New = "New"
     Old = "Old"
@@ -18,7 +18,7 @@ class SortType(Enum):
     MostComments = "MostComments"
 
 
-class CommentSortType(Enum):
+class CommentSortType(str, Enum):
     Hot = "Hot"
     New = "New"
     Old = "Old"
