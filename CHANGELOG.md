@@ -2,11 +2,23 @@
 
 ## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.1...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.2...HEAD)
+
+**Closed issues:**
+
+- Issue with comment.list [\#59](https://github.com/db0/pythorhead/issues/59)
+
+## [v0.15.2](https://github.com/db0/pythorhead/tree/v0.15.2) (2023-07-19)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.1...v0.15.2)
 
 **Closed issues:**
 
 - Issue with community.list [\#56](https://github.com/db0/pythorhead/issues/56)
+
+**Merged pull requests:**
+
+- Fix community list by type [\#60](https://github.com/db0/pythorhead/pull/60) ([Dakkaron](https://github.com/Dakkaron))
 
 ## [v0.15.1](https://github.com/db0/pythorhead/tree/v0.15.1) (2023-07-19)
 
