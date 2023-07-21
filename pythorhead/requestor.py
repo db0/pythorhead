@@ -89,10 +89,11 @@ class Requestor:
             return
         return r.json()
 
-    def log_in(self, username_or_email: str, password: str) -> bool:
+    def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         payload = {
             "username_or_email": username_or_email,
             "password": password,
+            "totp_2fa_token": totp,
         }
         if data := self.api(Request.POST, "/user/login", json=payload):
             self._auth.set_token(data["jwt"])

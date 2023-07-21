@@ -35,8 +35,8 @@ class Lemmy:
     def nodeinfo(self):
         return self._requestor.nodeinfo
 
-    def log_in(self, username_or_email: str, password: str) -> bool:
-        return self._requestor.log_in(username_or_email, password)
+    def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
+        return self._requestor.log_in(username_or_email, password, totp)
 
     def discover_community(self, community_name: str) -> Optional[int]:
         if community_name in self._known_communities:
