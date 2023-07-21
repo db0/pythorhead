@@ -1,11 +1,16 @@
 # Changelog
 
-## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+## [v0.15.3](https://github.com/db0/pythorhead/tree/v0.15.3) (2023-07-21)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.2...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.2...v0.15.3)
+
+**Implemented enhancements:**
+
+- Allow sending of TOTP token with login request [\#62](https://github.com/db0/pythorhead/pull/62) ([chris-y](https://github.com/chris-y))
 
 **Closed issues:**
 
+- How do I use the search? [\#61](https://github.com/db0/pythorhead/issues/61)
 - Issue with comment.list [\#59](https://github.com/db0/pythorhead/issues/59)
 
 ## [v0.15.2](https://github.com/db0/pythorhead/tree/v0.15.2) (2023-07-19)
