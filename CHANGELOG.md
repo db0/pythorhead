@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.15.4](https://github.com/db0/pythorhead/tree/v0.15.4) (2023-07-22)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.3...v0.15.4)
+
+**Merged pull requests:**
+
+- Functionallity to distinguish comments. [\#63](https://github.com/db0/pythorhead/pull/63) ([SomeoneStoleMyNickname](https://github.com/SomeoneStoleMyNickname))
+
 ## [v0.15.3](https://github.com/db0/pythorhead/tree/v0.15.3) (2023-07-21)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.2...v0.15.3)
