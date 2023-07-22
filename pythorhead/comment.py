@@ -112,7 +112,6 @@ class Comment:
         self,
         comment_id: int,
         content: Optional[str] = None,
-        distinguished: Optional[bool] = None,
         form_id: Optional[str] = None,
         language_id: Union[int, LanguageType, None] = None,
     ) -> Optional[dict]:
@@ -122,7 +121,6 @@ class Comment:
         Args:
             comment_id (int)
             content (Optional[str], optional): Defaults to None.
-            distinguished (Optional[bool], optional): Defaults to None.
             form_id (Optional[str], optional): Defaults to None.
             language_id (Union[int, LanguageType], optional): Defaults to None.
 
@@ -134,8 +132,6 @@ class Comment:
         }
         if content is not None:
             edit_comment["content"] = content
-        if distinguished is not None:
-            edit_comment["distinguished"] = distinguished
         if form_id is not None:
             edit_comment["form_id"] = form_id
         if language_id is not None:
@@ -187,6 +183,26 @@ class Comment:
             json={
                 "comment_id": comment_id,
                 "deleted": deleted,
+            },
+        )
+
+    def distinguish(self, comment_id: int, distinguished: bool) -> Optional[dict]:
+        """
+        Moderator mark / unmark as a moderator comment.
+        Args:
+            comment_id (int)
+            distinguished (bool)
+
+        Returns:
+            Optional[dict]: distinguished comment data if successful
+        """
+
+        return self._requestor.api(
+            Request.POST,
+            "/comment/distinguish",
+            json={
+                "comment_id": comment_id,
+                "distinguished": distinguished,
             },
         )
 
