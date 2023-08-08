@@ -5,7 +5,6 @@ import os
 import argparse
 import json
 from pythorhead import Lemmy
-from pythorhead.types import SearchOption
 
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument('-d', '--lemmy_domain', action='store', required=False, type=str, help="the domain in which to look for this user")
@@ -24,7 +23,7 @@ if not lemmy_community:
     lemmy_community = os.getenv('LEMMY_COMMUNITY', "div0@lemmy.dbzer0.com")
 
 lemmy = Lemmy(f"https://{lemmy_domain}")
-community_id = lemmy.discover_community(lemmy_community, search=SearchOption.Retry)
+community_id = lemmy.discover_community(lemmy_community)
 if community_id:
     print(f"Community '{lemmy_community} has id {community_id}")
 else:
