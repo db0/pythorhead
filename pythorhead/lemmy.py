@@ -10,7 +10,7 @@ from pythorhead.post import Post
 from pythorhead.private_message import PrivateMessage
 from pythorhead.requestor import Request, Requestor
 from pythorhead.site import Site
-from pythorhead.types import FeatureType, ListingType, SortType, SearchType
+from pythorhead.types import FeatureType, ListingType, SortType, SearchType, SearchOption
 from pythorhead.user import User
 from pythorhead.admin import Admin
 
@@ -40,7 +40,7 @@ class Lemmy:
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         return self._requestor.log_in(username_or_email, password, totp)
 
-    def discover_community(self, community_name: str, search=SearchType.Yes) -> Optional[int]:
+    def discover_community(self, community_name: str, search=SearchOption.Yes) -> Optional[int]:
         if community_name in self._known_communities:
             return self._known_communities[community_name]
 
@@ -48,7 +48,7 @@ class Lemmy:
         if request is None and search != SearchType.No:
             search_result = self.search(
                 q=community_name,
-                listing_type=ListingType.Community
+                type_=SearchType.Communities.value
             )
             if search_result is None:
                 if search != SearchType.Retry:
@@ -57,7 +57,7 @@ class Lemmy:
                 time.sleep(5)
                 search_result = self.search(
                     q=community_name,
-                    type_=FeatureType.Community
+                    type_=SearchType.Communities.value
                 )
                 if search_result is not None:
                     request = self.community.get(name=community_name)
@@ -76,7 +76,7 @@ class Lemmy:
         limit: Optional[int] = None,
         listing_type: Optional[ListingType] = None,
         sort: Optional[SortType] = None,
-        type_: Optional[FeatureType] = None,
+        type_: Optional[SearchType] = None,
     ) -> Optional[dict]:
         """
 
@@ -91,7 +91,7 @@ class Lemmy:
             limit (Optional[int]): Defaults to None.
             listing_type (Optional[ListingType]): Defaults to None.
             sort (Optional[SortType]): Defaults to None.
-            type_ (Optional[FeatureType]): Defaults to None.
+            type_ (Optional[SearchType]): Defaults to None.
 
         Returns:
             Optional[dict]: search result
