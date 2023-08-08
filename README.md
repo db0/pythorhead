@@ -6,7 +6,7 @@ A python library for interacting with Lemmy
 
 # Examples
 
-See working examples in [examples/](/examples)
+See working examples in [examples/](https://github.com/db0/pythorhead/tree/main/examples)
 
 ## Sample Post Usage
 
