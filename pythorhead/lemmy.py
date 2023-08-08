@@ -54,9 +54,10 @@ class Lemmy:
             )
             logger.warning(search_result)
             if search_result is None:
+                logger.warning(search != SearchOption.Retry)
                 if search != SearchOption.Retry:
                     return None
-                logger.info(f"Community '{community_name}' not found via search. Attempting wait and retry")
+                logger.warning(f"Community '{community_name}' not found via search. Attempting wait and retry")
                 time.sleep(5)
                 search_result = self.search(
                     q=community_name,
