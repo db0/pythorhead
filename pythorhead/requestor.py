@@ -70,10 +70,10 @@ class Requestor:
             }
             r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", headers = headers, **kwargs)
         except Exception as err:
-            logger.error(f"Error encountered while {method}: {err}")
+            logger.error(f"Error encountered while {method} on endpoint {endpoint}: {err}")
             return
         if not r.ok:
-            logger.error(f"Error encountered while {method}: {r.text}")
+            logger.error(f"Error encountered while {method} on endpoint {endpoint}: {r.text}")
             return
 
         return r.json()
