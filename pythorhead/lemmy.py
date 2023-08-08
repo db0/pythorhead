@@ -57,7 +57,7 @@ class Lemmy:
                 time.sleep(5)
                 search_result = self.search(
                     q=community_name,
-                    listing_type=ListingType.Community
+                    type_=FeatureType.Community
                 )
                 if search_result is not None:
                     request = self.community.get(name=community_name)
