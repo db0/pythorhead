@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.15.5](https://github.com/db0/pythorhead/tree/v0.15.5) (2023-08-08)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.4...v0.15.5)
+
+**Closed issues:**
+
+- 🐛 Python dependency error when building [\#69](https://github.com/db0/pythorhead/issues/69)
+- A community needs to be searched before it can be discovered [\#68](https://github.com/db0/pythorhead/issues/68)
+- Problem encountered retrieving Lemmy nodeinfo: Expecting value: line 1 column 1 \(char 0\) [\#65](https://github.com/db0/pythorhead/issues/65)
+
+**Merged pull requests:**
+
+- chore: version bumb [\#72](https://github.com/db0/pythorhead/pull/72) ([db0](https://github.com/db0))
+- Feat: Community discovery also does a search [\#71](https://github.com/db0/pythorhead/pull/71) ([db0](https://github.com/db0))
+
 ## [v0.15.4](https://github.com/db0/pythorhead/tree/v0.15.4) (2023-07-22)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.3...v0.15.4)
