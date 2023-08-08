@@ -11,8 +11,6 @@ arg_parser.add_argument('-d', '--lemmy_domain', action='store', required=False, 
 arg_parser.add_argument('-c', '--lemmy_community', action='store', required=False, type=str, help="the community which to discover")
 args = arg_parser.parse_args()
 
-
-
 lemmy_domain = args.lemmy_domain
 if not lemmy_domain:
     lemmy_domain = os.getenv('LEMMY_DOMAIN', "lemmy.dbzer0.com")
