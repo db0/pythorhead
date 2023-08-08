@@ -62,6 +62,7 @@ class Lemmy:
                     q=community_name,
                     type_=SearchType.Communities.value
                 )
+                logger.warning(search_result)
                 if search_result is not None:
                     request = self.community.get(name=community_name)
         if request is not None:
