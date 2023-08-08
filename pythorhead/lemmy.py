@@ -50,6 +50,8 @@ class Lemmy:
                 q=community_name,
                 type_=SearchType.Communities.value
             )
+            logger.debug(search_result)
+            logger.debug(search)
             if search_result is None:
                 if search != SearchOption.Retry:
                     return None
