@@ -50,21 +50,21 @@ class Lemmy:
         if request is None and search != SearchOption.No:
             search_result = self.search(
                 q=community_name,
-                type_=SearchType.Communities.value
             )
             logger.warning(search_result)
             if search_result is None:
-                logger.warning(search != SearchOption.Retry)
+                return None
+            if len(search_result['communities']) == 0:
                 if search != SearchOption.Retry:
                     return None
                 logger.warning(f"Community '{community_name}' not found via search. Attempting wait and retry")
                 time.sleep(5)
                 search_result = self.search(
                     q=community_name,
-                    type_=SearchType.Communities.value
+                    type_=SearchType.Communities
                 )
                 logger.warning(search_result)
-                if search_result is not None:
+                if len(search_result['communities']) > 0:
                     request = self.community.get(name=community_name)
         if request is not None:
             community_id = request["community_view"]["community"]["id"]
@@ -101,6 +101,11 @@ class Lemmy:
         Returns:
             Optional[dict]: search result
         """
-
+        if listing_type is not None:
+            listing_type = listing_type.value
+        if sort is not None:
+            sort = sort.value
+        if type_ is not None:
+            type_ = type_.value
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.api(Request.GET, "/search", params=params)
