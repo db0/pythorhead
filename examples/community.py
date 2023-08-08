@@ -8,7 +8,6 @@ from pythorhead import Lemmy
 
 
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument('username', action="store")
 arg_parser.add_argument('-d', '--lemmy_domain', action='store', required=False, type=str, help="the domain in which to look for this user")
 arg_parser.add_argument('-c', '--lemmy_community', action='store', required=False, type=str, help="the community which to discover")
 args = arg_parser.parse_args()
