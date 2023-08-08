@@ -45,6 +45,7 @@ class Lemmy:
             return self._known_communities[community_name]
 
         request = self.community.get(name=community_name)
+        logger.info(request)
         if request is None and search != SearchOption.No:
             search_result = self.search(
                 q=community_name,
