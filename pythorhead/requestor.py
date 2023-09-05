@@ -25,10 +25,12 @@ REQUEST_MAP = {
 class Requestor:
     nodeinfo: Optional[dict] = None
     domain: Optional[str] = None
+    raise_exceptions: Optional[bool] = False
 
-    def __init__(self):
+    def __init__(self, raise_exceptions = False):
         self._auth = Authentication()
         self.set_api_base_url = self._auth.set_api_base_url
+        self.raise_exceptions = raise_exceptions
 
     def set_domain(self, domain: str):
         self.domain = domain
@@ -44,8 +46,10 @@ class Requestor:
             }
             self.nodeinfo = requests.get(f"{self.domain}/nodeinfo/2.0.json", headers = headers, timeout=2).json()
         except Exception as err:
-            logger.error(f"Problem encountered retrieving Lemmy nodeinfo: {err}")
-            return
+            if not self.raise_exceptions:
+                logger.error(f"Problem encountered retrieving Lemmy nodeinfo: {err}")
+                return
+            raise err
         software = self.nodeinfo.get("software", {}).get("name")
         if software != "lemmy":
             logger.error(f"Domain name does not appear to contain a lemmy software, but instead '{software}")
@@ -70,11 +74,16 @@ class Requestor:
             }
             r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", headers = headers, **kwargs)
         except Exception as err:
-            logger.error(f"Error encountered while {method} on endpoint {endpoint}: {err}")
-            return
+            if not self.raise_exceptions:
+                logger.error(f"Error encountered while {method} on endpoint {endpoint}: {err}")
+                return
+            raise err
         if not r.ok:
-            logger.error(f"Error encountered while {method} on endpoint {endpoint}: {r.text}")
-            return
+            if not self.raise_exceptions:
+                logger.error(f"Error encountered while {method} on endpoint {endpoint}: {r.text}")
+                return
+            else:
+                raise Exception(f"Error encountered while {method} on endpoint {endpoint}: {r.text}")
 
         return r.json()
 

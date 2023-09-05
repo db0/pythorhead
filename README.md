@@ -8,6 +8,11 @@ A python library for interacting with Lemmy
 
 See working examples in [examples/](https://github.com/db0/pythorhead/tree/main/examples)
 
+
+# Exceptions
+
+If you want to raise exceptions on failures instead of returning null, pass `raise_exceptions=True` to the `Lemmy()` constructor
+
 ## Sample Post Usage
 
 ```python
@@ -34,3 +39,4 @@ post_id = lemmy.post.list()[0]["post"]["id"]
 lemmy.comment.create(post_id, "Hello Lemmy World")
 
 ```
+
