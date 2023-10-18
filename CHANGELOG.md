@@ -2,11 +2,23 @@
 
 ## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.6...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.16.0...HEAD)
+
+**Implemented enhancements:**
+
+- Set timeout for requests [\#75](https://github.com/db0/pythorhead/issues/75)
+
+## [v0.16.0](https://github.com/db0/pythorhead/tree/v0.16.0) (2023-10-18)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.6...v0.16.0)
 
 **Closed issues:**
 
 - requestor.api catches all exceptions, making it really hard to debug. [\#73](https://github.com/db0/pythorhead/issues/73)
+
+**Merged pull requests:**
+
+- feat: Allows specifying request timeout [\#76](https://github.com/db0/pythorhead/pull/76) ([db0](https://github.com/db0))
 
 ## [v0.15.6](https://github.com/db0/pythorhead/tree/v0.15.6) (2023-09-05)
 
