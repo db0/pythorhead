@@ -3,7 +3,7 @@
 import argparse
 import json
 import os
-
+import re
 from pythorhead import Lemmy
 
 arg_parser = argparse.ArgumentParser()
@@ -49,7 +49,7 @@ lemmy_password = args.lemmy_password
 if not lemmy_password:
     lemmy_password = os.getenv("LEMMY_PASSWORD")
 
-lemmy = Lemmy(f"https://{lemmy_domain}")
+lemmy = Lemmy(f"https://{lemmy_domain}", raise_exceptions=True, request_timeout=2)
 if lemmy_username and lemmy_password:
     login = lemmy.log_in(lemmy_username, lemmy_password)
 user = lemmy.user.get(username=args.username)
