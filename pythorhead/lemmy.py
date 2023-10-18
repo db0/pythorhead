@@ -20,8 +20,8 @@ class Lemmy:
     _known_communities = {}
     _requestor: Requestor
 
-    def __init__(self, api_base_url: str, raise_exceptions = False) -> None:
-        self._requestor = Requestor(raise_exceptions)
+    def __init__(self, api_base_url: str, raise_exceptions = False, request_timeout=3) -> None:
+        self._requestor = Requestor(raise_exceptions, request_timeout)
         self._requestor.set_domain(api_base_url)
         self.post = Post(self._requestor)
         self.community = Community(self._requestor)

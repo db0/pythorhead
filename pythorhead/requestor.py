@@ -26,11 +26,13 @@ class Requestor:
     nodeinfo: Optional[dict] = None
     domain: Optional[str] = None
     raise_exceptions: Optional[bool] = False
+    request_timeout: Optional[int] = 3
 
-    def __init__(self, raise_exceptions = False):
+    def __init__(self, raise_exceptions = False, request_timeout = 3):
         self._auth = Authentication()
         self.set_api_base_url = self._auth.set_api_base_url
         self.raise_exceptions = raise_exceptions
+        self.request_timeout = request_timeout
 
     def set_domain(self, domain: str):
         self.domain = domain
@@ -72,7 +74,7 @@ class Requestor:
                 "Sec-GPC": "1",
                 "User-Agent": "pythorhead/0.5",
             }
-            r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", headers = headers, **kwargs)
+            r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", headers = headers, timeout=self.request_timeout , **kwargs)
         except Exception as err:
             if not self.raise_exceptions:
                 logger.error(f"Error encountered while {method} on endpoint {endpoint}: {err}")
@@ -92,7 +94,7 @@ class Requestor:
         cookies = {}
         if self._auth.token:
             cookies["jwt"] = self._auth.token
-        r = REQUEST_MAP[method](self._auth.image_url, cookies=cookies, **kwargs)
+        r = REQUEST_MAP[method](self._auth.image_url, cookies=cookies, timeout=self.request_timeout, **kwargs)
         if not r.ok:
             logger.error(f"Error encountered while {method}: {r.text}")
             return
