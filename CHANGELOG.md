@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.6...HEAD)
+
+**Closed issues:**
+
+- requestor.api catches all exceptions, making it really hard to debug. [\#73](https://github.com/db0/pythorhead/issues/73)
+
+## [v0.15.6](https://github.com/db0/pythorhead/tree/v0.15.6) (2023-09-05)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.5...v0.15.6)
+
+**Merged pull requests:**
+
+- Feat: raise\_exceptions [\#74](https://github.com/db0/pythorhead/pull/74) ([db0](https://github.com/db0))
+
 ## [v0.15.5](https://github.com/db0/pythorhead/tree/v0.15.5) (2023-08-08)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.15.4...v0.15.5)
