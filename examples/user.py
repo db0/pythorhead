@@ -3,7 +3,6 @@
 import argparse
 import json
 import os
-import re
 from pythorhead import Lemmy
 
 arg_parser = argparse.ArgumentParser()
