@@ -53,3 +53,33 @@ class User:
             user_purge["reason"] = reason
 
         return self._requestor.api(Request.POST, "/admin/purge/person", json=user_purge)
+    
+    def ban_user(
+            self, 
+            ban: bool = True, 
+            expires: Optional[int] = None, 
+            person_id: int = None,
+            reason: Optional[str] = None, 
+            remove_data: Optional[bool] = None
+        ) -> Optional[dict]:
+        """
+        Admin/Mod ban person from instance
+
+        Args:
+            ban (bool): Defaults to True
+            expires (Optional[int]): Time to ban expires
+            person_id (int): Defaults to None
+            reason (Optional[str]): Defaults to None
+            remove_data (Optional[bool]): Defaults to None 
+        
+        """
+        user_ban: dict[str, Any] = {"ban": ban, "person_id": person_id}
+
+        if expires is not None:
+            user_ban["expires"] = expires
+        if reason is not None:
+            user_ban["reason"] = reason
+        if remove_data is not None:
+            user_ban["remove_data"] = remove_data
+            
+        return self._requestor.api(Request.POST, "/user/ban", json=user_ban)
