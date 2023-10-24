@@ -67,7 +67,7 @@ class User:
 
         Args:
             ban (bool): Defaults to True
-            expires (Optional[int]): Time to ban expires
+            expires (Optional[int]): Unix time of ban expiration, i.e. a ban expiring 1st Jan 2023 at midnight would be 1672531200. Defaults to None.
             person_id (int): Defaults to None
             reason (Optional[str]): Defaults to None
             remove_data (Optional[bool]): Defaults to None 
