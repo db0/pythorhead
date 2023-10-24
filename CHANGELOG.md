@@ -1,12 +1,22 @@
 # Changelog
 
-## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+## [v0.17.0](https://github.com/db0/pythorhead/tree/v0.17.0) (2023-10-24)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.16.0...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.16.0...v0.17.0)
 
 **Implemented enhancements:**
 
 - Set timeout for requests [\#75](https://github.com/db0/pythorhead/issues/75)
+
+**Closed issues:**
+
+- ERROR:pythorhead.requestor:Error encountered while Request.POST: relation "activity" does not exist [\#67](https://github.com/db0/pythorhead/issues/67)
+- Error encountered while Request.POST: {"error":"rate\_limit\_error"} [\#66](https://github.com/db0/pythorhead/issues/66)
+
+**Merged pull requests:**
+
+- feat: add ban\_user.py example [\#78](https://github.com/db0/pythorhead/pull/78) ([db0](https://github.com/db0))
+- Add Ban User functionality [\#77](https://github.com/db0/pythorhead/pull/77) ([Demigodrick](https://github.com/Demigodrick))
 
 ## [v0.16.0](https://github.com/db0/pythorhead/tree/v0.16.0) (2023-10-18)
 
