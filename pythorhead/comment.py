@@ -65,6 +65,25 @@ class Comment:
         if data := self._requestor.api(Request.GET, "/comment/list", params=list_comment):
             return data["comments"]
         return []
+    
+    def get(  # noqa: A003
+        self,
+        comment_id: int,
+    ) -> dict:
+        """
+
+        Get specific comment from its ID
+
+        Args:
+            comment_id [int].
+
+        Returns:
+            List[dict]: list of comments
+        """
+        list_comment = {"id": comment_id}
+        if data := self._requestor.api(Request.GET, "/comment", params=list_comment):
+            return data
+        return {}
 
     def create(
         self,
