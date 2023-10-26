@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.18.0...HEAD)
+
+**Implemented enhancements:**
+
+- Comment.get\(\) Function [\#79](https://github.com/db0/pythorhead/issues/79)
+
+## [v0.18.0](https://github.com/db0/pythorhead/tree/v0.18.0) (2023-10-26)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.17.0...v0.18.0)
+
+**Merged pull requests:**
+
+- feat: comment get [\#80](https://github.com/db0/pythorhead/pull/80) ([db0](https://github.com/db0))
+
 ## [v0.17.0](https://github.com/db0/pythorhead/tree/v0.17.0) (2023-10-24)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.16.0...v0.17.0)
