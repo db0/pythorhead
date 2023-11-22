@@ -1,12 +1,16 @@
 # Changelog
 
-## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+## [v0.19.0](https://github.com/db0/pythorhead/tree/v0.19.0) (2023-11-22)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.18.0...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.18.0...v0.19.0)
 
 **Implemented enhancements:**
 
 - Comment.get\(\) Function [\#79](https://github.com/db0/pythorhead/issues/79)
+
+**Merged pull requests:**
+
+- feat: resolve\_object endpoint [\#81](https://github.com/db0/pythorhead/pull/81) ([db0](https://github.com/db0))
 
 ## [v0.18.0](https://github.com/db0/pythorhead/tree/v0.18.0) (2023-10-26)
 
