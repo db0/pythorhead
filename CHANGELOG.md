@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.19.1](https://github.com/db0/pythorhead/tree/v0.19.1) (2023-11-22)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.19.0...v0.19.1)
+
+**Merged pull requests:**
+
+- feat: get\_base\_url [\#82](https://github.com/db0/pythorhead/pull/82) ([db0](https://github.com/db0))
+
 ## [v0.19.0](https://github.com/db0/pythorhead/tree/v0.19.0) (2023-11-22)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.18.0...v0.19.0)
