@@ -123,3 +123,6 @@ class Lemmy:
         """
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.api(Request.GET, "/resolve_object", params=params)
+
+    def get_base_url(self):
+        return self._requestor.domain
