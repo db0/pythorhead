@@ -106,3 +106,20 @@ class Lemmy:
             type_ = type_.value
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.api(Request.GET, "/search", params=params)
+
+    def resolve_object(
+        self,
+        q: str,
+    ) -> Optional[dict]:
+        """
+
+        Resolve a remove URL to the local URL
+
+        Args:
+            q (str)
+
+        Returns:
+            Optional[dict]: search result
+        """
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        return self._requestor.api(Request.GET, "/resolve_object", params=params)
