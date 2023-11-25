@@ -280,8 +280,8 @@ class Comment:
         if page is not None:
             list_reports["page"] = page
         if unresolved_only is not None:
-            list_reports['unresolved_only'] = unresolved_only
-
+            # This must be sent as a lowercase stringifiend bool or we get an error
+            list_reports['unresolved_only'] = str(unresolved_only).lower()
         if data := self._requestor.api(Request.GET, "/comment/report/list", params=list_reports):
             return data["comment_reports"]
         return []
