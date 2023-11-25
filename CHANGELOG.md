@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.19.2](https://github.com/db0/pythorhead/tree/v0.19.2) (2023-11-25)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.19.1...v0.19.2)
+
+**Merged pull requests:**
+
+- fix: unresolved\_reports payload [\#83](https://github.com/db0/pythorhead/pull/83) ([db0](https://github.com/db0))
+
 ## [v0.19.1](https://github.com/db0/pythorhead/tree/v0.19.1) (2023-11-22)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.19.0...v0.19.1)
