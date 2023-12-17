@@ -4,6 +4,7 @@ from typing import Optional
 
 import requests
 
+from pythorhead import get_version
 from pythorhead.auth import Authentication
 
 logger = logging.getLogger(__name__)
@@ -33,7 +34,7 @@ class Requestor:
         self.set_api_base_url = self._auth.set_api_base_url
         self.raise_exceptions = raise_exceptions
         self.request_timeout = request_timeout
-
+    
     def set_domain(self, domain: str):
         self.domain = domain
         self._auth.set_api_base_url(self.domain)
@@ -44,7 +45,7 @@ class Requestor:
                 "Sec-Fetch-Site": "cross-site",
                 "Sec-Fetch-User": "?1",
                 "Sec-GPC": "1",
-                "User-Agent": "pythorhead/0.5",
+                "User-Agent": f"pythorhead/{get_version()}",
             }
             self.nodeinfo = requests.get(f"{self.domain}/nodeinfo/2.0.json", headers = headers, timeout=2).json()
         except Exception as err:
