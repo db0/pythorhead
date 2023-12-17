@@ -3,6 +3,7 @@ from enum import Enum
 from typing import Optional
 
 import requests
+import semver
 
 from pythorhead import get_version
 from pythorhead.auth import Authentication
@@ -34,7 +35,10 @@ class Requestor:
         self.set_api_base_url = self._auth.set_api_base_url
         self.raise_exceptions = raise_exceptions
         self.request_timeout = request_timeout
-    
+
+    def get_instance_version(self):
+        return semver.Version.parse(self.nodeinfo["software"]["version"])
+
     def set_domain(self, domain: str):
         self.domain = domain
         self._auth.set_api_base_url(self.domain)
@@ -61,20 +65,24 @@ class Requestor:
 
     def api(self, method: Request, endpoint: str, **kwargs) -> Optional[dict]:
         logger.info(f"Requesting API {method} {endpoint}")
+        headers = {
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1",
+            "Sec-GPC": "1",
+            "User-Agent": f"pythorhead/{get_version()}",
+        }
         if self._auth.token:
-            if (data := kwargs.get("json")) is not None:
-                data["auth"] = self._auth.token
-            if (data := kwargs.get("params")) is not None:
-                data["auth"] = self._auth.token
+            # < 0.19 requires a different auth method
+            if self.get_instance_version().compare("0.19.0") < 0:
+                if (data := kwargs.get("json")) is not None:
+                    data["auth"] = self._auth.token
+                if (data := kwargs.get("params")) is not None:
+                    data["auth"] = self._auth.token
+            else:
+                headers["Authorization"] = f"Bearer {self._auth.token}"
         try:
-            headers = {
-                "Sec-Fetch-Dest": "document",
-                "Sec-Fetch-Mode": "navigate",
-                "Sec-Fetch-Site": "none",
-                "Sec-Fetch-User": "?1",
-                "Sec-GPC": "1",
-                "User-Agent": "pythorhead/0.5",
-            }
             r = REQUEST_MAP[method](f"{self._auth.api_url}{endpoint}", headers = headers, timeout=self.request_timeout , **kwargs)
         except Exception as err:
             if not self.raise_exceptions:
