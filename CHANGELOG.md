@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.20.0...HEAD)
+
+**Closed issues:**
+
+- Issue with 0.19 authentication [\#84](https://github.com/db0/pythorhead/issues/84)
+
+## [v0.20.0](https://github.com/db0/pythorhead/tree/v0.20.0) (2023-12-17)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.19.2...v0.20.0)
+
+**Merged pull requests:**
+
+- feat: Support for 0.19 auth [\#85](https://github.com/db0/pythorhead/pull/85) ([db0](https://github.com/db0))
+
 ## [v0.19.2](https://github.com/db0/pythorhead/tree/v0.19.2) (2023-11-25)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.19.1...v0.19.2)
