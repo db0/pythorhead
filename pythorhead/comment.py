@@ -386,4 +386,28 @@ class Comment:
 
         return self._requestor.api(Request.POST, "/admin/purge/comment", json=purge_comment)
 
+    def get_replies(
+        self,
+        unread_only: bool,
+        page: int,
+        limit: int = 20,
+        sort: CommentSortType = None,
+    ) -> Optional[dict]:
+        """
+        List comment replies
+        
+        Args:
+            unread_only (bool).
+            page (int).
+            limit (int) with a max of 50, defaults to 20.
+            sort type: "Hot" | "Top" | "New" | "Old" | "Controversial"
+            
+        Returns:
+            dict? comment replies response
+        """
+        limit = 50 if limit > 50 else limit
+        unread_only = 'true' if unread_only else 'false'
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        return self._requestor.api(Request.GET, "/user/replies",  params=params)
+
     __call__ = create
