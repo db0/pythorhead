@@ -1,12 +1,16 @@
 # Changelog
 
-## [Unreleased](https://github.com/db0/pythorhead/tree/HEAD)
+## [v0.20.1](https://github.com/db0/pythorhead/tree/v0.20.1) (2024-01-15)
 
-[Full Changelog](https://github.com/db0/pythorhead/compare/v0.20.0...HEAD)
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.20.0...v0.20.1)
 
 **Closed issues:**
 
 - Issue with 0.19 authentication [\#84](https://github.com/db0/pythorhead/issues/84)
+
+**Merged pull requests:**
+
+- Add "get\_replies" to comments [\#87](https://github.com/db0/pythorhead/pull/87) ([Demigodrick](https://github.com/Demigodrick))
 
 ## [v0.20.0](https://github.com/db0/pythorhead/tree/v0.20.0) (2023-12-17)
 
