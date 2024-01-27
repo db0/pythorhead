@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.21.0](https://github.com/db0/pythorhead/tree/v0.21.0) (2024-01-27)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.20.1...v0.21.0)
+
+**Merged pull requests:**
+
+- feat: Allow marking mentions as read [\#88](https://github.com/db0/pythorhead/pull/88) ([db0](https://github.com/db0))
+
 ## [v0.20.1](https://github.com/db0/pythorhead/tree/v0.20.1) (2024-01-15)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.20.0...v0.20.1)
