@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.22.0](https://github.com/db0/pythorhead/tree/v0.22.0) (2024-02-09)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.21.0...v0.22.0)
+
+**Merged pull requests:**
+
+- added ban\_from\_community [\#89](https://github.com/db0/pythorhead/pull/89) ([thekingoflorda](https://github.com/thekingoflorda))
+
 ## [v0.21.0](https://github.com/db0/pythorhead/tree/v0.21.0) (2024-01-27)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.20.1...v0.21.0)
