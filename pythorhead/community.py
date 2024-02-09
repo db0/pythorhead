@@ -162,7 +162,7 @@ class Community:
         }
         return self._requestor.api(Request.POST, "/community/mod", json=addmodtocommunity)
     
-    def ban_from_community(
+    def ban_user(
             self, 
             ban: bool = True, 
             expires: Optional[Union[datetime, int]] = None, 
@@ -171,6 +171,21 @@ class Community:
             reason: Optional[str] = None, 
             remove_data: Optional[bool] = None
         ) -> Optional[dict]:
+        """
+
+        Ban user from community
+
+        Args:
+            ban (bool): Defaults to True. False Unbans the user
+            expires (Optional[Union[datetime, int]]): Unix time of ban expiration as an integer or a datetime object. Defaults to None for permanent ban.
+            person_id (int): Defaults to None
+            community_id (int): Defaults to None
+            reason (Optional[str]): Defaults to None
+            remove_data (Optional[bool]): Defaults to None 
+        
+        Returns:
+            Optional[dict]: 
+        """
     
         banFromCommunity: dict[str, Any] = {"ban": ban, "person_id": person_id, "community_id": community_id}
 
