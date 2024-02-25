@@ -7,8 +7,6 @@ import os
 from pythorhead import Lemmy
 
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("username", action="store")
-arg_parser.add_argument("content", action="store")
 arg_parser.add_argument(
     "-d",
     "--lemmy_domain",
@@ -51,11 +49,15 @@ if not lemmy_password:
     lemmy_password = os.getenv("LEMMY_PASSWORD")
 
 lemmy = Lemmy(f"https://{lemmy_domain}")
+if not lemmy_username or not lemmy_password:
+    print("Please provide username and password")
+    exit(1)
 if lemmy_username and lemmy_password:
-    lemmy.log_in(lemmy_username, lemmy_password)
-user = lemmy.user.get(username=args.username)
-if not user:
-    raise Exception("No valid username found")
-pm = lemmy.private_message(args.content, user["person_view"]["person"]["id"])
-if not pm:
-    print("Sending private message failed")
+    login = lemmy.log_in(lemmy_username, lemmy_password)
+if not login:
+    exit(1)
+mentions = lemmy.mention.list(
+    unread_only=False,
+    limit=1
+)
+print(json.dumps(mentions,indent=4))
