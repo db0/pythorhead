@@ -16,6 +16,7 @@ class SortType(str, Enum):
     TopTwelveHour = "TopTwelveHour"
     NewComments = "NewComments"
     MostComments = "MostComments"
+    Scaled = "Scaled"
 
 
 class CommentSortType(str, Enum):

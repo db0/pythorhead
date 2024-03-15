@@ -1,7 +1,7 @@
 from typing import Any, List, Literal, Optional, Union
 from datetime import datetime
 from pythorhead.requestor import Request, Requestor
-from pythorhead.types import SortType
+from pythorhead.types import SortType, ListingType, LanguageType
 
 
 class User:
@@ -90,3 +90,44 @@ class User:
             user_ban["remove_data"] = remove_data
 
         return self._requestor.api(Request.POST, "/user/ban", json=user_ban)
+    
+    def save_user_settings(
+        self,
+        show_nsfw: Optional[bool] = None,
+        blur_nsfw: Optional[bool] = None,
+        auto_expand: Optional[bool] = None,
+        show_scores: Optional[bool] = None,
+        theme: Optional[str] = None,
+        default_sort_type: Optional[SortType] = None,
+        default_listing_type: Optional[ListingType] = None,
+        interface_language: Optional[str] = None,
+        avatar: Optional[str] = None,
+        banner: Optional[str] = None,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
+        bio: Optional[str] = None,
+        matrix_user_id: Optional[str] = None,
+        show_avatars: Optional[bool] = None,
+        send_notifications_to_email: Optional[bool] = None,
+        bot_account: Optional[bool] = None,
+        show_bot_accounts: Optional[bool] = None,
+        show_read_posts: Optional[bool] = None,
+        discussion_languages: Union[int, LanguageType, None] = None,
+        open_links_in_new_tab: Optional[bool] = None,
+        infinite_scroll_enabled: Optional[bool] = None,
+        post_listing_mode: Optional[str] = None,
+        enable_keyboard_navigation: Optional[bool] = None,
+        enable_animated_images: Optional[bool] = None,
+        collapse_bot_comments: Optional[bool] = None,
+
+    ) -> Optional[dict]:
+        """
+        Get user details with various filters.
+
+        Args:
+            TBD
+        Returns:
+            dict: user view
+        """
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        return self._requestor.api(Request.PUT, "/user/save_user_settings", json=params)

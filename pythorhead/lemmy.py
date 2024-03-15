@@ -37,6 +37,10 @@ class Lemmy:
     def nodeinfo(self):
         return self._requestor.nodeinfo
 
+    @property
+    def username(self):
+        return self._requestor.logged_in_username
+
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         return self._requestor.log_in(username_or_email, password, totp)
 

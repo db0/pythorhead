@@ -15,6 +15,7 @@ class Community:
         title: str,
         description: Optional[str] = None,
         icon: Optional[str] = None,
+        banner: Optional[str] = None,
         nsfw: Optional[bool] = None,
         posting_restricted_to_mods: Optional[bool] = None,
         discussion_languages: Optional[List[Union[int, LanguageType]]] = None,
@@ -52,6 +53,39 @@ class Community:
             ]
 
         return self._requestor.api(Request.POST, "/community", json=new_community)
+
+    def edit(
+        self,
+        community_id: int,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+        icon: Optional[str] = None,
+        banner: Optional[str] = None,
+        nsfw: Optional[bool] = None,
+        posting_restricted_to_mods: Optional[bool] = None,
+        discussion_languages: Optional[List[Union[int, LanguageType]]] = None,
+    ) -> Optional[dict]:
+        """
+        Edit a community
+
+        Args:
+            name (str)
+            title (str)
+            description (str, optional): Defaults to None
+            icon (str, optional): Defaults to None
+            nsfw (bool, optional): Defaults to None
+            posting_restricted_to_mods (bool, optional): Defaults to None
+            discussion_languages: (List[Union[int, LanguageType]], optional): Defaults to None
+
+        Returns:
+            Optional[dict]: post data if successful
+        """
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        if discussion_languages is not None:
+            params["discussion_languages"] = [
+                language.value for language in discussion_languages if isinstance(language, LanguageType)
+            ]
+        return self._requestor.api(Request.PUT, "/community", json=params)
 
     def get(self, id: Optional[int] = None, name: Optional[str] = None) -> Optional[dict]:
         """
