@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.23.0](https://github.com/db0/pythorhead/tree/v0.23.0) (2024-03-16)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.22.0...v0.23.0)
+
+**Merged pull requests:**
+
+- feat: Support for more endpoints [\#90](https://github.com/db0/pythorhead/pull/90) ([db0](https://github.com/db0))
+
 ## [v0.22.0](https://github.com/db0/pythorhead/tree/v0.22.0) (2024-02-09)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.21.0...v0.22.0)
