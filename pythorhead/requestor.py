@@ -29,6 +29,7 @@ class Requestor:
     domain: Optional[str] = None
     raise_exceptions: Optional[bool] = False
     request_timeout: Optional[int] = 3
+    logged_in_username: Optional[str] = None
 
     def __init__(self, raise_exceptions = False, request_timeout = 3):
         self._auth = Authentication()
@@ -109,6 +110,17 @@ class Requestor:
             return
         return r.json()
 
+    def image_del(self, method: Request, image_delete_url:str, **kwargs) -> Optional[dict]:
+        logger.info(f"Deleting image {method}")
+        cookies = {}
+        if self._auth.token:
+            cookies["jwt"] = self._auth.token
+        r = REQUEST_MAP[method](image_delete_url, cookies=cookies, timeout=self.request_timeout, **kwargs)
+        if not r.ok:
+            logger.error(f"Error encountered while {method}: {r.text}")
+            return
+        return r
+
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         payload = {
             "username_or_email": username_or_email,
@@ -117,7 +129,12 @@ class Requestor:
         }
         if data := self.api(Request.POST, "/user/login", json=payload):
             self._auth.set_token(data["jwt"])
+            self.logged_in_username = username_or_email
         return self._auth.token is not None
 
     def log_out(self) -> None:
         self._auth.token = None
+        self.logged_in_username = None
+
+    def is_logged_in(self) -> bool:
+        return self.logged_in_username is not None
