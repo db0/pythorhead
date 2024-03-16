@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.23.1](https://github.com/db0/pythorhead/tree/v0.23.1) (2024-03-16)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.23.0...v0.23.1)
+
+**Merged pull requests:**
+
+- fix: pillow requirement [\#91](https://github.com/db0/pythorhead/pull/91) ([db0](https://github.com/db0))
+
 ## [v0.23.0](https://github.com/db0/pythorhead/tree/v0.23.0) (2024-03-16)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.22.0...v0.23.0)
