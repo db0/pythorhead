@@ -44,6 +44,9 @@ class Lemmy:
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         return self._requestor.log_in(username_or_email, password, totp)
 
+    def relog_in(self) -> bool:
+        return self._requestor._log_in()
+
     def discover_community(self, community_name: str, search=SearchOption.Retry) -> Optional[int]:
         if community_name in self._known_communities:
             return self._known_communities[community_name]

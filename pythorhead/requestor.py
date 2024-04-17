@@ -30,6 +30,7 @@ class Requestor:
     raise_exceptions: Optional[bool] = False
     request_timeout: Optional[int] = 3
     logged_in_username: Optional[str] = None
+    current_password: Optional[str] = None
 
     def __init__(self, raise_exceptions = False, request_timeout = 3):
         self._auth = Authentication()
@@ -122,14 +123,21 @@ class Requestor:
         return r
 
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
+        self.logged_in_username = username_or_email
+        self.current_password = password
+        return self._log_in(totp)
+
+    def _log_in(self, totp: Optional[str] = None) -> bool:
         payload = {
-            "username_or_email": username_or_email,
-            "password": password,
+            "username_or_email": self.logged_in_username,
+            "password": self.current_password,
             "totp_2fa_token": totp,
         }
         if data := self.api(Request.POST, "/user/login", json=payload):
             self._auth.set_token(data["jwt"])
-            self.logged_in_username = username_or_email
+        else:
+            self.logged_in_username = None
+            self.current_password = None
         return self._auth.token is not None
 
     def log_out(self) -> None:
