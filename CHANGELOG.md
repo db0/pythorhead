@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.24.0](https://github.com/db0/pythorhead/tree/v0.24.0) (2024-04-17)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.23.1...v0.24.0)
+
+**Merged pull requests:**
+
+- feat: allows to refresh auth token with relog\_in [\#94](https://github.com/db0/pythorhead/pull/94) ([db0](https://github.com/db0))
+
 ## [v0.23.1](https://github.com/db0/pythorhead/tree/v0.23.1) (2024-03-16)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.23.0...v0.23.1)
