@@ -32,7 +32,9 @@ class User:
         Returns:
             dict: user view
         """
-        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+        params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and value is not True and key != "self"}
+        if saved_only:
+            params['saved_only'] = 'true'
         return self._requestor.api(Request.GET, "/user", params=params)
 
     def purge(
