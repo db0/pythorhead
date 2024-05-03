@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.24.1](https://github.com/db0/pythorhead/tree/v0.24.1) (2024-05-03)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.0...v0.24.1)
+
+**Merged pull requests:**
+
+- \(issue \#93\) fix: saved\_only works for users now [\#96](https://github.com/db0/pythorhead/pull/96) ([cyborgcatboy](https://github.com/cyborgcatboy))
+
 ## [v0.24.0](https://github.com/db0/pythorhead/tree/v0.24.0) (2024-04-17)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.23.1...v0.24.0)
