@@ -121,7 +121,11 @@ class Requestor:
             cookies["jwt"] = self._auth.token
         r = REQUEST_MAP[method](image_delete_url, cookies=cookies, timeout=self.request_timeout, **kwargs)
         if not r.ok:
-            logger.error(f"Error encountered while {method}: {r.text}")
+            if not self.raise_exceptions:
+                logger.error(f"Error encountered while {method}: {r.text}")
+                return
+            else:
+                raise Exception(f"Error encountered while {method}: {r.text}")
             return
         return r
 
