@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.24.2](https://github.com/db0/pythorhead/tree/v0.24.2) (2024-05-04)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.1...v0.24.2)
+
+**Closed issues:**
+
+- API doesn't map python True to JSON true properly [\#93](https://github.com/db0/pythorhead/issues/93)
+
+**Merged pull requests:**
+
+- Return JSON data when image upload fails [\#97](https://github.com/db0/pythorhead/pull/97) ([Krafting](https://github.com/Krafting))
+
 ## [v0.24.1](https://github.com/db0/pythorhead/tree/v0.24.1) (2024-05-03)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.0...v0.24.1)
