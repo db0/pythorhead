@@ -56,9 +56,6 @@ class Image:
                 del file["delete_token"]
 
             return data["files"]
-
-        else:
-            return data
         
     def delete(self, image_delete_url: str):
         """
