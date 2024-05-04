@@ -126,7 +126,6 @@ class Requestor:
                 return
             else:
                 raise Exception(f"Error encountered while {method}: {r.text}")
-            return
         return r
 
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
