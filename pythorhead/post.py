@@ -328,11 +328,11 @@ class Post:
         Returns:
             Optional[dict]: post data if successful
         """
-        mark_as_read_post = {
+        mark_as_read_posts = {
             "post_ids": post_ids,
             "read": read,
         }
-        return self._requestor.api(Request.POST, "/post/mark_as_read", json=mark_as_read_post)
+        return self._requestor.api(Request.POST, "/post/mark_as_read", json=mark_as_read_posts)
 
     def site_metadata(self, url: str) -> Optional[dict]:
         """
