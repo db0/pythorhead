@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.25.0](https://github.com/db0/pythorhead/tree/v0.25.0) (2024-06-09)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.2...v0.25.0)
+
+**Merged pull requests:**
+
+- Update mark post as read [\#98](https://github.com/db0/pythorhead/pull/98) ([CTalvio](https://github.com/CTalvio))
+
 ## [v0.24.2](https://github.com/db0/pythorhead/tree/v0.24.2) (2024-05-04)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.1...v0.24.2)
