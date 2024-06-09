@@ -41,6 +41,10 @@ class Lemmy:
     def username(self):
         return self._requestor.logged_in_username
 
+    @property
+    def instance_version(self):
+        return self._requestor.get_instance_version()
+    
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         return self._requestor.log_in(username_or_email, password, totp)
 
@@ -133,3 +137,4 @@ class Lemmy:
 
     def get_base_url(self):
         return self._requestor.domain
+    
