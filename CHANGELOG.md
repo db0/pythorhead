@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.25.1](https://github.com/db0/pythorhead/tree/v0.25.1) (2024-06-23)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.0...v0.25.1)
+
+**Closed issues:**
+
+- Reading and dealing with reports [\#99](https://github.com/db0/pythorhead/issues/99)
+
+**Merged pull requests:**
+
+- Add ModeratorView listing type [\#100](https://github.com/db0/pythorhead/pull/100) ([chris-y](https://github.com/chris-y))
+
 ## [v0.25.0](https://github.com/db0/pythorhead/tree/v0.25.0) (2024-06-09)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.2...v0.25.0)
