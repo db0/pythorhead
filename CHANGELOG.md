@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.25.2](https://github.com/db0/pythorhead/tree/v0.25.2) (2024-06-27)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.1...v0.25.2)
+
+**Merged pull requests:**
+
+- support python 3.12 [\#101](https://github.com/db0/pythorhead/pull/101) ([stenius](https://github.com/stenius))
+
 ## [v0.25.1](https://github.com/db0/pythorhead/tree/v0.25.1) (2024-06-23)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.0...v0.25.1)
