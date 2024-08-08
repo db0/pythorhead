@@ -25,7 +25,7 @@ REQUEST_MAP = {
 
 
 class Requestor:
-    nodeinfo: Optional[dict] = None
+    _nodeinfo: Optional[dict] = None
     domain: Optional[str] = None
     raise_exceptions: Optional[bool] = False
     request_timeout: Optional[int] = 3
@@ -38,12 +38,10 @@ class Requestor:
         self.raise_exceptions = raise_exceptions
         self.request_timeout = request_timeout
 
-    def get_instance_version(self):
-        return semver.Version.parse(self.nodeinfo["software"]["version"])
-
-    def set_domain(self, domain: str):
-        self.domain = domain
-        self._auth.set_api_base_url(self.domain)
+    @property
+    def nodeinfo(self) -> dict:
+        if self._nodeinfo:
+            return self._nodeinfo
         try:
             headers = {
                 "Sec-Fetch-Dest": "document",
@@ -53,12 +51,20 @@ class Requestor:
                 "Sec-GPC": "1",
                 "User-Agent": f"pythorhead/{get_version()}",
             }
-            self.nodeinfo = requests.get(f"{self.domain}/nodeinfo/2.0.json", headers = headers, timeout=2).json()
+            self._nodeinfo = requests.get(f"{self.domain}/nodeinfo/2.0.json", headers=headers, timeout=2).json()
+            return self._nodeinfo
         except Exception as err:
             if not self.raise_exceptions:
                 logger.error(f"Problem encountered retrieving Lemmy nodeinfo: {err}")
-                return
+                return {}
             raise err
+
+    def get_instance_version(self):
+        return semver.Version.parse(self.nodeinfo["software"]["version"])
+
+    def set_domain(self, domain: str):
+        self.domain = domain
+        self._auth.set_api_base_url(self.domain)
         software = self.nodeinfo.get("software", {}).get("name")
         if software != "lemmy":
             logger.error(f"Domain name does not appear to contain a lemmy software, but instead '{software}")
