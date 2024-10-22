@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.26.0](https://github.com/db0/pythorhead/tree/v0.26.0) (2024-10-22)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.2...v0.26.0)
+
+**Merged pull requests:**
+
+- Make nodeinfo a property of Requestor [\#103](https://github.com/db0/pythorhead/pull/103) ([fixmycode](https://github.com/fixmycode))
+
 ## [v0.25.2](https://github.com/db0/pythorhead/tree/v0.25.2) (2024-06-27)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.1...v0.25.2)
