@@ -6,3 +6,4 @@ class ListingType(str, Enum):
     Community = "Community"
     Local = "Local"
     Subscribed = "Subscribed"
+    ModeratorView = "ModeratorView"

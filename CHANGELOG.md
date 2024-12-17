@@ -1,5 +1,33 @@
 # Changelog
 
+## [v0.26.0](https://github.com/db0/pythorhead/tree/v0.26.0) (2024-10-22)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.2...v0.26.0)
+
+**Merged pull requests:**
+
+- Make nodeinfo a property of Requestor [\#103](https://github.com/db0/pythorhead/pull/103) ([fixmycode](https://github.com/fixmycode))
+
+## [v0.25.2](https://github.com/db0/pythorhead/tree/v0.25.2) (2024-06-27)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.1...v0.25.2)
+
+**Merged pull requests:**
+
+- support python 3.12 [\#101](https://github.com/db0/pythorhead/pull/101) ([stenius](https://github.com/stenius))
+
+## [v0.25.1](https://github.com/db0/pythorhead/tree/v0.25.1) (2024-06-23)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.0...v0.25.1)
+
+**Closed issues:**
+
+- Reading and dealing with reports [\#99](https://github.com/db0/pythorhead/issues/99)
+
+**Merged pull requests:**
+
+- Add ModeratorView listing type [\#100](https://github.com/db0/pythorhead/pull/100) ([chris-y](https://github.com/chris-y))
+
 ## [v0.25.0](https://github.com/db0/pythorhead/tree/v0.25.0) (2024-06-09)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.24.2...v0.25.0)
