@@ -1,38 +1,41 @@
-from typing import Any, List, Literal, Optional, Union
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from datetime import datetime
 from pythorhead import lemmy
 from pythorhead.types import SortType, ListingType, LanguageType
-
+from dateutil import parser
+import json
 
 @dataclass
 class LemmyUser:
     id: int
     name: str
-    avatar: str
     banned: bool
-    published: str
-    updated: str
+    published: datetime
     actor_id: str
-    bio: str
     local: bool
-    banner: str
     deleted: bool
-    matirx_user_id: str
     bot_account: bool
-    ban_expires: datetime
     instance_id: int
     is_admin: bool
+    display_name: str | None = None
+    bio: str | None = None
+    avatar: str | None = None
+    banner: str | None = None
+    matrix_user_id: str | None = None
+    ban_expires: datetime | None = None
+    updated: datetime | None = None
 
     user_request_class = None
     
     @classmethod
     def from_dict(cls, person_dict: dict, user_request_class) -> 'LemmyUser':
         # Convert string to datetime for ban_expires if it exists
-        if 'ban_expires' in person_dict and person_dict['ban_expires']:
-            person_dict['ban_expires'] = datetime.fromisoformat(person_dict['ban_expires'])
-        
-        return cls(**person_dict, user_request_class)
+        for key in {'ban_expires', 'updates', 'published'}:
+            if key in person_dict and person_dict[key]:
+                person_dict[key] = parser.isoparse(person_dict[key])
+        new_user = cls(**person_dict)
+        new_user.user_request_class = user_request_class
+        return new_user
     
     def refresh(self) -> None:
         """
@@ -74,7 +77,7 @@ class LemmyUser:
         self.user_request_class.save_user_settings(
             avatar=self.avatar,
             banner=self.banner,
-            display_name=self.name,
+            display_name=self.display_name,
             bio=self.bio,
             matrix_user_id=self.matrix_user_id,
             bot_account=self.bot_account,
@@ -86,3 +89,17 @@ class LemmyUser:
             raise Exception("Cannot update user settings for anyone but the currently logged-in user.")
         self.user_request_class.save_user_settings(**kwargs)
         self.refresh()
+
+    def asdict(self):
+        return asdict(self)
+
+    def asjson(self, indent=4):
+        def custom_serializer(obj):
+            if isinstance(obj, datetime):
+                return obj.isoformat()  # Convert datetime to ISO 8601 string
+            else:
+                return obj
+            raise TypeError(f"Type {type(obj)} not serializable")
+        
+        selfdict = self.asdict()
+        return json.dumps(selfdict, indent=indent, default=custom_serializer)

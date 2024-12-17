@@ -30,6 +30,7 @@ class User:
             limit (Optional[int], optional): Defaults to None.
             community_id (Optional[int], optional): Defaults to None.
             saved_only (Optional[bool], optional): Defaults to None.
+            return_user_object: (Optional[bool], optional): If true, returns a LemmyUser object, instead of the raw dict
         Returns:
             dict: user view
         """
@@ -38,9 +39,9 @@ class User:
             params['saved_only'] = 'true'
         ret_dict = self._requestor.api(Request.GET, "/user", params=params)
         if return_user_object:
-            user_dict = ret_dict['person']
-            user_dict['is_admin'] = ret_dict['is_admin']
-            return LemmyUser.from_dict(user_dict)
+            user_dict = ret_dict['person_view']['person']
+            user_dict['is_admin'] = ret_dict['person_view']['is_admin']
+            return LemmyUser.from_dict(user_dict, self)
         return ret_dict
 
     def purge(
