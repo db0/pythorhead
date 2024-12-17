@@ -3,6 +3,7 @@ from datetime import datetime
 from pythorhead import lemmy
 from pythorhead.types import SortType, ListingType, LanguageType
 from dateutil import parser
+from pythorhead.utils import json_serializer
 import json
 
 @dataclass
@@ -93,13 +94,6 @@ class LemmyUser:
     def asdict(self):
         return asdict(self)
 
-    def asjson(self, indent=4):
-        def custom_serializer(obj):
-            if isinstance(obj, datetime):
-                return obj.isoformat()  # Convert datetime to ISO 8601 string
-            else:
-                return obj
-            raise TypeError(f"Type {type(obj)} not serializable")
-        
+    def asjson(self, indent=4):      
         selfdict = self.asdict()
-        return json.dumps(selfdict, indent=indent, default=custom_serializer)
+        return json.dumps(selfdict, indent=indent, default=json_serializer)
