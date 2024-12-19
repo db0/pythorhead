@@ -2,7 +2,6 @@ from typing import Any, List, Literal, Optional, Union
 from datetime import datetime
 from pythorhead.requestor import Request, Requestor
 from pythorhead.types import SortType, ListingType, LanguageType
-from pythorhead.classes.user import LemmyUser
 
 class User:
     def __init__(self, _requestor: Requestor):
@@ -18,7 +17,7 @@ class User:
         community_id: Optional[int] = None,
         saved_only: Optional[bool] = None,
         return_user_object = False,
-    ) -> dict | LemmyUser | None:
+    ) -> dict | None:
         """
         Get user details with various filters.
 
@@ -37,12 +36,7 @@ class User:
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and value is not True and key != "self"}
         if saved_only:
             params['saved_only'] = 'true'
-        ret_dict = self._requestor.api(Request.GET, "/user", params=params)
-        if return_user_object:
-            user_dict = ret_dict['person_view']['person']
-            user_dict['is_admin'] = ret_dict['person_view']['is_admin']
-            return LemmyUser.from_dict(user_dict, self)
-        return ret_dict
+        return self._requestor.api(Request.GET, "/user", params=params)
 
     def purge(
             self, 

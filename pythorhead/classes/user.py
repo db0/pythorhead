@@ -4,6 +4,7 @@ from pythorhead import lemmy
 from pythorhead.types import SortType, ListingType, LanguageType
 from dateutil import parser
 from pythorhead.utils import json_serializer
+
 import json
 
 @dataclass
@@ -25,17 +26,17 @@ class LemmyUser:
     matrix_user_id: str | None = None
     ban_expires: datetime | None = None
     updated: datetime | None = None
-
-    user_request_class = None
+    # The owning lemmy instance. We use it to reach the API classes
+    lemmy = None
     
     @classmethod
-    def from_dict(cls, person_dict: dict, user_request_class) -> 'LemmyUser':
+    def from_dict(cls, person_dict: dict, lemmy) -> 'LemmyUser':
         # Convert string to datetime for ban_expires if it exists
         for key in {'ban_expires', 'updates', 'published'}:
             if key in person_dict and person_dict[key]:
                 person_dict[key] = parser.isoparse(person_dict[key])
         new_user = cls(**person_dict)
-        new_user.user_request_class = user_request_class
+        new_user.lemmy = lemmy
         return new_user
     
     def refresh(self) -> None:
@@ -45,7 +46,7 @@ class LemmyUser:
         Args:
             new_data: Dictionary containing updated user data
         """
-        new_data = self.user_request_class.get(person_id=self.person_id)
+        new_data = self.lemmy.user.get(person_id=self.person_id)
         # Handle datetime conversion
         if 'ban_expires' in new_data and new_data['ban_expires']:
             new_data['ban_expires'] = datetime.fromisoformat(new_data['ban_expires'])
@@ -55,7 +56,7 @@ class LemmyUser:
 
 
     def purge(self) -> None:
-        self.user_request_class.purge(person_id=self.person_id)
+        self.lemmy.user.purge(person_id=self.person_id)
     
     def ban(self,
             ban: bool = True, 
@@ -63,7 +64,7 @@ class LemmyUser:
             reason: str | None = None, 
             remove_data: bool | None = None
         ) -> None:
-        self.user_request_class.ban(
+        self.lemmy.user.ban(
             person_id=self.person_id,
             ban = ban,
             expires = expires,
@@ -73,9 +74,9 @@ class LemmyUser:
         self.refresh()
     
     def update(self):
-        if self.user_request_class._requestor.logged_in_username != self.name:
+        if self.lemmy.user._requestor.logged_in_username != self.name:
             raise Exception("Cannot update user details for anyone but the currently logged-in user.")
-        self.user_request_class.save_user_settings(
+        self.lemmy.user.save_user_settings(
             avatar=self.avatar,
             banner=self.banner,
             display_name=self.display_name,
@@ -86,9 +87,9 @@ class LemmyUser:
         self.refresh()
     
     def set_settings(self, **kwargs):
-        if self.user_request_class._requestor.logged_in_username != self.name:
+        if self.lemmy.user._requestor.logged_in_username != self.name:
             raise Exception("Cannot update user settings for anyone but the currently logged-in user.")
-        self.user_request_class.save_user_settings(**kwargs)
+        self.lemmy.user.save_user_settings(**kwargs)
         self.refresh()
 
     def asdict(self):
@@ -97,3 +98,9 @@ class LemmyUser:
     def asjson(self, indent=4):      
         selfdict = self.asdict()
         return json.dumps(selfdict, indent=indent, default=json_serializer)
+    
+    def pm(self, content):
+        self.lemmy.private_message(
+            content=content,
+            recipient_id=self.id,
+        )
