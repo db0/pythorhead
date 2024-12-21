@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.27.0](https://github.com/db0/pythorhead/tree/v0.27.0) (2024-12-21)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.26.0...v0.27.0)
+
+**Merged pull requests:**
+
+- feat: adds object classes [\#104](https://github.com/db0/pythorhead/pull/104) ([db0](https://github.com/db0))
+
 ## [v0.26.0](https://github.com/db0/pythorhead/tree/v0.26.0) (2024-10-22)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.25.2...v0.26.0)
@@ -54,7 +62,7 @@
 
 **Merged pull requests:**
 
-- \(issue \#93\) fix: saved\_only works for users now [\#96](https://github.com/db0/pythorhead/pull/96) ([cyborgcatboy](https://github.com/cyborgcatboy))
+- \(issue \#93\) fix: saved\_only works for users now [\#96](https://github.com/db0/pythorhead/pull/96) ([ghost](https://github.com/ghost))
 
 ## [v0.24.0](https://github.com/db0/pythorhead/tree/v0.24.0) (2024-04-17)
 
