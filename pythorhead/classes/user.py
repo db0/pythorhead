@@ -1,7 +1,5 @@
 from dataclasses import dataclass, asdict
 from datetime import datetime
-from pythorhead import lemmy
-from pythorhead.types import SortType, ListingType, LanguageType
 from dateutil import parser
 from pythorhead.utils import json_serializer
 
