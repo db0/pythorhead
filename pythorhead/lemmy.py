@@ -1,3 +1,4 @@
+from __future__ import annotations
 import logging
 import time
 from typing import Any, Optional
@@ -13,12 +14,22 @@ from pythorhead.site import Site
 from pythorhead.types import FeatureType, ListingType, SortType, SearchType, SearchOption
 from pythorhead.user import User
 from pythorhead.admin import Admin
+from pythorhead.classes.user import LemmyUser
 
 logger = logging.getLogger(__name__)
 
 class Lemmy:
     _known_communities = {}
     _requestor: Requestor
+    post: Post
+    community: Community
+    comment: Comment
+    site: Site
+    user: User
+    private_message: PrivateMessage
+    image: Image
+    mention: Mention
+    admin: Admin
 
     def __init__(self, api_base_url: str, raise_exceptions = False, request_timeout=3) -> None:
         self._requestor = Requestor(raise_exceptions, request_timeout)
@@ -79,6 +90,14 @@ class Lemmy:
             self._known_communities[community_name] = community_id
             return community_id
 
+    def get_user(self, **kwargs) -> LemmyUser | None:
+        user_json = self.user.get(**kwargs)
+        if user_json is None:
+            return
+        user_dict = user_json['person_view']['person']
+        user_dict['is_admin'] = user_json['person_view']['is_admin']
+        return LemmyUser.from_dict(user_dict, self)
+        
     def search(
         self,
         q: str,

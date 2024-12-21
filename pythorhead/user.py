@@ -3,7 +3,6 @@ from datetime import datetime
 from pythorhead.requestor import Request, Requestor
 from pythorhead.types import SortType, ListingType, LanguageType
 
-
 class User:
     def __init__(self, _requestor: Requestor):
         self._requestor = _requestor
@@ -17,7 +16,8 @@ class User:
         limit: Optional[int] = None,
         community_id: Optional[int] = None,
         saved_only: Optional[bool] = None,
-    ) -> Optional[dict]:
+        return_user_object = False,
+    ) -> dict | None:
         """
         Get user details with various filters.
 
@@ -29,6 +29,7 @@ class User:
             limit (Optional[int], optional): Defaults to None.
             community_id (Optional[int], optional): Defaults to None.
             saved_only (Optional[bool], optional): Defaults to None.
+            return_user_object: (Optional[bool], optional): If true, returns a LemmyUser object, instead of the raw dict
         Returns:
             dict: user view
         """
