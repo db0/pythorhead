@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.27.3](https://github.com/db0/pythorhead/tree/v0.27.3) (2024-12-21)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.27.2...v0.27.3)
+
 ## [v0.27.2](https://github.com/db0/pythorhead/tree/v0.27.2) (2024-12-21)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.27.1...v0.27.2)
