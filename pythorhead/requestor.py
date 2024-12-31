@@ -152,6 +152,29 @@ class Requestor:
             self.current_password = None
         return self._auth.token is not None
 
+    # Register a new user and loges them in
+    def register(self, username: str, email: str, password: str, captcha: str) -> bool:
+        payload = {
+            "username": username,
+            "email": email,
+            "password": password,
+            "password_verify": password, # this is a funny line
+            "captcha": captcha,
+        }
+
+        self.logged_in_username = username
+        self.current_password = password
+
+
+        if data := self.api(Request.POST, "/user/register", json=payload):
+            self._auth.set_token(data["jwt"])
+        else:
+            self.logged_in_username = None
+            self.current_password = None
+
+        return self._auth.token is not None
+
+
     def log_out(self) -> None:
         self._auth.token = None
         self.logged_in_username = None
