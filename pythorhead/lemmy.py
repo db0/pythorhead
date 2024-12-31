@@ -59,6 +59,9 @@ class Lemmy:
     def log_in(self, username_or_email: str, password: str, totp: Optional[str] = None) -> bool:
         return self._requestor.log_in(username_or_email, password, totp)
 
+    def register(self, username: str, email: str, password: str, captcha: Optional[str] = None) -> bool:
+        return self._requestor.register(username, email, password, captcha)
+
     def relog_in(self) -> bool:
         return self._requestor._log_in()
 
