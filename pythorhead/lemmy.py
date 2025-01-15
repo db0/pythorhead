@@ -14,6 +14,7 @@ from pythorhead.site import Site
 from pythorhead.types import FeatureType, ListingType, SortType, SearchType, SearchOption
 from pythorhead.user import User
 from pythorhead.admin import Admin
+from pythorhead.emoji import Emoji
 from pythorhead.classes.user import LemmyUser
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,7 @@ class Lemmy:
     image: Image
     mention: Mention
     admin: Admin
+    emoji: Emoji
 
     def __init__(self, api_base_url: str, raise_exceptions = False, request_timeout=3) -> None:
         self._requestor = Requestor(raise_exceptions, request_timeout)
@@ -43,6 +45,7 @@ class Lemmy:
         self.image = Image(self._requestor)
         self.mention = Mention(self._requestor)
         self.admin = Admin(self._requestor)
+        self.emoji = Emoji(self._requestor)
 
     @property
     def nodeinfo(self):

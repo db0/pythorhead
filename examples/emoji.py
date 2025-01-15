@@ -1,5 +1,5 @@
 
-## python examples/site.py db0
+## python examples/emoji.py db0
 
 import os
 import argparse
@@ -30,11 +30,11 @@ lemmy_password = args.lemmy_password
 if not lemmy_password:
     lemmy_password = os.getenv("LEMMY_PASSWORD")
 
-lemmy = Lemmy(f"https://{lemmy_domain}")
+lemmy = Lemmy(f"https://{lemmy_domain}", raise_exceptions=True)
 if lemmy_username and lemmy_password:
     login = lemmy.log_in(lemmy_username, lemmy_password)
-site = lemmy.site.get()
-if site:
-    print(json.dumps(site, indent=4))
+emoji = lemmy.emoji.get()
+if emoji:
+    print(json.dumps(emoji, indent=4))
 else:
-    print("Retrieval of site information failed")
+    print("Retrieval of emoji information failed")
