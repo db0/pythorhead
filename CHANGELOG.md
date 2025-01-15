@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.28.0](https://github.com/db0/pythorhead/tree/v0.28.0) (2025-01-15)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.27.3...v0.28.0)
+
+**Merged pull requests:**
+
+- feat: Adds endpoint for custom emoji [\#107](https://github.com/db0/pythorhead/pull/107) ([db0](https://github.com/db0))
+
 ## [v0.27.3](https://github.com/db0/pythorhead/tree/v0.27.3) (2024-12-21)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.27.2...v0.27.3)
