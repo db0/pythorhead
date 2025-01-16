@@ -298,6 +298,7 @@ class Post:
             "locked": locked,
         }
         return self._requestor.api(Request.POST, "/post/lock", json=lock_post)
+
     def mark_as_read(self, post_id: int, read: bool) -> Optional[dict]:
         """
 
@@ -433,3 +434,24 @@ class Post:
         return self._requestor.api(Request.POST, "/admin/purge/post", json=purge_post)
 
     __call__ = create
+
+
+    def list_votes(self, post_id: int, page: int = 1, limit: int = 50) -> Optional[dict]:
+        """
+
+        List the likes of a post
+
+        Args:
+            post_id (int)
+            page (int)
+            limit (int)
+
+        Returns:
+            Optional[dict]: list of likes if successful
+        """
+        list_votes_params = {
+            "post_id": post_id,
+            "page": page,
+            "limit": limit,
+        }
+        return self._requestor.api(Request.GET, "/post/like/list", params=list_votes_params)

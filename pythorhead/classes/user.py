@@ -24,6 +24,8 @@ class LemmyUser:
     matrix_user_id: str | None = None
     ban_expires: datetime | None = None
     updated: datetime | None = None
+    comments: list[dict] = None
+    posts: list[dict] = None
     # The owning lemmy instance. We use it to reach the API classes
     lemmy = None
     
@@ -44,13 +46,17 @@ class LemmyUser:
         Args:
             new_data: Dictionary containing updated user data
         """
-        new_data = self.lemmy.user.get(person_id=self.person_id)
+        fresh_data = self.lemmy.user.get(person_id=self.id)
+        user_dict = fresh_data['person_view']['person']
+        user_dict['is_admin'] = fresh_data['person_view']['is_admin']
+        user_dict['comments'] = fresh_data['comments']
+        user_dict['posts'] = fresh_data['posts']
         # Handle datetime conversion
-        if 'ban_expires' in new_data and new_data['ban_expires']:
-            new_data['ban_expires'] = datetime.fromisoformat(new_data['ban_expires'])
+        if 'ban_expires' in user_dict and user_dict['ban_expires']:
+            user_dict['ban_expires'] = datetime.fromisoformat(user_dict['ban_expires'])
         
-        for field_name in new_data:
-            setattr(self, field_name, new_data[field_name])
+        for field_name in user_dict:
+            setattr(self, field_name, user_dict[field_name])
 
 
     def purge(self) -> None:
@@ -102,3 +108,12 @@ class LemmyUser:
             content=content,
             recipient_id=self.id,
         )
+    
+    def get_latest_posts(self):
+        self.refresh()
+        return self.posts
+
+    def get_latest_comments(self):
+        self.refresh()
+        return self.comments
+    

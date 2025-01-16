@@ -99,6 +99,8 @@ class Lemmy:
             return
         user_dict = user_json['person_view']['person']
         user_dict['is_admin'] = user_json['person_view']['is_admin']
+        user_dict['comments'] = user_json['comments']
+        user_dict['posts'] = user_json['posts']
         return LemmyUser.from_dict(user_dict, self)
         
     def search(
