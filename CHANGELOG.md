@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.30.1](https://github.com/db0/pythorhead/tree/v0.30.1) (2025-01-21)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.30.0...v0.30.1)
+
+**Merged pull requests:**
+
+- Add hide post function [\#108](https://github.com/db0/pythorhead/pull/108) ([chris-y](https://github.com/chris-y))
+
 ## [v0.30.0](https://github.com/db0/pythorhead/tree/v0.30.0) (2025-01-21)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.29.0...v0.30.0)
