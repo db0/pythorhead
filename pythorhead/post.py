@@ -299,6 +299,24 @@ class Post:
         }
         return self._requestor.api(Request.POST, "/post/lock", json=lock_post)
 
+    def hide(self, post_id: int, hide: bool) -> Optional[dict]:
+        """
+
+        Hide a post
+
+        Args:
+            post_id (int)
+            hide (bool)
+
+        Returns:
+            Optional[dict]: post data if successful
+        """
+        hide_post = {
+            "post_ids": [post_id],
+            "hide": hide,
+        }
+        return self._requestor.api(Request.POST, "/post/hide", json=hide_post)
+
     def mark_as_read(self, post_id: int, read: bool) -> Optional[dict]:
         """
 
