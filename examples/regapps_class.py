@@ -1,11 +1,10 @@
-## python examples/user.py db0
+## python examples/regapps_class
 
 import argparse
 import os
 from pythorhead import Lemmy
 
 arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument("username", action="store")
 arg_parser.add_argument(
     "-d",
     "--lemmy_domain",
@@ -50,8 +49,8 @@ if not lemmy_password:
 lemmy = Lemmy(f"https://{lemmy_domain}", raise_exceptions=True, request_timeout=2)
 if lemmy_username and lemmy_password:
     login = lemmy.log_in(lemmy_username, lemmy_password)
-user = lemmy.get_user(username=args.username)
-if user:
-    print(user.asjson(indent=4))
-else:
-    print("no matching username found")
+regapps = lemmy.get_registration_applications(limit=10)
+if not regapps:
+    print("No registration applications found")
+for regapp in regapps:
+    print(f"Application from user '{regapp.creator.name}' {regapp.get_application_status()}")

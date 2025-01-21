@@ -1,12 +1,10 @@
-from dataclasses import dataclass, asdict
 from datetime import datetime
 from dateutil import parser
-from pythorhead.utils import json_serializer
-
-import json
+from pythorhead.classes.base import LemmyBaseClass
+from dataclasses import dataclass
 
 @dataclass
-class LemmyUser:
+class LemmyUser(LemmyBaseClass):
     id: int
     name: str
     banned: bool
@@ -16,7 +14,7 @@ class LemmyUser:
     deleted: bool
     bot_account: bool
     instance_id: int
-    is_admin: bool
+    is_admin: bool = False
     display_name: str | None = None
     bio: str | None = None
     avatar: str | None = None
@@ -24,20 +22,21 @@ class LemmyUser:
     matrix_user_id: str | None = None
     ban_expires: datetime | None = None
     updated: datetime | None = None
+    #TODO Convert to classes
     comments: list[dict] = None
     posts: list[dict] = None
-    # The owning lemmy instance. We use it to reach the API classes
-    lemmy = None
     
     @classmethod
-    def from_dict(cls, person_dict: dict, lemmy) -> 'LemmyUser':
+    def from_dict(cls, data_dict: dict, lemmy) -> 'LemmyUser':
         # Convert string to datetime for ban_expires if it exists
+        
         for key in {'ban_expires', 'updates', 'published'}:
-            if key in person_dict and person_dict[key]:
-                person_dict[key] = parser.isoparse(person_dict[key])
-        new_user = cls(**person_dict)
-        new_user.lemmy = lemmy
-        return new_user
+            if key in data_dict and data_dict[key]:
+                data_dict[key] = parser.isoparse(data_dict[key])
+        new_class = cls(**data_dict)
+        new_class._lemmy = lemmy
+        new_class._origin = data_dict
+        return new_class
     
     def refresh(self) -> None:
         """
@@ -46,7 +45,7 @@ class LemmyUser:
         Args:
             new_data: Dictionary containing updated user data
         """
-        fresh_data = self.lemmy.user.get(person_id=self.id)
+        fresh_data = self._lemmy.user.get(person_id=self.id)
         user_dict = fresh_data['person_view']['person']
         user_dict['is_admin'] = fresh_data['person_view']['is_admin']
         user_dict['comments'] = fresh_data['comments']
@@ -60,7 +59,7 @@ class LemmyUser:
 
 
     def purge(self) -> None:
-        self.lemmy.user.purge(person_id=self.person_id)
+        self._lemmy.user.purge(person_id=self.person_id)
     
     def ban(self,
             ban: bool = True, 
@@ -68,7 +67,7 @@ class LemmyUser:
             reason: str | None = None, 
             remove_data: bool | None = None
         ) -> None:
-        self.lemmy.user.ban(
+        self._lemmy.user.ban(
             person_id=self.person_id,
             ban = ban,
             expires = expires,
@@ -78,9 +77,9 @@ class LemmyUser:
         self.refresh()
     
     def update(self):
-        if self.lemmy.user._requestor.logged_in_username != self.name:
+        if self._lemmy.user._requestor.logged_in_username != self.name:
             raise Exception("Cannot update user details for anyone but the currently logged-in user.")
-        self.lemmy.user.save_user_settings(
+        self._lemmy.user.save_user_settings(
             avatar=self.avatar,
             banner=self.banner,
             display_name=self.display_name,
@@ -91,20 +90,13 @@ class LemmyUser:
         self.refresh()
     
     def set_settings(self, **kwargs):
-        if self.lemmy.user._requestor.logged_in_username != self.name:
+        if self._lemmy.user._requestor.logged_in_username != self.name:
             raise Exception("Cannot update user settings for anyone but the currently logged-in user.")
-        self.lemmy.user.save_user_settings(**kwargs)
+        self._lemmy.user.save_user_settings(**kwargs)
         self.refresh()
-
-    def asdict(self):
-        return asdict(self)
-
-    def asjson(self, indent=4):      
-        selfdict = self.asdict()
-        return json.dumps(selfdict, indent=indent, default=json_serializer)
     
     def pm(self, content):
-        self.lemmy.private_message(
+        self._lemmy.private_message(
             content=content,
             recipient_id=self.id,
         )

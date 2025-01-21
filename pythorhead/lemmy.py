@@ -16,6 +16,7 @@ from pythorhead.user import User
 from pythorhead.admin import Admin
 from pythorhead.emoji import Emoji
 from pythorhead.classes.user import LemmyUser
+from pythorhead import class_methods
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +33,9 @@ class Lemmy:
     mention: Mention
     admin: Admin
     emoji: Emoji
+    # imported class methods
+    get_user = class_methods.get_user
+    get_registration_applications = class_methods.get_applications
 
     def __init__(self, api_base_url: str, raise_exceptions = False, request_timeout=3) -> None:
         self._requestor = Requestor(raise_exceptions, request_timeout)
@@ -92,17 +96,7 @@ class Lemmy:
             community_id = request["community_view"]["community"]["id"]
             self._known_communities[community_name] = community_id
             return community_id
-
-    def get_user(self, **kwargs) -> LemmyUser | None:
-        user_json = self.user.get(**kwargs)
-        if user_json is None:
-            return
-        user_dict = user_json['person_view']['person']
-        user_dict['is_admin'] = user_json['person_view']['is_admin']
-        user_dict['comments'] = user_json['comments']
-        user_dict['posts'] = user_json['posts']
-        return LemmyUser.from_dict(user_dict, self)
-        
+    
     def search(
         self,
         q: str,

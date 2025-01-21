@@ -7,3 +7,10 @@ class ListingType(str, Enum):
     Local = "Local"
     Subscribed = "Subscribed"
     ModeratorView = "ModeratorView"
+
+class PostListingType(str, Enum):
+    All = "All"
+    Community = "Community"
+    Local = "Local"
+    Subscribed = "Subscribed"
+    ModeratorView = "ModeratorView"

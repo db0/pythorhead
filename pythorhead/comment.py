@@ -2,7 +2,7 @@ from typing import Any, List, Literal, Optional, Union
 
 from pythorhead.requestor import Request, Requestor
 from pythorhead.types import CommentSortType, LanguageType, ListingType
-
+import logging
 
 class Comment:
     def __init__(self, _requestor: Requestor):
@@ -47,6 +47,8 @@ class Comment:
             list_comment["community_name"] = community_name
         if limit is not None:
             list_comment["limit"] = limit
+            if max_depth is not None:
+                logging.warning("list comments 'limit' param is ignored when 'max_depth' is set")
         if max_depth is not None:
             list_comment["max_depth"] = max_depth
         if page is not None:
@@ -61,7 +63,6 @@ class Comment:
             list_comment["sort"] = sort.value
         if type_ is not None:
             list_comment["type_"] = type_.value
-
         if data := self._requestor.api(Request.GET, "/comment/list", params=list_comment):
             return data["comments"]
         return []
