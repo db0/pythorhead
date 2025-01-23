@@ -15,6 +15,7 @@ from pythorhead.types import FeatureType, ListingType, SortType, SearchType, Sea
 from pythorhead.user import User
 from pythorhead.admin import Admin
 from pythorhead.emoji import Emoji
+from pythorhead.modlog import Modlog
 from pythorhead.classes.user import LemmyUser
 from pythorhead import class_methods
 
@@ -33,6 +34,7 @@ class Lemmy:
     mention: Mention
     admin: Admin
     emoji: Emoji
+    modlog: Modlog
     # imported class methods
     get_user = class_methods.get_user
     get_registration_applications = class_methods.get_applications
@@ -50,6 +52,7 @@ class Lemmy:
         self.mention = Mention(self._requestor)
         self.admin = Admin(self._requestor)
         self.emoji = Emoji(self._requestor)
+        self.modlog = Modlog(self._requestor)
 
     @property
     def nodeinfo(self):
