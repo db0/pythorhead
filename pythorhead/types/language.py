@@ -3,6 +3,7 @@ from enum import Enum
 # from https://github.com/LemmyNet/lemmy/blob/c216153dfb3cb2d08b72fa466fe522b3c7accde7/migrations/2022-06-21-123144_language-tags/up.sql
 
 class LanguageType(Enum):
+    BROWSER = -1
     UNDETERMINED = 0
     AA = 1 # Afaraf
     AB = 2 # аҧсуа бызшәа
