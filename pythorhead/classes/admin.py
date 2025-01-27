@@ -17,7 +17,6 @@ class ApplicationStatus(str, Enum):
 class LemmyLocalUser(LemmyBaseClass):
     id: int
     person_id: int
-    email: str
     show_nsfw: bool
     theme: str
     default_sort_type: SortType
@@ -40,6 +39,7 @@ class LemmyLocalUser(LemmyBaseClass):
     enable_keyboard_navigation: bool
     enable_animated_images: bool
     collapse_bot_comments: bool
+    email: str | None = None
     published: datetime | None = None
     
     @classmethod
