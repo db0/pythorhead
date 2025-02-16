@@ -23,3 +23,21 @@ class Admin:
         """
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.api(Request.GET, "/admin/registration_application/list", params=params)
+    
+    def accept_application(
+        self,
+        user_id: int,
+        reject: Optional[bool] = False,
+        deny_reason: Optional[str] = None
+    ) -> Optional[dict]:
+        accept = "true"
+        process_application = {
+            "id": user_id,
+            "approve": accept,
+        }
+
+        return self._requestor.api(
+            Request.POST,
+            "/admin/registration_application/approve",
+            json=process_application,
+        )
