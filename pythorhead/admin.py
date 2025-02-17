@@ -27,17 +27,19 @@ class Admin:
     def accept_application(
         self,
         user_id: int,
-        reject: Optional[bool] = False,
+        approve: Optional[bool] = True,
         deny_reason: Optional[str] = None
     ) -> Optional[dict]:
-        accept = "true"
-        process_application = {
-            "id": user_id,
-            "approve": accept,
-        }
+        process_application: dict[str, Any] = {"id": id, "approve": approve}
 
+        if id is not None:
+            process_application["id"] = user_id
+        if approve is not None:
+            process_application["approve"] = approve
+
+        print (process_application)
         return self._requestor.api(
             Request.POST,
             "/admin/registration_application/approve",
-            json=process_application,
+            json=process_application
         )
