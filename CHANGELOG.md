@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.31.2](https://github.com/db0/pythorhead/tree/v0.31.2) (2025-02-19)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.31.1...v0.31.2)
+
+**Merged pull requests:**
+
+- Add community.hide [\#111](https://github.com/db0/pythorhead/pull/111) ([Demigodrick](https://github.com/Demigodrick))
+
 ## [v0.31.1](https://github.com/db0/pythorhead/tree/v0.31.1) (2025-01-27)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.31.0...v0.31.1)
