@@ -30,16 +30,13 @@ class Admin:
         approve: Optional[bool] = True,
         deny_reason: Optional[str] = None
     ) -> Optional[dict]:
-        process_application: dict[str, Any] = {"id": id, "approve": approve}
+        process_application = {
+            "id": user_id,
+            "approve": approve,
+        }
 
-        if id is not None:
-            process_application["id"] = user_id
-        if approve is not None:
-            process_application["approve"] = approve
-
-        print (process_application)
         return self._requestor.api(
-            Request.POST,
+            Request.PUT,
             "/admin/registration_application/approve",
             json=process_application
         )
