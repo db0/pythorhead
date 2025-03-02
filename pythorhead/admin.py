@@ -24,16 +24,30 @@ class Admin:
         params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
         return self._requestor.api(Request.GET, "/admin/registration_application/list", params=params)
     
-    def accept_application(
+    def process_application(
         self,
         user_id: int,
         approve: Optional[bool] = True,
         deny_reason: Optional[str] = None
     ) -> Optional[dict]:
+        """
+        Accept or deny a specific user application. Note user must be admin.
+
+        Args:
+            user_id (int): The user id.
+            approve (Optional[bool], optional): Defaults to True.
+            deny_reason (Optional[str]): Defaults to None.
+        Returns:
+            Optional[dict]: application data if successful
+        """
+
         process_application = {
             "id": user_id,
             "approve": approve,
         }
+
+        if deny_reason is not None:
+            process_application["deny_reason"] = deny_reason
 
         return self._requestor.api(
             Request.PUT,
