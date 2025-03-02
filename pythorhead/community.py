@@ -234,4 +234,25 @@ class Community:
             banFromCommunity["remove_data"] = remove_data
 
         return self._requestor.api(Request.POST, "/community/ban_user", json=banFromCommunity)
+    
+    def hide(
+            self,
+            community_id: int,
+            reason: Optional[str] = None,
+            hidden: bool = False,
+        ) -> Optional[dict]:
+            """
+            Hide a communtiy from public / "All" view (Admin only)
+
+            Args:
+                community ID(int)
+                reason (str, optional): Defaults to None
+                hidden (bool): Defaults to False
+                
+            Returns:
+                Optional[dict]: 
+            """
+            params: dict[str, Any] = {key: value for key, value in locals().items() if value is not None and key != "self"}
+            return self._requestor.api(Request.PUT, "/community/hide", json=params)
+
 
