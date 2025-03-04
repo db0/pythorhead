@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.32.0](https://github.com/db0/pythorhead/tree/v0.32.0) (2025-03-04)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.31.2...v0.32.0)
+
+**Merged pull requests:**
+
+- Acception and rejection of user applications [\#112](https://github.com/db0/pythorhead/pull/112) ([BurningTurtle-dev](https://github.com/BurningTurtle-dev))
+
 ## [v0.31.2](https://github.com/db0/pythorhead/tree/v0.31.2) (2025-02-19)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.31.1...v0.31.2)
