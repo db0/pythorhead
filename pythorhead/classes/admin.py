@@ -39,6 +39,7 @@ class LemmyLocalUser(LemmyBaseClass):
     enable_keyboard_navigation: bool
     enable_animated_images: bool
     collapse_bot_comments: bool
+    last_donation_notification: datetime | None = None
     email: str | None = None
     published: datetime | None = None
     
