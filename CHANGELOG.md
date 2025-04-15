@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.32.1](https://github.com/db0/pythorhead/tree/v0.32.1) (2025-04-15)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.32.0...v0.32.1)
+
+**Merged pull requests:**
+
+- fix: adds new last\_donation\_notification [\#113](https://github.com/db0/pythorhead/pull/113) ([db0](https://github.com/db0))
+
 ## [v0.32.0](https://github.com/db0/pythorhead/tree/v0.32.0) (2025-03-04)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.31.2...v0.32.0)
