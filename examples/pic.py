@@ -53,6 +53,16 @@ arg_parser.add_argument(
     type=str,
     help="Which password to authenticate with",
 )
+arg_parser.add_argument(
+    "-a",
+    "--alt_text",
+    action="store",
+    required=False,
+    type=str,
+    help="the image alt text to use",
+)
+
+
 args = arg_parser.parse_args()
 
 
@@ -97,6 +107,7 @@ if image is not None:
         args.title,
         url=image[0]["image_url"],
         body=args.body,
+        alt_text=args.alt_text,
     )
     if post:
         print(f"Successfully posted ({post['post_view']['post']['ap_id']})")
