@@ -84,6 +84,7 @@ class Post:
         name: str,
         url: Optional[str] = None,
         body: Optional[str] = None,
+        alt_text: Optional[str] = None,
         nsfw: Optional[bool] = None,
         honeypot: Optional[str] = None,
         language_id: Union[int, LanguageType, None] = None,
@@ -96,6 +97,7 @@ class Post:
             name (str)
             url (str, optional): Defaults to None.
             body (str, optional): Defaults to None.
+            alt_text (ste, optional): Defaults to None. Lemmy 0.19.4+
             nsfw (bool, optional): Defaults to None.
             honeypot (str, optional): Defaults to None.
             language_id (Union[int, LanguageType], optional): Defaults to None.
@@ -112,6 +114,8 @@ class Post:
             new_post["url"] = url
         if body is not None:
             new_post["body"] = body
+        if alt_text is not None:
+            new_post["alt_text"] = alt_text
         if nsfw is not None:
             new_post["nsfw"] = nsfw
         if honeypot is not None:
@@ -169,6 +173,7 @@ class Post:
         name: Optional[str] = None,
         url: Optional[str] = None,
         body: Optional[str] = None,
+        alt_text: Optional[str] = None,
         nsfw: Optional[bool] = None,
         language_id: Union[int, LanguageType, None] = None,
     ) -> Optional[dict]:
@@ -181,6 +186,7 @@ class Post:
             name (str, optional): Defaults to None.
             url (str, optional): Defaults to None.
             body (str, optional): Defaults to None.
+            alt_text (str, optional): Defaults to None. Lemmy 0.19.4+
             nsfw (bool, optional): Defaults to None.
             language_id (Union[int, LanguageType], optional): Defaults to None.
 
@@ -196,6 +202,8 @@ class Post:
             edit_post["url"] = url
         if body is not None:
             edit_post["body"] = body
+        if alt_text is not None:
+            edit_post["alt_text"] = alt_text
         if nsfw is not None:
             edit_post["nsfw"] = nsfw
         if language_id is not None:
