@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.33.0](https://github.com/db0/pythorhead/tree/v0.33.0) (2025-04-28)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.32.1...v0.33.0)
+
+**Merged pull requests:**
+
+- Support alt text [\#114](https://github.com/db0/pythorhead/pull/114) ([chris-y](https://github.com/chris-y))
+
 ## [v0.32.1](https://github.com/db0/pythorhead/tree/v0.32.1) (2025-04-15)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.32.0...v0.32.1)
