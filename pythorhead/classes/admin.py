@@ -5,6 +5,7 @@ from pythorhead.classes.user import LemmyUser
 from dataclasses import dataclass
 from pythorhead.types import SortType, ListingType, LanguageType
 from enum import Enum
+from loguru import logger
 
 # TODO: Convert to StrEnum in python 3.11
 class ApplicationStatus(str, Enum):
@@ -68,8 +69,6 @@ class LemmyRegistrationApplication(LemmyBaseClass):
     local_user_id: int
     answer: str
     published: datetime
-    creator_local_user: dict
-    creator: LemmyUser
     creator_local_user: LemmyLocalUser
     creator: LemmyUser
     admin_id: int | None = None
@@ -94,3 +93,19 @@ class LemmyRegistrationApplication(LemmyBaseClass):
         elif self.deny_reason:
             return ApplicationStatus.Denied
         return ApplicationStatus.Pending
+
+    def accept(self, deny_reason=None) -> None:
+        """Accept the registration application."""
+        self._lemmy.admin.process_application(
+            application_id=self.local_user_id,
+            approve=True
+        )
+
+    def reject(self, deny_reason=None) -> None:
+        """Reject the registration application."""
+        logger.warning(self.local_user_id)
+        self._lemmy.admin.process_application(
+            application_id=self.id,
+            approve=False,
+            deny_reason=deny_reason,
+        )
