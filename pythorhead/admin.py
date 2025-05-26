@@ -26,7 +26,7 @@ class Admin:
     
     def process_application(
         self,
-        user_id: int,
+        application_id: int,
         approve: Optional[bool] = True,
         deny_reason: Optional[str] = None
     ) -> Optional[dict]:
@@ -34,7 +34,7 @@ class Admin:
         Accept or deny a specific user application. Note user must be admin.
 
         Args:
-            user_id (int): The user id.
+            application_id (int): The application application_id.
             approve (Optional[bool], optional): Defaults to True.
             deny_reason (Optional[str]): Defaults to None.
         Returns:
@@ -42,7 +42,7 @@ class Admin:
         """
 
         process_application = {
-            "id": user_id,
+            "id": application_id,
             "approve": approve,
         }
 
