@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.34.0](https://github.com/db0/pythorhead/tree/v0.34.0) (2025-05-26)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.33.0...v0.34.0)
+
+**Closed issues:**
+
+- Allow adding alt text to images [\#106](https://github.com/db0/pythorhead/issues/106)
+
+**Merged pull requests:**
+
+- feat: aprove/deny application requests from class [\#115](https://github.com/db0/pythorhead/pull/115) ([db0](https://github.com/db0))
+
 ## [v0.33.0](https://github.com/db0/pythorhead/tree/v0.33.0) (2025-04-28)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.32.1...v0.33.0)
