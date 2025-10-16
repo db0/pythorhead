@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.34.3](https://github.com/db0/pythorhead/tree/v0.34.3) (2025-10-16)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.34.2...v0.34.3)
+
+## [v0.34.2](https://github.com/db0/pythorhead/tree/v0.34.2) (2025-10-16)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.34.1...v0.34.2)
+
 ## [v0.34.1](https://github.com/db0/pythorhead/tree/v0.34.1) (2025-10-16)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.34.0...v0.34.1)
