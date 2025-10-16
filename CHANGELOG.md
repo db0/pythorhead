@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.34.1](https://github.com/db0/pythorhead/tree/v0.34.1) (2025-10-16)
+
+[Full Changelog](https://github.com/db0/pythorhead/compare/v0.34.0...v0.34.1)
+
+**Closed issues:**
+
+- I'm seeing error `ModuleNotFoundError: No module named 'loguru'` [\#118](https://github.com/db0/pythorhead/issues/118)
+
+**Merged pull requests:**
+
+- add loguru dependency in pyproject.toml [\#116](https://github.com/db0/pythorhead/pull/116) ([carlesmu](https://github.com/carlesmu))
+
 ## [v0.34.0](https://github.com/db0/pythorhead/tree/v0.34.0) (2025-05-26)
 
 [Full Changelog](https://github.com/db0/pythorhead/compare/v0.33.0...v0.34.0)
@@ -471,7 +483,7 @@
 **Merged pull requests:**
 
 - fix create community [\#36](https://github.com/db0/pythorhead/pull/36) ([NicKoehler](https://github.com/NicKoehler))
-- Remove logging.basicConfig statement [\#32](https://github.com/db0/pythorhead/pull/32) ([hjalp](https://github.com/hjalp))
+- Remove logging.basicConfig statement [\#32](https://github.com/db0/pythorhead/pull/32) ([ghost](https://github.com/ghost))
 
 ## [v0.9.2](https://github.com/db0/pythorhead/tree/v0.9.2) (2023-06-26)
 
